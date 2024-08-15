@@ -1,0 +1,46 @@
+---
+permalink: install/concept_invalid_path_setup_alternate_paths_are_not_configured.html 
+sidebar: sidebar 
+keywords: invalid, path, setup, alternate, paths, configured 
+summary: 'É importante configurar caminhos alternativos para todos os LUNs de array de ambos os iniciadores FC no sistema ONTAP, evitando assim um ponto único de falha (SPOF).' 
+---
+= Configuração de caminho inválida: Caminhos alternativos não estão configurados
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+É importante configurar caminhos alternativos para todos os LUNs de array de ambos os iniciadores FC no sistema ONTAP, evitando assim um ponto único de falha (SPOF).
+
+A configuração a seguir é inválida porque não fornece caminhos alternativos de cada porta do iniciador de FC nos sistemas ONTAP para cada LUN no storage array. Ambas as portas do iniciador de FC do mesmo sistema ONTAP são conectadas ao storage array por meio do mesmo switch.
+
+image::../media/invalid_config_no_alternate_paths.gif[Este gráfico é descrito no texto circundante.]
+
+Suponha que o seguinte zoneamento esteja em vigor neste exemplo inválido:
+
+* Para vs1:
++
+** 0A está zoneada para ver controlador 1 porta A..
+** 0C está zoneada para ver controlador 1 porta B.
+
+
+* Para vs2:
++
+** 0A está zoneada para ver controlador 2 porta A..
+** 0C está zoneada para ver controlador 2 porta B.
+
+
+
+
+Nesta configuração de exemplo, cada switch se torna um SPOF.
+
+Para tornar esta configuração válida, as seguintes alterações devem ser feitas:
+
+* A porta 0C do iniciador FC do VS1 deve estar conetada ao Switch 2.
+* A porta 0a do iniciador FC do VS2 deve estar conetada ao Switch 1.
+* O zoneamento apropriado deve ser configurado.
++
+Se você estiver usando várias portas em um storage array compatível com a configuração de um conjunto específico de LUNs em um conjunto selecionado de portas, uma determinada porta do iniciador de FC deverá poder ver todos os LUNs do array apresentados na malha.
+
+

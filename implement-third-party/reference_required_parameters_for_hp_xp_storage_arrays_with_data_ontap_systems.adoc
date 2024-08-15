@@ -1,0 +1,67 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_hp_xp_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, hp, xp, storage, arrays, ontap, workaround 
+summary: Certas configurações de parâmetros são necessárias no storage para que esse storage funcione com sucesso com sistemas ONTAP. 
+---
+= Parâmetros necessários para matrizes de armazenamento HP XP com ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Certas configurações de parâmetros são necessárias no storage para que esse storage funcione com sucesso com sistemas ONTAP.
+
+
+
+== Parâmetros de sistema necessários para matrizes de armazenamento HP XP
+
+As definições de parâmetros necessárias são apresentadas na seguinte tabela:
+
+|===
+| Parâmetro | Definição 
+
+
+ a| 
+`Host mode`
+ a| 
+Padrão ou 00
+
+
+
+ a| 
+`Port security`
+ a| 
+Ativado
+
+
+
+ a| 
+[NOTE]
+====
+Um grupo de host que é separado dos grupos de host padrão deve ser criado para cada par de portas de destino do iniciador.
+
+====
+|===
+Os parâmetros da matriz de armazenamento devem ser definidos e os LUNs devem ser mapeados para os grupos de hosts antes que o switch seja zoneado para conetar o sistema ONTAP a uma matriz de armazenamento HP XP.
+
+Se as portas do iniciador ONTAP FC forem zoneadas com as portas de destino da matriz HP XP antes que os parâmetros da matriz de armazenamento sejam definidos e os LUNs sejam mapeados para os grupos de host, talvez você não consiga ver os LUNs apresentados à interface ONTAP.
+
+Nesta situação, o ONTAP gera uma das seguintes mensagens EMS:
+
+[listing]
+----
+[fci.device.login.reject:info] The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x9 'Invalid R_CTL Field', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+[listing]
+----
+[fci.device.login.reject:info]: The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x3 'Nx_Port Not Available, Temporary', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+
+
+== Solução alternativa
+
+Se o zoneamento foi configurado antes de definir os parâmetros e mapear os LUNs para os grupos de hosts, você pode resolver o problema de LUNs não serem visíveis executando uma reinicialização de caminho para forçar uma redescoberta dos LUNs da matriz mapeados a partir da matriz de armazenamento HP XP.
+
+xref:reference_workaround_when_luns_are_not_visible_with_hp_xp_storage_arrays.adoc[Solução alternativa quando os LUNs não são visíveis com matrizes de armazenamento HP XP]

@@ -1,0 +1,27 @@
+---
+permalink: install/concept_requirements_for_connecting_to_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, connect, storage, arrays 
+summary: Ao Planejar como conetar seu sistema ONTAP a um storage array, seu plano de conetividade porta-a-porta deve abordar as diretrizes de redundância, interrupção e outras. 
+---
+= Requisitos para conexão a matrizes de armazenamento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ao Planejar como conetar seu sistema ONTAP a um storage array, seu plano de conetividade porta-a-porta deve abordar as diretrizes de redundância, interrupção e outras.
+
+Os requisitos para configurar conexões são os seguintes:
+
+* Cada conexão em um par de portas redundantes no storage array deve ser conetada a uma porta de iniciador de FC diferente no sistema ONTAP.
+* As portas usadas nos switches FC devem ser redundantes.
+* A conetividade deve ser configurada para evitar um SPOF.
++
+Certifique-se de que as portas no storage array que você selecionar para acessar um determinado LUN são de componentes diferentes, de modo a evitar um único ponto de falha, por exemplo, de controladores alternativos, clusters ou gabinetes. O motivo é que você não quer que todo o acesso a um LUN de matriz seja perdido se um componente falhar.
+
+* O número de caminhos não pode exceder o número de caminhos suportados para a versão do ONTAP.
+* Se você quiser configurar uma configuração em que uma porta do iniciador FC seja compartilhada com várias portas de destino ou uma porta de destino seja compartilhada com várias portas do iniciador FC, siga as regras apropriadas.
+* Se o storage array oferecer suporte a menos LUNs por grupo de host por porta do que o número de LUNs usados pelos sistemas ONTAP, será necessário adicionar cabos adicionais entre o sistema ONTAP e o storage array.
+

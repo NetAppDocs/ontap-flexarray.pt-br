@@ -1,0 +1,14 @@
+---
+permalink: install/reference_relationship_between_zoning_and_host_group_configuration.html 
+sidebar: sidebar 
+keywords: relationship, between, zone, host, group, configuration 
+summary: Quando você corrige erros de configuração de zoneamento, às vezes você precisa alterar a configuração do grupo de host também e o inverso. 
+---
+= Relação entre zoneamento e configuração do grupo host
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Quando você corrige erros de configuração de zoneamento, às vezes você precisa alterar a configuração do grupo de host também e o inverso.

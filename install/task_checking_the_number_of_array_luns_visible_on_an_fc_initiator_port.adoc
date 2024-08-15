@@ -1,0 +1,41 @@
+---
+permalink: install/task_checking_the_number_of_array_luns_visible_on_an_fc_initiator_port.html 
+sidebar: sidebar 
+keywords: check, number, array, luns, visible, fc initiator, port 
+summary: Você pode verificar o número de LUNs de array visíveis em uma porta do iniciador FC. O número de LUNs de array compatíveis que podem ser visíveis em uma porta do iniciador de FC varia para diferentes versões do ONTAP. 
+---
+= Verificação do número de LUNs de array visíveis em uma porta do iniciador FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode verificar o número de LUNs de array visíveis em uma porta do iniciador FC. O número de LUNs de array compatíveis que podem ser visíveis em uma porta do iniciador de FC varia para diferentes versões do ONTAP.
+
+.Passos
+. Verifique o número visível na porta do iniciador FC: `storage array config show -initiator initiator_number`
++
+`storage array config show -initiator 0a`
+
+. Se houver mais de um grupo de LUN de array para um nó, adicione o número de LUNs de array para todos os grupos de LUN para esse nó, a fim de determinar o total combinado de LUNs de array visíveis para o iniciador FC especificado desse nó.
++
+O exemplo a seguir mostra a saída do iniciador FC 0a para todos os nós. Para determinar o número de LUNs de array visíveis em um iniciador FC específico para um nó _particular_, você deve olhar para as entradas desse nó de todas as portas de destino mostradas para esse nó. Por exemplo, para localizar o número de LUNs de array vistos em vgv3070f51-01:0a, você adicionaria a contagem de LUN de 24 para o grupo LUN 1 (HP) à contagem de LUN de 1 para o grupo LUN 2 (DGC_RAID5_1), para um total de 25 LUNs de array visíveis em vgvgv3070f51-01:0a.
+
++
+Você seguiria o mesmo processo para determinar o número de LUNs de array visíveis em vgv3070f51-02:0a para o grupo LUN 0 e o grupo LUN 2, que também é 25.
+
++
+[listing]
+----
+
+vgv3070f51::> storage array config show -initiator 0a
+             LUN   LUN
+Node         Group Count    Array Name     Array Target Port Initiator
+------------ ----- -----    -----------  ------------------  -------
+vgv3070f51-01    1    24             HP    50014380025d1508     0a
+                 2     1    DGC_RAID5_1    200600a0b819e16f     0a
+vgv3070f51-02    0    24             HP    50014380025d1508     0a
+                 2     1    DGC_RAID5_1    200600a0b819e16f     0a
+----
+

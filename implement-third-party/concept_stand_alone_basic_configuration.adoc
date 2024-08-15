@@ -1,0 +1,24 @@
+---
+permalink: implement-third-party/concept_stand_alone_basic_configuration.html 
+sidebar: sidebar 
+keywords: stand-alone, basic, configuration 
+summary: A configuração básica independente de um sistema ONTAP que usa LUNs de array é uma configuração simples e conetada à malha com um único par de portas de iniciador FC que acessa um único grupo de LUN. 
+---
+= Configuração básica independente
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A configuração básica independente de um sistema ONTAP que usa LUNs de array é uma configuração simples e conetada à malha com um único par de portas de iniciador FC que acessa um único grupo de LUN.
+
+Esta configuração é suportada para utilização com todas as matrizes de armazenamento listadas na Matriz de interoperabilidade, conforme suportado para a versão do ONTAP em execução no seu sistema.
+
+A ilustração a seguir mostra esta configuração:
+
+image::../media/one_standalone_2_port_array_lun_group_array_port_labels.gif[Em uma única configuração de grupo LUN de matriz de 2 portas com um sistema autônomo]
+
+*Informações relacionadas*
+
+https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"]

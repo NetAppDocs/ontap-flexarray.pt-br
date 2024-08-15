@@ -1,0 +1,30 @@
+---
+permalink: implement-third-party/concept_requirements_for_using_disks_external_to_the_storage_array.html 
+sidebar: sidebar 
+keywords: requirements, using, disks, external, storage, array 
+summary: 'O ONTAP suporta o uso dos mesmos discos por trás dos storage arrays que o fornecedor suporta (ou seja, discos externos ao storage array). Quando você está implantando matrizes de armazenamento que usam discos externos, o ONTAP aceita a configuração entre o storage array e os discos externos.' 
+---
+= Requisitos para o uso de discos externos ao storage array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O ONTAP suporta o uso dos mesmos discos por trás dos storage arrays que o fornecedor suporta (ou seja, discos externos ao storage array). Quando você está implantando matrizes de armazenamento que usam discos externos, o ONTAP aceita a configuração entre o storage array e os discos externos.
+
+A seguir estão as restrições e as recomendações de práticas recomendadas para a implantação de storage arrays que usam discos externos:
+
+* Volumes raiz e LUNs de núcleo sobressalente são compatíveis com discos externos.
+* Os LUNs de array de discos externos e internos não devem estar no mesmo agregado ONTAP.
+* Os LUNs de array de unidades SATA e LUNs de array de unidades FC não devem estar no mesmo agregado.
+* As regras para o número de caminhos para LUNs de array em discos externos são as mesmas que para LUNs de array em discos no storage array.
++
+No caso de discos externos, os caminhos vão do sistema ONTAP através do storage array para os discos externos.
+
+* Somente a soma de verificação de bloco é suportada para LUNs de array em discos externos.
+
+
+*Informações relacionadas*
+
+https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Referência e requisitos de instalação da virtualização do FlexArray"]

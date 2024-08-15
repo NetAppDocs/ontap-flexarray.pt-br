@@ -1,0 +1,32 @@
+---
+permalink: implement-third-party/concept_requirements_for_implementing_lun_security_on_emc_symmetrix_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, implementing, lun, security, emc, symmetrix, storage, arrays 
+summary: Você usa a segurança LUN para eliminar a possibilidade de um host gravar dados em um LUN que não é de propriedade desse host. 
+---
+= Requisitos para implementar a segurança LUN em matrizes de armazenamento EMC Symmetrix
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você usa a segurança LUN para eliminar a possibilidade de um host gravar dados em um LUN que não é de propriedade desse host.
+
+Para eliminar a possibilidade de um host que não seja ONTAP substituir LUNs de array EMC Symmetrix de propriedade de um sistema ONTAP ou vice-versa, você deve apresentar os dispositivos lógicos Symmetrix através das portas do diretor de host (canal) de uma das seguintes maneiras:
+
+* Apresente apenas os dispositivos lógicos Symmetrix para ONTAP em portas específicas do diretor de host (canal) Symmetrix que são dedicadas ao uso do ONTAP.
++
+Se as portas não puderem ser dedicadas ao ONTAP, você deverá confirmar que todos os outros hosts que usam essas portas são compatíveis com os requisitos do ONTAP. Isso ocorre porque cada host conetado ao array Symmetrix tem requisitos para diferentes configurações de atributos de porta. O compartilhamento de portas entre vários hosts conetados ao storage Symmetrix pode resultar em uma configuração impossível de implementar.
+
+* Para matrizes de armazenamento VMAX, crie vistas de máscara para o mapeamento e a máscara necessários criando grupos de portas, grupos de armazenamento e grupos de iniciadores.
++
+Para conseguir isso, você deve primeiro habilitar o atributo de porta ACLX nas portas de storage do VMAX.
+
+
+
+[NOTE]
+====
+Não apresente o LUN VCMDB a todos os hosts por padrão. Configure a configuração global para restringir a visibilidade ao VCMDB, a menos que tenha sido especificamente visível para um host específico.
+
+====

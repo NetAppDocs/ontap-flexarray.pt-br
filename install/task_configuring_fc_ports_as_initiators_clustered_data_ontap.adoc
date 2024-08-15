@@ -1,0 +1,57 @@
+---
+permalink: install/task_configuring_fc_ports_as_initiators_clustered_data_ontap.html 
+sidebar: sidebar 
+keywords: configure, fc ports, initiators 
+summary: Você pode configurar portas FC individuais como iniciadores em sistemas ONTAP. O modo iniciador permite que as portas se conetem a matrizes de armazenamento. 
+---
+= Configurando portas FC como iniciadores
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode configurar portas FC individuais como iniciadores em sistemas ONTAP. O modo iniciador permite que as portas se conetem a matrizes de armazenamento.
+
+.Passos
+. *Opcional:* se a porta do adaptador já tiver LIFs configuradas, exclua todos os LIFs usando o `network interface delete` comando.
++
+Se o LIF estiver em um conjunto de portas, você deve remover o LIF do conjunto de portas antes de excluir o LIF.
+
++
+O exemplo a seguir mostra como você pode excluir LIFs em um SVM VS3: `network interface delete -vserver vs3 -lif lif2,lif0`
+
+. Coloque a porta offline usando o `network fcp adapter modify` comando.
++
+O exemplo a seguir mostra como você pode colocar a porta 0C off-line para o nó sysnode: `network fcp adapter modify -node sysnode1 -adapter 0c -state down`
+
+. Use o `system hardware unified-connect modify` comando para alterar a porta off-line de destino para iniciador.
++
+O exemplo a seguir mostra como você pode alterar o tipo de porta para 0C de destino para iniciador: `system node hardware unified-connect modify -node sysnode1 -adapter 0c -type initiator`
+
+. Reinicie o nó que hospeda o adaptador que você alterou.
+. Use o `system hardware unified-connect show` comando para verificar se as portas FC estão configuradas corretamente para sua configuração.
++
+O exemplo a seguir mostra a alteração no tipo de porta para 0C:
+
++
+`system node hardware unified-connect show -node sysnode1`
+
++
+[listing]
+----
+
+
+                       Current  Current    Pending  Pending
+Node          Adapter  Mode     Type       Mode     Type       Status
+------------  -------  -------  ---------  -------  ---------  -----------
+sysnode1      0a       fc       target     -        -          online
+sysnode1      0b       fc       target     -        -          online
+sysnode1      0c       fc       initiator  -        -          offline
+sysnode1      0d       fc       target     -        -          online
+----
+. Use o `storage enable adapter` comando para colocar a porta off-line novamente on-line.
++
+O exemplo a seguir mostra como você pode fazer a porta 0C online: `node run -node sysnode1 -command storage enable adapter -e 0c`
+
+

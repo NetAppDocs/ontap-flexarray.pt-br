@@ -1,0 +1,36 @@
+---
+permalink: install/task_modifying_assignment_of_spare_array_luns.html 
+sidebar: sidebar 
+keywords: modify, assignment, spare, array, luns 
+summary: Você pode alterar a propriedade de um LUN de matriz sobressalente para outro nó. Você pode querer fazer isso para balanceamento de carga sobre os nós. 
+---
+= Modificação da atribuição de LUNs de array sobressalente
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode alterar a propriedade de um LUN de array _spare_ para outro nó. Você pode querer fazer isso para balanceamento de carga sobre os nós.
+
+.Passos
+. No console do nó que possui o LUN de array que você deseja reatribuir, digite o seguinte comando para ver uma lista de LUNs de array sobressalentes no nó: `storage disk show -owner local`
++
+São listados os LUNs de array pertencentes ao nó, sobressalentes e LUNs agregados.
+
+. Confirme se o LUN que você deseja reatribuir a outro nó é um LUN sobressalente.
+. Digite o seguinte comando para atribuir a propriedade do LUN de matriz a outro nó: `storage disk assign arrayLUNname -owner new_owner_name -force`
++
+[NOTE]
+====
+A propriedade de LUN de array não será alterada se a opção -force não for usada ou se o LUN de array já tiver sido adicionado a um agregado.
+
+====
+. Digite o seguinte comando para verificar se a propriedade do LUN de matriz sobressalente foi alterada para o outro nó: `storage disk show -owner local`
++
+O LUN de matriz sobressalente que você alterou para o novo proprietário não deve mais aparecer na lista de peças sobressalentes. Se o LUN do array ainda aparecer, repita o comando para alterar a propriedade.
+
+. No nó de destino, digite o seguinte comando para verificar se o LUN de matriz sobressalente cuja propriedade você alterou está listado como um sobressalente de propriedade do nó de destino: `storage disk show -owner local`
+
+
+Você deve adicionar o LUN de array a um agregado antes que ele possa ser usado para armazenamento.

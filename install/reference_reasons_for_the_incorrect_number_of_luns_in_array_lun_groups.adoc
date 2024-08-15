@@ -1,0 +1,57 @@
+---
+permalink: install/reference_reasons_for_the_incorrect_number_of_luns_in_array_lun_groups.html 
+sidebar: sidebar 
+keywords: reasons, incorrect, number, luns, array, groups, issue, resolve 
+summary: Ao validar sua configuração, você deve verificar a saída show de configuração da matriz de armazenamento para garantir que o número de LUNs em cada grupo LUN seja o que você pretendia. A causa mais provável para o número incorreto de LUNs em um grupo LUN é que o LUN de array não é mapeado para um sistema ONTAP. 
+---
+= Razões para o número incorreto de LUNs em grupos LUN de matriz
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ao validar sua configuração, você deve verificar a `storage array config show` saída para garantir que o número de LUNs em cada grupo LUN seja o que você pretendia. A causa mais provável para o número incorreto de LUNs em um grupo LUN é que o LUN de array não é mapeado para um sistema ONTAP.
+
+
+
+== Exemplo de configuração de storage array show output
+
+O número de LUNs de array em cada grupo LUN aparece `storage array config show` na saída, como mostra o seguinte exemplo:
+
+[listing]
+----
+mysystem1::> storage array config show
+
+               LUN     LUN
+Node           Group   Count Array Name     Array Target Port  Initiator
+------         ------ ----- -------------- -------------------- ----------
+mysystem1        0      50   DGC_RAID5_1     201A00a0b80fee04     0a
+                                             202A00a0b80fee04     0c
+----
+
+
+== Explicação
+
+As razões mais prováveis pelas quais um LUN de array que você esperava estar em um grupo de LUN está faltando são as seguintes:
+
+* O LUN de array não é mapeado para o sistema ONTAP.
+* Um erro de mapeamento é feito que resultou no LUN de array estar no grupo LUN errado.
++
+Por exemplo, a configuração do grupo de hosts pode estar incorreta.
+
+* A matriz de armazenamento ainda está em processo de inicialização e disponibilização dos LUNs da matriz (estado de transição).
+* O scanner LUN ONTAP ainda não descobriu os LUNs (estado de transição).
+
+
+
+
+== Resolvendo o problema
+
+. Se o LUN do array não tiver sido mapeado para o sistema ONTAP, o administrador do storage terá que mapeá-lo.
++
+O processo de mapeamento de LUNs de array para hosts varia entre arrays de storage.
+
+. Se o LUN de array tiver sido mapeado para o sistema ONTAP, verifique o zoneamento e a configuração do grupo de host.
+. Depois que o problema for corrigido, execute `storage array config show` novamente para confirmar que o problema foi corrigido.
+

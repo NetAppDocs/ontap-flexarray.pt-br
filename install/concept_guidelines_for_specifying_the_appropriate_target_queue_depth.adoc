@@ -1,0 +1,30 @@
+---
+permalink: install/concept_guidelines_for_specifying_the_appropriate_target_queue_depth.html 
+sidebar: sidebar 
+keywords: guidelines, specify, appropriate, target, queue, depth 
+summary: Você precisa considerar o impactos de todos os iniciadores acessando a porta do storage array quando estiver planejando a configuração para um sistema ONTAP específico ou um host específico que não execute o ONTAP. 
+---
+= Diretrizes para especificar a profundidade de fila de destino apropriada
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você precisa considerar o impactos de todos os iniciadores acessando a porta do storage array quando estiver planejando a configuração para um sistema ONTAP específico ou um host específico que não execute o ONTAP.
+
+Se sua implantação incluir mais de um iniciador em uma porta de destino, você precisará considerar o número total de comandos enviados a uma porta de destino por todos os iniciadores ao definir a profundidade da fila de destino.
+
+As diretrizes para especificar a profundidade de fila de destino apropriada são as seguintes:
+
+* Não configure um valor de 0 (zero).
++
+Um valor de 0 significa que não há limite nos comandos pendentes.
+
+* Considere o volume de comandos que iniciadores específicos provavelmente enviariam para a porta de destino.
++
+Em seguida, você pode configurar valores mais altos para os iniciadores que provavelmente enviarão um número maior de solicitações e um valor menor para os iniciadores que provavelmente enviarão um número menor de solicitações.
+
+* Configure hosts que não executam o ONTAP de acordo com as diretrizes fornecidas para esses hosts.
+* Considere definir a profundidade da fila de destino em uma base por porta de destino quando as cargas de trabalho diferem entre portas.
+

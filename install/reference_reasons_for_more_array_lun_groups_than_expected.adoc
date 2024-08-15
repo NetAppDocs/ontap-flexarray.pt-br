@@ -1,0 +1,97 @@
+---
+permalink: install/reference_reasons_for_more_array_lun_groups_than_expected.html 
+sidebar: sidebar 
+keywords: reasons, array, lun, groups, expected 
+summary: Ao validar sua configuração, você deve verificar a saída show de configuração da matriz de armazenamento para garantir que o número de grupos de LUN seja o que você pretendia. O motivo mais comum para grupos de LUN de matriz extra é que o LDEV está abrangendo pares de portas de destino. 
+---
+= Razões para mais grupos LUN de array do que o esperado
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ao validar sua configuração, você deve verificar a `storage array config show` saída para garantir que o número de grupos de LUN seja o que você pretendia. O motivo mais comum para grupos de LUN de matriz extra é que o LDEV está abrangendo pares de portas de destino.
+
+
+
+== Explicação
+
+As razões comuns pelas quais você veria mais grupos de LUN do que o esperado são as seguintes:
+
+* Um LDEV não é mapeado para um par de portas de destino redundante.
++
+A causa mais comum de um grupo LUN extra é que o LDEV está abrangendo pares de caminhos. Diz-se que um LDEV é _spanning path pairs_ se IDs LUN correspondentes para o LDEV não forem apresentados a um par de portas de destino redundante no storage array.
+
+
+
+[NOTE]
+====
+Em muitos storages, não é possível apresentar um LDEV para portas de destino que não são redundantes se você seguir o processo convencional para criar e mapear LDEVs.
+
+====
+* O ONTAP está tentando equilibrar a carga sobre as portas de destino durante a migração de LUNs de array de um grupo de LUN para outro.
++
+Neste caso, os pares de caminhos de expansão LDEV são um estado de transição.
+
+* Estão configuradas demasiadas ligações.
+
+
+O ONTAP pode ser executado com um único grupo de LUN de array ou vários grupos de LUN de array. Portanto, o ONTAP não considera nenhum número de grupos de LUN como uma configuração incorreta. No entanto, vários grupos de LUN não são compatíveis com todos os storage arrays em todas as versões do ONTAP. Durante o Planejamento de configuração, você deve verificar as informações na Matriz de interoperabilidade para verificar se vários grupos de LUN de matriz são suportados para os storages usados na configuração do ONTAP.
+
+
+
+== Cenário de problema
+
+Suponha que existem dois grupos de LUN existentes, o grupo de LUN 0 e o grupo de LUN 1. O grupo LUN 0 tem dois LUNs de array e o grupo LUN 1 tem três LUNs de array. O administrador criou um novo LDEV Z, com a intenção de adicionar LUN 3 ao grupo LUN 0. O administrador mapeou LDEV Z como LUN 3 em duas portas de storage array. No entanto, as portas para as quais o LUN 3 é mapeado, as portas do storage array 1A e 2B, não são um par de portas de destino redundante, como mostra a ilustração a seguir.
+
+image::../media/ldev_spans_path_pairs_v2.gif[Este gráfico é descrito no texto circundante.]
+
+O resultado desse erro é que um terceiro grupo LUN não intencional é criado (Grupo 2), como mostra o exemplo a seguir:
+
+[listing]
+----
+
+mysystem1::> storage array config show
+
+          LUN   LUN
+Node      Group Count  Array Name  	Array Target Ports     	Switch Port  	Initiator
+-------   ----- ------ ----------- 	-------------------    	-----------  	---------
+
+mysystem1  0     3     DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr20es25:5    0a
+                                   	20:2A:00:a0:b8:0f:ee:04  vnci9124s53:6   0c
+           1     3     DGC_RAID5_1  20:1B:00:a0:b8:0f:ee:04  vnbr20es25:7    0b
+                                   	20:2B:00:a0:b8:0f:ee:04  vnci9124s53:8   0d
+           2     1     DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr20es25:5    0a
+                                   	20:2B:00:a0:b8:0f:ee:04  vnci9124s53:8   0d
+----
+Você pode inferir a partir das informações na coluna portas de destino de matriz para os grupos 0 e 1 que os caminhos para as portas de destino de matriz são redundantes. O grupo 0 vai para as portas de destino 1A e 2A, um par de portas de destino. O grupo 1 vai para 1B e 2B, um par de portas de destino diferente.
+
+No entanto, as informações na coluna Array Target Ports para o Grupo 2 sugerem que os caminhos não são redundantes. Um caminho vai para a porta de destino 1A e o outro vai para a porta de destino 2B. Este não é um par de portas de destino redundante; o LUN de matriz está abrangendo grupos de LUN. O LUN de array deve ter sido mapeado para 1A e 2A ou 1B e 2B.
+
+Como o sistema ONTAP pode ser executado com pares de caminho de expansão LDEV, a mensagem instruindo você a executar `storage errors show` não aparece depois de executar o `storage array config show` comando. No entanto, esta não é uma configuração de melhores práticas.
+
+
+
+== Resolvendo o problema
+
+. Aguarde um minuto e, em seguida, execute `storage array config show` novamente para ver se o grupo LUN extra ainda é mostrado na `storage array config show` saída.
++
+** Se o grupo de LUN extra não estiver mais na saída, você pode concluir que o problema foi transitório.
+** Se o grupo LUN extra ainda aparecer na saída, o administrador do storage de armazenamento deve remapear o LDEV, conforme documentado nas próximas etapas.
++
+Você precisa manter a redundância ao corrigir esse problema. Este procedimento instrui você a mapear o LDEV para a porta de destino correta _before_ removendo o mapeamento para a porta de destino incorreta. A redundância é mantida neste caso porque você está aumentando o número de caminhos para três, temporariamente, em vez de diminuir o número de caminhos para um enquanto você está corrigindo o problema.
+
+
+
+. Decida quais das portas de destino inconsistentes devem ser remapeadas.
+. Na matriz de armazenamento, mapeie o LDEV para a nova porta de destino (correta).
+. No ONTAP, execute `storage array config show` para confirmar que três caminhos são mostrados.
+. Remova o mapeamento incorreto.
+. Aguarde um minuto enquanto o ONTAP descobre o LUN.
+. No ONTAP, execute `storage array config show` novamente para se certificar de que o grupo de LUN extra desapareceu.
+
+
+*Informações relacionadas*
+
+https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"]

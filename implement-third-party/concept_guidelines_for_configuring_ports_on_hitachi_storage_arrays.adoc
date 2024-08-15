@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/concept_guidelines_for_configuring_ports_on_hitachi_storage_arrays.html 
+sidebar: sidebar 
+keywords: guidelines, configuring, ports, hitachi, storage, arrays 
+summary: Você deve seguir certas diretrizes ao configurar portas em matrizes de armazenamento Hitachi. 
+---
+= Diretrizes para a configuração de portas em matrizes de armazenamento Hitachi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve seguir certas diretrizes ao configurar portas em matrizes de armazenamento Hitachi.
+
+As diretrizes para a configuração de portas em matrizes de armazenamento Hitachi são as seguintes:
+
+* Você deve adicionar apenas um grupo de host por porta.
+* Você deve garantir que um grupo de host inclua todas as portas do iniciador FC dos sistemas V-Series em uma vizinhança de LUN de array.
+

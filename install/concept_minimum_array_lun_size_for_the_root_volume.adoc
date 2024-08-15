@@ -1,0 +1,20 @@
+---
+permalink: install/concept_minimum_array_lun_size_for_the_root_volume.html 
+sidebar: sidebar 
+keywords: array, lun, size, required, root, volume 
+summary: Você deve definir o tamanho do volume raiz para ser maior que o tamanho mínimo de LUN de matriz suportado, para garantir que haja espaço suficiente no volume raiz para arquivos do sistema, arquivos de log e arquivos centrais. Você deve fornecer esses arquivos para o suporte técnico se ocorrer um problema de sistema. 
+---
+= Tamanho de LUN de array necessário para o volume raiz
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve definir o tamanho do volume raiz para ser maior que o tamanho mínimo de LUN de matriz suportado, para garantir que haja espaço suficiente no volume raiz para arquivos do sistema, arquivos de log e arquivos centrais. Você deve fornecer esses arquivos para o suporte técnico se ocorrer um problema de sistema.
+
+O _Hardware Universe_ lista o tamanho mínimo de LUN de array para um volume raiz.
+
+*Informações relacionadas*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

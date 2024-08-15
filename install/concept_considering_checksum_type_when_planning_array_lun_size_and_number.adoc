@@ -1,0 +1,16 @@
+---
+permalink: install/concept_considering_checksum_type_when_planning_array_lun_size_and_number.html 
+sidebar: sidebar 
+keywords: consider, checksum, type, plan, array, lun, size, number 
+summary: Ao Planejar o número e o tamanho dos LUNs de array que você precisa para o ONTAP, você deve considerar o impactos do tipo de checksum na quantidade de espaço utilizável no LUN de array. Um tipo de checksum deve ser especificado para cada LUN de array atribuído a um sistema ONTAP. 
+---
+= Considerando o tipo de checksum ao Planejar o tamanho e o número do LUN do array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ao Planejar o número e o tamanho dos LUNs de array que você precisa para o ONTAP, você deve considerar o impactos do tipo de checksum na quantidade de espaço utilizável no LUN de array. Um tipo de checksum deve ser especificado para cada LUN de array atribuído a um sistema ONTAP.
+
+Quando um LUN de array no storage array é mapeado para ser usado por um sistema ONTAP , o ONTAP trata o LUN de array como um disco bruto e não formatado. Quando você atribui um LUN de matriz a um sistema ONTAP, você especifica o tipo de checksum, que informa ao ONTAP como formatar o LUN de matriz bruta. O impactos do tipo de checksum no espaço utilizável depende do tipo de checksum especificado para o LUN.

@@ -1,0 +1,22 @@
+---
+permalink: install/concept_planning_for_lun_security_on_storage_arrays.html 
+sidebar: sidebar 
+keywords: plan, lun, security, storage, arrays 
+summary: Se você estiver usando seu sistema ONTAP com storage arrays, use um método de segurança LUN para eliminar a possibilidade de um sistema que não seja ONTAP substituir LUNs de storage de propriedade de um sistema ONTAP ou vice-versa. 
+---
+= Planejamento da segurança LUN nas matrizes de armazenamento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se você estiver usando seu sistema ONTAP com storage arrays, use um método de segurança LUN para eliminar a possibilidade de um sistema que não seja ONTAP substituir LUNs de storage de propriedade de um sistema ONTAP ou vice-versa.
+
+A segurança LUN é um método para isolar os hosts que podem acessar LUNs de array específicos. A segurança de LUN é semelhante ao zoneamento do switch no conceito, mas é realizada no storage array. _Segurança LUN_ e _mascaramento LUN_ são termos equivalentes para descrever esta funcionalidade.
+
+[NOTE]
+====
+O esquema de propriedade de disco do ONTAP impede que um sistema ONTAP substitua um LUN de storage de propriedade de outro sistema ONTAP. No entanto, isso não impede que um sistema ONTAP substitua um LUN de array acessível por um host que não seja ONTAP. Da mesma forma, sem um método de impedir a substituição, um host não-ONTAP poderia substituir um LUN de array usado por um sistema ONTAP.
+
+====

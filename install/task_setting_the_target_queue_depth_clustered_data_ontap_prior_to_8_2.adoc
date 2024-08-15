@@ -1,0 +1,20 @@
+---
+permalink: install/task_setting_the_target_queue_depth_clustered_data_ontap_prior_to_8_2.html 
+sidebar: sidebar 
+keywords: set, target, queue, depth, ontap, 8.2 
+summary: A profundidade padrão da fila de destino é aceitável para a maioria das implementações, mas você pode alterar o valor padrão, se necessário. 
+---
+= Definir a profundidade da fila de destino (ONTAP anterior a 8,2)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A profundidade padrão da fila de destino é aceitável para a maioria das implementações, mas você pode alterar o valor padrão, se necessário.
+
+Essa configuração é por sistema ONTAP e se aplica a todas as portas de destino em todos os storages de armazenamento. Para sistemas ONTAP com versão anterior a 8,2, pode utilizar esta opção.
+
+.Passo
+. Utilize a seguinte opção para definir a profundidade da fila de destino: `options disk.target_port.cmd_queue_depth value`
+

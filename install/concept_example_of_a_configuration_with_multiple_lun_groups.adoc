@@ -1,0 +1,86 @@
+---
+permalink: install/concept_example_of_a_configuration_with_multiple_lun_groups.html 
+sidebar: sidebar 
+keywords: example, configuration, multiple, lun, groups 
+summary: Você pode usar uma configuração de vários grupos de LUN para melhorar o desempenho do sistema, espalhando a carga de trabalho por várias portas de destino. 
+---
+= Exemplo de uma configuração com vários grupos LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode usar uma configuração de vários grupos de LUN para melhorar o desempenho do sistema, espalhando a carga de trabalho por várias portas de destino.
+
+Uma configuração de vários grupos LUN é suportada para a maioria dos storages de armazenamento. Consulte a _Interoperability Matrix_ para confirmar que essa configuração é suportada com seu storage array.
+
+A ilustração a seguir mostra como um par de portas do iniciador FC (0C e 0f) em um sistema ONTAP acessa um grupo LUN em um par de portas do storage array e um segundo par de portas do iniciador FC (0a e 0h) acessa um segundo grupo LUN no mesmo storage array em um par de portas do storage array diferente.
+
+Essa configuração é chamada de _stand-alone com dois grupos LUN de matriz de 2 portas_. Uma configuração de vários grupos LUN poderia ter um par de HA em vez de um sistema autônomo.
+
+image::../media/multiple_lun_groups_with_stand_alone_6xxx_array_controller.gif[Este gráfico é descrito pelo texto circundante.]
+
+Essa configuração de vários grupos de LUN permite que você espalhe a e/S pelos grupos RAID (grupos de paridade) no storage array. Você configura a configuração para que diferentes pares de portas do iniciador de FC acessem diferentes grupos de LUNs no storage array. O sistema ONTAP vê qualquer LUN de matriz em apenas dois caminhos, porque um determinado LDEV (dispositivo lógico) é mapeado para apenas duas portas redundantes na matriz de armazenamento. Cada grupo LUN é acessado por meio de um par de portas de destino diferente.
+
+Cada LDEV é identificado externamente por um ID LUN. O LDEV deve ser mapeado para o mesmo ID LUN em todas as portas de storage array sobre as quais ele será visível para os sistemas ONTAP.
+
+[NOTE]
+====
+O mesmo ID de LUN não pode se referir a dois LDEVs diferentes, mesmo que os LUNs que usam o mesmo ID estejam em diferentes grupos de hosts em uma porta de destino. Embora a reutilização de ID de LUN não seja suportada na mesma porta de destino, a reutilização de ID de LUN é suportada em um storage array se os LUNs forem mapeados para diferentes portas de storage array.
+
+====
+A tabela a seguir resume o zoneamento para este exemplo. O zoneamento de um único iniciador é a estratégia de zoneamento recomendada.
+
+|===
+| Zona | Porta do iniciador de FC no sistema ONTAP | Storage array 
+
+
+ a| 
+Interrutor 1
+
+
+
+ a| 
+z1
+ a| 
+Porta 0a
+ a| 
+Controlador 1 porta B
+
+
+
+ a| 
+z2
+ a| 
+Porta 0c
+ a| 
+Controlador 1 porta A
+
+
+
+ a| 
+Interrutor 2
+
+
+
+ a| 
+z3
+ a| 
+Porta 0f
+ a| 
+Controlador 2 porta A
+
+
+
+ a| 
+z4
+ a| 
+Porta 0h
+ a| 
+Controlador 2 porta B
+
+|===
+*Informações relacionadas*
+
+https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"]

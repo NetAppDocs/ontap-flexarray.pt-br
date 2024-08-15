@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_hitachi_storage_arrays.html 
+sidebar: sidebar 
+keywords: hitachi, storage, arrays 
+summary: Você deve atender a certos requisitos ao configurar matrizes de armazenamento Hitachi para trabalhar com sistemas ONTAP que usam LUNs de matriz. Esses requisitos incluem a configuração de parâmetros de configuração em matrizes de armazenamento e a implantação de apenas configurações suportadas. 
+---
+= Matrizes de armazenamento Hitachi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve atender a certos requisitos ao configurar matrizes de armazenamento Hitachi para trabalhar com sistemas ONTAP que usam LUNs de matriz. Esses requisitos incluem a configuração de parâmetros de configuração em matrizes de armazenamento e a implantação de apenas configurações suportadas.

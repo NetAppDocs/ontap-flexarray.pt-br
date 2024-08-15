@@ -1,0 +1,35 @@
+---
+permalink: install/task_obtaining_wwns_manually.html 
+sidebar: sidebar 
+keywords: obtain, wwpns, manually 
+summary: 'Se o sistema ONTAP não estiver conetado ao switch SAN, você precisará obter os WWPNs (World Wide Port Names) das portas do iniciador FC do sistema que serão usadas para conetar o sistema ao switch.' 
+---
+= Obtendo WWPNs manualmente
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se o sistema ONTAP não estiver conetado ao switch SAN, você precisará obter os WWPNs (World Wide Port Names) das portas do iniciador FC do sistema que serão usadas para conetar o sistema ao switch.
+
+Ter o switch automaticamente descobrir WWPNs é o método preferido de obter WWPNs porque você pode evitar possíveis erros resultantes de digitar os WWPNs na configuração do switch.
+
+.Passos
+. Ligue a ligação da consola do sistema a um computador portátil.
+. Ligue o seu sistema.
++
+Interrompa o processo de inicialização pressionando Ctrl-c quando você vir a seguinte mensagem no console:
+
++
+[listing]
+----
+Press CTRL-C for boot menu
+----
+. Selecione a opção Maintenance Mode (modo de manutenção) no menu de opções de arranque.
+. Digite o seguinte comando para listar as WWPNs das portas do iniciador FC do sistema: `storage show adapter`
++
+Para listar um adaptador WWPN específico, adicione o nome do adaptador, por exemplo, storage show adapter 0a.
+
+. Registe as WWPNs que serão utilizadas e saia do modo Manutenção.
+

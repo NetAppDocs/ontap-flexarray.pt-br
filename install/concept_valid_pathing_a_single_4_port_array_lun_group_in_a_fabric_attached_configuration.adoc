@@ -1,0 +1,36 @@
+---
+permalink: install/concept_valid_pathing_a_single_4_port_array_lun_group_in_a_fabric_attached_configuration.html 
+sidebar: sidebar 
+keywords: valid, path, single, 4, port, array, lun, group, fabric attached, configuration 
+summary: Uma única configuração de grupo LUN de array de 4 portas funciona com todos os storage arrays para todas as versões do ONTAP. 
+---
+= Interrupção válida: Um único grupo LUN de matriz de 4 portas em uma configuração conetada à malha
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Uma única configuração de grupo LUN de array de 4 portas funciona com todos os storage arrays para todas as versões do ONTAP.
+
+A ilustração a seguir mostra o pathing em uma configuração com um único grupo LUN de matriz de 4 portas:
+
+image::../media/one_4_port_array_lun_gp.gif[Este gráfico é descrito pelo texto circundante.]
+
+Nessa configuração com um único grupo LUN de 4 portas, os LUNs de array são mapeados para quatro portas no storage array. O grupo LUN de array é apresentado a ambos os nós no par de HA em portas de destino de array diferentes. No entanto, cada nó pode ver um LUN de array, de ponta a ponta, por apenas dois caminhos. O zoneamento é configurado para que cada porta do iniciador FC em um nó possa acessar apenas uma única porta de matriz de destino.
+
+É útil comparar sua saída com a saída válida `storage array config show` quando você está verificando se o número de grupos LUN que você esperava foi configurado. O exemplo de saída a seguir `storage array config show` mostra a saída esperada para esta configuração - um único grupo LUN de matriz:
+
+[listing]
+----
+vs::> storage array config show
+             LUN   LUN
+Node         Group Count  Array Name     Array Target Port     Initiator
+------------ ----- ----- ------------- ----------------------- ---------
+vs1            1    10   DGC_RAID5_1      50050763030301241A     0a
+                                          50050763031301242A     0c
+vs2            1    10   DGC_RAID5_1      50050763030881241B     0a
+                                          50050763031881242B     0c
+
+4 entries were displayed.
+----

@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/reference_supported_fabric_attached_configurations_for_storage_arrays.html 
+sidebar: sidebar 
+keywords: support, fabric-attached, configurations 
+summary: Várias configurações conectadas à malha são compatíveis com todos os fornecedores de storage array, a menos que mencionado de outra forma. 
+---
+= Configurações conectadas à malha compatíveis
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Várias configurações conectadas à malha são compatíveis com todos os fornecedores de storage array, a menos que mencionado de outra forma.
+
+A Matriz de interoperabilidade contém informações adicionais sobre modelos de matriz específicos.
+
+*Informações relacionadas*
+
+https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"]

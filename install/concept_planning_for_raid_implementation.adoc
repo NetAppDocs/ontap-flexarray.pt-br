@@ -1,0 +1,14 @@
+---
+permalink: install/concept_planning_for_raid_implementation.html 
+sidebar: sidebar 
+keywords: plan, raid, implementation 
+summary: Você precisa Planejar o tamanho e o número de LUNs nos grupos RAID da matriz de armazenamento e decidir se deseja compartilhar o grupo RAID entre os hosts. 
+---
+= Planejamento para implementação de RAID
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você precisa Planejar o tamanho e o número de LUNs nos grupos RAID da matriz de armazenamento e decidir se deseja compartilhar o grupo RAID entre os hosts.

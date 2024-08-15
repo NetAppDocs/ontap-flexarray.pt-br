@@ -1,0 +1,32 @@
+---
+permalink: install/concept_planning_considerations_for_ontap_raid_groups.html 
+sidebar: sidebar 
+keywords: plan, considerations, ontap, raid, groups 
+summary: Antes de configurar grupos RAID do ONTAP para LUNs de array, é necessário Planejar o tamanho de agregados, o número e o tamanho dos grupos RAID e o tamanho das LUNs de array. Os grupos RAID que melhor atendem aos requisitos de dados garantem proteção adequada no array para os dados e sua disponibilidade. 
+---
+= Considerações de Planejamento para grupos RAID do ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de configurar grupos RAID do ONTAP para LUNs de array, é necessário Planejar o tamanho de agregados, o número e o tamanho dos grupos RAID e o tamanho das LUNs de array. Os grupos RAID que melhor atendem aos requisitos de dados garantem proteção adequada no array para os dados e sua disponibilidade.
+
+O Planejamento para grupos RAID do ONTAP envolve as seguintes tarefas:
+
+. Planejamento do tamanho do agregado que melhor atende aos requisitos de dados.
+. Planejamento do número e do tamanho dos grupos RAID necessários para o tamanho do agregado.
+. Planejamento do tamanho dos LUNs de storage necessários nos grupos RAID do ONTAP:
++
+** Para evitar uma penalidade de desempenho, todos os LUNs de array em um determinado grupo RAID do ONTAP devem ter o mesmo tamanho.
+** Os LUNs de array devem ter o mesmo tamanho em todos os grupos RAID no mesmo agregado.
+
+
+. Comunicação com o administrador do storage de armazenamento para criar o número de LUNs do storage do tamanho que você precisa para o agregado.
++
+Os LUNs do array devem ser otimizados para o desempenho de acordo com as instruções na documentação do fornecedor do storage array.
+
+
+
+Para obter mais recomendações sobre a configuração de grupos RAID do ONTAP para uso com matrizes de armazenamento, https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["_Gerenciamento de discos e agregados_"] consulte .

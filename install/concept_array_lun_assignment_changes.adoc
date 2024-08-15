@@ -1,0 +1,14 @@
+---
+permalink: install/concept_array_lun_assignment_changes.html 
+sidebar: sidebar 
+keywords: array, lun, assignment, changes 
+summary: Você pode alterar a atribuição de um LUN de matriz sobressalente de um sistema ONTAP para outro. Você pode querer alterar a propriedade do balanceamento de carga sobre nós. 
+---
+= Alterações de atribuição de LUN de matriz
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode alterar a atribuição de um LUN de array _spare_ de um sistema ONTAP para outro. Você pode querer alterar a propriedade do balanceamento de carga sobre nós.

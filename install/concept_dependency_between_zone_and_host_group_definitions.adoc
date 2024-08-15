@@ -1,0 +1,90 @@
+---
+permalink: install/concept_dependency_between_zone_and_host_group_definitions.html 
+sidebar: sidebar 
+keywords: dependency, between, zone, host, group, definitions, common, errors, cascading, effect 
+summary: Erros feitos nas definições de zona podem exigir reconfiguração das definições do grupo de hosts e o inverso. 
+---
+= Dependência entre definições de zona e grupo anfitrião
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Erros feitos nas definições de zona podem exigir reconfiguração das definições do grupo de hosts e o inverso.
+
+Quando uma definição de zona é construída, duas portas são especificadas: A WWPN da porta iniciador FC no sistema ONTAP e a porta de matriz de armazenamento WWPN ou WWNN para essa zona. Da mesma forma, quando o grupo de hosts do sistema ONTAP é configurado no storage array, as WWPNs das portas do iniciador FC que você deseja ser membros do grupo de hosts são especificadas.
+
+A ordem típica da configuração é a seguinte:
+
+. Construa uma definição de zona.
+. Construa o grupo de hosts no storage array (escolhendo a WWPN da porta iniciador FC no sistema ONTAP na lista de seleção).
+. Apresentar LUNs de array nas portas.
+
+
+No entanto, grupos de hosts são, às vezes, configurados antes das definições de zona, o que requer a inserção manual de WWPNs na configuração do grupo de hosts na matriz de armazenamento.
+
+
+
+== Erros comuns
+
+Na saída ONTAP, as portas do iniciador FC no sistema ONTAP são identificadas pelo número do adaptador - por exemplo, 0a, 0b, 0C, 0d e assim por diante para modelos com portas integradas. WWPNs são mostrados na GUI do switch e na GUI do storage array. Como WWPNs são longos e em formato hexadecimal, os seguintes erros são comuns:
+
+[cols="2*"]
+|===
+| Como WWPNs são especificados | Erro comum 
+
+
+ a| 
+O administrador digita em WWPNs
+ a| 
+Um erro de digitação é cometido.
+
+
+
+ a| 
+WWPNs são automaticamente descobertos pelo switch
+ a| 
+A porta WWPN errada do iniciador FC é selecionada na lista de seleção.
+
+|===
+[NOTE]
+====
+Quando os sistemas, switches e storage array da ONTAP são cabeados juntos, o switch descobre automaticamente as WWPNs dos sistemas ONTAP e das portas do storage array. Os WWPNs estão então disponíveis em listas de seleção na GUI do switch, permitindo a seleção do WWPN de cada membro da zona em vez de digitá-lo. Para eliminar a possibilidade de erros de digitação, recomenda-se que o switch descubra WWPNs.
+
+====
+
+
+== Efeito em cascata de erros
+
+Uma primeira etapa óbvia ao solucionar problemas com uma configuração conetada à malha é verificar se o zoneamento foi configurado corretamente. Considerar a relação entre o grupo anfitrião e as definições de zona também é importante. A correção de um problema pode exigir a reconfiguração da definição de zona e da definição do grupo anfitrião, dependendo de onde o erro foi feito durante o processo de configuração.
+
+Se o switch estiver descobrindo automaticamente WWPNs e as definições de zona forem configuradas primeiro, as WWPNs das portas do iniciador FC que serão usadas para acessar LUNs na matriz de armazenamento serão propagadas automaticamente para as listas de seleção de configuração do grupo de host na GUI do storage. Portanto, quaisquer erros de zoneamento também são propagados para as listas de seleção de grupo de hosts de storage. As listas de seleção mostram os WWPNs hexadecimais longos em vez dos rótulos de porta iniciador FC curtos que são visíveis no sistema ONTAP (por exemplo, 0a, 0b e assim por diante). Portanto, não é fácil ver que o WWPN que você esperava estar listado não está lá.
+
+A tabela a seguir mostra os efeitos de certos erros:
+
+[cols="3*"]
+|===
+| Definição de zona no interrutor | Configuração do grupo de host no storage array | Sintoma na saída ONTAP 
+
+
+ a| 
+A porta do iniciador FC na definição de zona está incorreta. Isso fez com que a porta WWPN do iniciador FC incorreta fosse propagada para a configuração do grupo de hosts.
+ a| 
+A WWPN da porta do iniciador FC mostrada na lista de seleção foi selecionada, não a WWPN pretendida.
+ a| 
+Os LUNs de array não são visíveis na porta do iniciador de FC na qual os LUNs esperados seriam visíveis.
+
+
+
+ a| 
+A definição de zona inclui a porta do iniciador FC correta.
+ a| 
+A definição WWPN na definição do grupo anfitrião está incorreta devido a um dos seguintes fatores:
+
+* A WWPN errada foi selecionada.
+* Os grupos de hosts foram configurados manualmente antes da definição de zona ser configurada e um erro de digitação foi feito ao digitar o WWPN da porta do iniciador FC.
+
+ a| 
+
+|===

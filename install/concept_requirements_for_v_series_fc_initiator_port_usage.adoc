@@ -1,0 +1,62 @@
+---
+permalink: install/concept_requirements_for_v_series_fc_initiator_port_usage.html 
+sidebar: sidebar 
+keywords: requirements, use, fc initiator, ports 
+summary: Se você quiser usar portas do iniciador FC em uma configuração do ONTAP com LUNs de array, você deve seguir requisitos específicos para redundância de pares de portas, configurações de portas para HBAs, conexão a portas de destino, limites de LUN de array e conexão a diferentes dispositivos e armazenamento. 
+---
+= Requisitos para o uso de portas do iniciador FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se você quiser usar portas do iniciador FC em uma configuração do ONTAP com LUNs de array, você deve seguir requisitos específicos para redundância de pares de portas, configurações de portas para HBAs, conexão a portas de destino, limites de LUN de array e conexão a diferentes dispositivos e armazenamento.
+
+|===
+| Para este recurso... | Os requisitos são... 
+
+
+ a| 
+Redundância de par de portas
+ a| 
+Você deve usar pares de portas de iniciador FC redundantes enquanto coneta um sistema ONTAP a LUNs de array.
+
+
+
+ a| 
+Configuração de porta para HBAs
+ a| 
+Você deve definir todos os HBAs usados para acessar discos ou LUNs de array como portas _iniciador_.
+
+
+
+ a| 
+Conexão a portas de destino do storage array
+ a| 
+Você pode conectar a mesma porta do iniciador de FC a várias portas de destino no storage array.
+
+É possível conectar um máximo de duas portas do iniciador de FC a uma única porta de destino.
+
+
+
+ a| 
+Limites de LUN de array
+ a| 
+Há limites em quantos LUNs de array podem ser visíveis em uma porta iniciador de FC. Esses limites variam com as versões do ONTAP.
+
+
+
+ a| 
+Ligar a diferentes dispositivos e armazenamento
+ a| 
+Você deve usar uma porta do iniciador de FC separada para conetar o sistema ONTAP a cada uma das seguintes opções:
+
+* Compartimentos de disco
+* LUNs de array
+* Dispositivos de fita
+
+
+Se o sistema ONTAP não tiver portas internas suficientes para sua exigência, você deve solicitar um HBA adicional.
+
+|===

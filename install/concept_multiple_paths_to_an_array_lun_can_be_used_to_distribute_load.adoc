@@ -1,0 +1,33 @@
+---
+permalink: install/concept_multiple_paths_to_an_array_lun_can_be_used_to_distribute_load.html 
+sidebar: sidebar 
+keywords: multiple, paths, array, lun, used, distribute, load, commands 
+summary: As solicitações de e/S para um determinado LUN podem ser distribuídas por todos os caminhos otimizados disponíveis para o LUN. Isso é diferente em versões anteriores, onde apesar de vários caminhos estarem disponíveis, as solicitações de e/S para um determinado LUN foram enviadas apenas por um único caminho otimizado ativo. 
+---
+= Vários caminhos para um LUN de array podem ser usados para distribuir carga
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+As solicitações de e/S para um determinado LUN podem ser distribuídas por todos os caminhos otimizados disponíveis para o LUN. Isso é diferente em versões anteriores, onde apesar de vários caminhos estarem disponíveis, as solicitações de e/S para um determinado LUN foram enviadas apenas por um único caminho otimizado ativo.
+
+A distribuição de solicitações de e/S para um determinado LUN em vários caminhos resulta nos seguintes benefícios:
+
+* Maior eficiência devido à utilização máxima de todos os caminhos disponíveis e otimizados
+* Melhor desempenho devido ao balanceamento de carga em vários caminhos
+
+
+Por exemplo, em um array ativo-ativo, as solicitações de e/S para um determinado LUN podem ser distribuídas por todas as quatro portas de destino disponíveis para esse LUN. Para um LUN de array ativo-ativo assimétrico, as solicitações de e/S podem ser distribuídas por todos os caminhos otimizados para um determinado LUN.
+
+
+
+== Comandos para visualizar o balanceamento de carga sobre vários caminhos para um determinado LUN
+
+Você pode executar os seguintes comandos para exibir a distribuição de carga para um determinado LUN em vários caminhos:
+
+* ``storage disk show -disk <LUN name>`` Exibe a distribuição da carga de e/S entre os caminhos disponíveis para um determinado LUN de array.
+* ``storage path show-by-initiator -array-name <array name>`` Exibe a distribuição da carga de e/S em todas as portas do iniciador no sistema ONTAP que está conetado a um determinado storage array.
+* ``storage path show -by-target -array-name <array name>`` Exibe a distribuição da carga de e/S em todas as portas de destino em um determinado storage array.
+

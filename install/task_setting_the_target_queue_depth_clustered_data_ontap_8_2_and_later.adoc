@@ -1,0 +1,41 @@
+---
+permalink: install/task_setting_the_target_queue_depth_clustered_data_ontap_8_2_and_later.html 
+sidebar: sidebar 
+keywords: set, target, queue, depth 
+summary: A profundidade padrão da fila de destino é aceitável para a maioria das implementações, mas pode ser alterada se forem encontrados problemas de desempenho. 
+---
+= Definir a profundidade da fila de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A profundidade padrão da fila de destino é aceitável para a maioria das implementações, mas pode ser alterada se forem encontrados problemas de desempenho.
+
+Você pode definir a profundidade da fila de destino por matriz de armazenamento ou por porta de destino.
+
+.Passo
+. Use um dos comandos a seguir para definir a profundidade da fila de portas de destino em todas as portas de destino ou em uma porta de destino específica de um storage array.
++
+|===
+| Se você quiser... | Utilizar esta sequência de comandos... 
+
+
+ a| 
+Defina a profundidade da fila da porta de destino em todas as portas de destino para uma matriz de armazenamento
+ a| 
+`set advanced` `storage array port modify -name array_name -max-queue-depth value`
+
+
+
+ a| 
+Defina a profundidade da fila da porta de destino em uma porta de destino específica em um storage de armazenamento
+ a| 
+`set advanced` `storage array port modify -name array_name -wwnn value -wwpn value -max-queue-depth value`
+
+|===
++
+Para obter mais informações sobre esses comandos, consulte as páginas man.
+
+

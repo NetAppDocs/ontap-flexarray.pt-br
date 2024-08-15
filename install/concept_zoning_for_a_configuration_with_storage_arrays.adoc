@@ -1,0 +1,16 @@
+---
+permalink: install/concept_zoning_for_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: zone, configuration, storage, arrays 
+summary: O zoneamento permite que um administrador de storage restrinja os LUNs de storage que um determinado sistema ONTAP pode acessar. O ONTAP requer que um LUN de array seja visível em apenas uma porta de destino para cada porta do iniciador. 
+---
+= Zoneamento em uma configuração com matrizes de armazenamento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O zoneamento permite que um administrador de storage restrinja os LUNs de storage que um determinado sistema ONTAP pode acessar. O ONTAP requer que um LUN de array seja visível em apenas uma porta de destino para cada porta do iniciador.
+
+A configuração de zoneamento em um switch Fibre Channel (FC) permite definir caminhos entre nós conetados, restringindo a visibilidade e a conetividade entre dispositivos conetados a uma SAN FC comum.

@@ -1,0 +1,20 @@
+---
+permalink: install/concept_flexarray_virtualization_technology_overview_using_array_luns_for_storage.html 
+sidebar: sidebar 
+keywords: flexarray, virtualization, technology, overview, use, array, luns, storage 
+summary: O software ONTAP fornece uma plataforma unificada de software de storage que simplifica o gerenciamento de compartimentos de disco nativos e LUNs nos storage arrays. Você pode adicionar storage quando e onde precisar, sem interrupção. Esta funcionalidade é fornecida pelo Software de virtualização FlexArray, anteriormente conhecido como Série V. 
+---
+= Visão geral da tecnologia de virtualização FlexArray ​using LUNs de storage para armazenamento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O software ONTAP fornece uma plataforma unificada de software de storage que simplifica o gerenciamento de compartimentos de disco nativos e LUNs nos storage arrays. Você pode adicionar storage quando e onde precisar, sem interrupção. Esta funcionalidade é fornecida pelo _Software de virtualização FlexArray_, anteriormente conhecido como Série V.
+
+A ilustração a seguir mostra uma configuração na qual os sistemas ONTAP licenciados para serem anexados a matrizes de armazenamento estão agrupando LUNs dos arrays de armazenamento e apresentando esse armazenamento aos clientes.
+
+image::../media/how_v_series_uses_storage.gif[Este gráfico é descrito pelo texto circundante.]
+
+Um sistema ONTAP apresenta armazenamento para clientes na forma de volumes de sistema de arquivos ONTAP, que você gerencia no sistema usando recursos de gerenciamento ONTAP ou como destino SCSI que cria LUNs para uso pelos clientes. Em ambos os casos (clientes de sistema de arquivos e clientes LUN), nos sistemas que podem usar LUNs de array, você combina os LUNs de array em um ou mais agregados de LUN de array. Em um ambiente ONTAP, você pode associar esses agregados de LUN de array a máquinas virtuais de storage (SVMs) e criar volumes ONTAP para apresentação aos clientes como arquivos ou como LUNs servidos pelo ONTAP.

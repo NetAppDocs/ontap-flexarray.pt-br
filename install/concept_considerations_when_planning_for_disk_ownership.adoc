@@ -1,0 +1,30 @@
+---
+permalink: install/concept_considerations_when_planning_for_disk_ownership.html 
+sidebar: sidebar 
+keywords: considerations, plan, disk, ownership 
+summary: Se você estiver implantando vários sistemas ONTAP para uso com LUNs de array, será necessário determinar qual sistema possui quais LUNs de array. A propriedade do disco garante que somente o sistema ONTAP que possui um LUN de array específico possa ler dados e gravar dados no LUN de array. 
+---
+= Considerações ao Planejar a propriedade do disco
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se você estiver implantando vários sistemas ONTAP para uso com LUNs de array, você deverá determinar qual sistema _possui_ quais LUNs de array. A propriedade do disco garante que somente o sistema ONTAP que possui um LUN de array específico possa ler dados e gravar dados no LUN de array.
+
+Você deve considerar o seguinte ao Planejar qual sistema possuirá quais LUNs de array:
+
+* O limite máximo de dispositivos atribuído suportado pela sua plataforma
++
+O _Hardware Universe_ mostra o limite máximo de dispositivos atribuído que é suportado para diferentes plataformas. Este é um limite codificado. Se o sistema usar LUNs e discos de storage, esse limite máximo será o máximo de discos e LUNs de storage combinados. Você deve ter em conta os dois tipos de armazenamento ao determinar quantos LUNs e discos de array podem ser atribuídos a um sistema.
+
+* A quantidade de carga que você espera ser gerada por diferentes aplicativos usados em seu ambiente
++
+Alguns tipos de aplicativos provavelmente gerarão muitas solicitações, enquanto outros aplicativos (por exemplo, aplicativos de arquivamento) geram menos solicitações. Você pode considerar a pesagem de atribuições de propriedade com base na carga esperada de aplicativos específicos.
+
+
+
+*Informações relacionadas*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

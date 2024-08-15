@@ -1,0 +1,94 @@
+---
+permalink: install/reference_all_paths_to_an_array_lun_are_on_the_same_storage_array_controller.html 
+sidebar: sidebar 
+keywords: all, paths, array, lun, same, storage, array, controller, errors, message 
+summary: 'O ONTAP não oferece suporte à configuração de todos os caminhos para o mesmo controlador de storage array, pois isso configura uma configuração com um único ponto de falha (SPOF). O comando storage errors show identifica qualquer LUN de matriz cujos caminhos são configurados para ir para o mesmo controlador de storage array.' 
+---
+= Todos os caminhos para um LUN de array estão no mesmo controlador de storage array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O ONTAP não oferece suporte à configuração de todos os caminhos para o mesmo controlador de storage array, pois isso configura uma configuração com um único ponto de falha (SPOF). O `storage errors show` comando identifica qualquer LUN de matriz cujos caminhos estão configurados para ir para o mesmo controlador de storage array.
+
+O ONTAP não permite que você atribua LUNs de array a um sistema ONTAP até que você corrija esse erro.
+
+
+
+== Erros de armazenamento mostram mensagem
+
+[listing]
+----
+NAME (UID): All paths to this array LUN are connected to the same fault domain. This is a single point of failure
+----
+
+
+== Explicação
+
+Esse erro ocorre porque os caminhos para um LUN de array são configurados para ir para o mesmo controlador de storage array ou FRU.
+
+[NOTE]
+====
+Usando quatro caminhos para um LUN de array, um storage com FRUs com vários diretores (como um EMC Symmetrix ou HDS USP) ou um storage com controladores duplos (como um EMC CX ou HP EVA) são bons métodos para alcançar redundância. No entanto, se você configurar os caminhos para percorrer um único controlador de storage array ou FRU, você estará configurando sua configuração com um SPOF, mesmo com esses recursos. Em um storage ativo-ativo, toda a FRU é considerada um domínio de falha. Um array de armazenamento EMC Symmetrix, por exemplo, tem vários diretores de canal na mesma placa FEBE. Uma placa FEBE é considerada um domínio de falha porque se todos os caminhos passarem pela mesma placa FEBE, você perde todos os caminhos se você precisar substituir a placa.
+
+====
+A ilustração a seguir mostra a seleção correta e incorreta da porta da matriz de armazenamento para configurar caminhos redundantes para um LUN de matriz, de modo que você não tenha um único domínio de falha. A configuração do caminho no exemplo à esquerda está correta porque os caminhos para o LUN de matriz são redundantes - cada conexão é para uma porta em um controlador diferente no storage array. No exemplo à direita, ambos os caminhos para o LUN de array vão para o mesmo controlador, que configura um SPOF.
+
+image::../media/redundant_array_port_selection.gif[Este gráfico é descrito no texto circundante.]
+
+O `storage errors show` comando mostra o LUN de matriz que está no mesmo domínio de falha. Você também pode ver esse problema na `storage disk show` saída se você olhar para a coluna TPGN (número do grupo de portas de destino). Um TPGN diferente deve ser mostrado para cada iniciador em um par de portas do iniciador. Se o TPGN for o mesmo para ambos os iniciadores no par, ambos os iniciadores estão no mesmo domínio de falha.
+
+O exemplo a seguir `storage disk show` mostra TPGN 1 para LUN 30, que é acessado através dos iniciadores 0a e 0C. Se os caminhos são redundantes, cada iniciador mostra um TPGN diferente.
+
+[listing]
+----
+
+mysystem1::> storage disk show mysystem1:vgbr300s70:9.126L30
+                  Disk: HP-1.15
+        Container Type: unassigned
+            Owner/Home: -  / -
+               DR Home: -
+                 Array: HP_HSV450_1
+                Vendor: HP
+                 Model: HSV450
+         Serial Number: 600508B4000B63140000800001660000
+                   UID: 600508B4:000B6314:00008000:01660000:00000000:...
+                   BPS: 512
+         Physical Size: -
+              Position: present
+Checksum Compatibility: block
+             Aggregate: -
+                  Plex: -
+Paths:
+                     LUN Initiator Side   Target Side
+Controller Initiator ID  Switch Port      Switch Port     Acc Use  Target Port      TPGN...
+---------- --------- --- ---------------- --------------- --- ---  ---------------- -----
+mysystem1    0c      30  vgci9148s75:1-12 vgci9148s75:1-9 AO  RDY  50014380025d1509   1
+mysystem1    0a      30  vgbr300s70:12    vgbr300s70:9    AO  INU  50014380025d1508   1
+
+Errors:
+HP-1.15 (600508b4000b63140000800001660000): All paths to this array LUN are connected to the same fault domain. This is a single point of failure.
+----
+[NOTE]
+====
+O UID completo neste exemplo é 600508B4:000B6314:00008000:01660000:00000000:00000000:00000000:00000000:00000000:00000000. Ele é truncado no exemplo por causa do espaço.
+
+====
+
+
+== Resolução de problemas e resolução de problemas
+
+Os caminhos para o LUN de array devem ser reconfigurados para que eles passem para controladoras de storage arrays redundantes ou FRUs.
+
+. Adicione um cabo à porta de destino redundante no outro controlador.
++
+Você deve manter a redundância ao corrigir esse problema adicionando um cabo ao controlador alternativo _before_ você remove um cabo do controlador com o SPOF. A redundância é mantida neste caso porque você está aumentando o número de caminhos para três caminhos temporariamente em vez de diminuir o número de caminhos para um enquanto você está corrigindo o problema.
+
+. Remova um cabo do controlador que foi configurado com o SPOF.
++
+Agora você tem dois caminhos redundantes para o LUN de matriz.
+
+. Na linha de comando ONTAP, digite o seguinte comando novamente e confirme se o erro foi corrigido: `storage errors show`
+

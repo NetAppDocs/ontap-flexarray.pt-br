@@ -1,0 +1,91 @@
+---
+permalink: install/concept_example_of_cascading_zoning_and_host_group_configuration_errors.html 
+sidebar: sidebar 
+keywords: example, cascade, zone, host, group, configuration, errors, troubleshoot 
+summary: Os erros feitos nas definições de zona podem afetar as definições do grupo anfitrião e vice-versa. Quando os LUNs não são visíveis em um caminho, você precisa verificar se há erros de configuração de zoneamento e de grupo de host. 
+---
+= Exemplo de zoneamento em cascata e erros de configuração do grupo host
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os erros feitos nas definições de zona podem afetar as definições do grupo anfitrião e vice-versa. Quando os LUNs não são visíveis em um caminho, você precisa verificar se há erros de configuração de zoneamento e de grupo de host.
+
+Suponha que sua sequência de configuração é a seguinte:
+
+. A definição de zona foi criada no switch.
++
+O WWPN para a porta iniciador FC 0a do sistema ONTAP foi colocado na definição de zona. No entanto, a intenção era que o WWPN para a porta iniciador FC 0C fosse colocado na definição de zona.
+
+. O grupo de hosts foi criado no storage array.
++
+A WWPN para a porta iniciador FC 0a foi selecionada (porque essa era a única WWPN disponível e não era óbvio que era a WWPN para 0a e não para 0C).
+
+. No ONTAP, você analisou LUNs de array nas portas do iniciador de FC, esperando ver LUNs de array em 0C.
++
+No entanto, não havia LUNs de array em 0C, porque a definição de zona e a definição de grupo de host incluem incorretamente o WWPN para a porta iniciador FC 0a.
+
++
+[NOTE]
+====
+Você usou o `storage array config show` comando para exibir as informações de LUN de matriz.
+
+====
+. Você começa a solução de problemas porque não pode ver LUNs sobre o iniciador sobre o qual você esperava vê-los.
+
+
+Você precisa verificar tanto o zoneamento quanto a configuração do grupo host, mas não importa qual dos seguintes procedimentos você começa primeiro. Você pode ver mensagens diferentes, dependendo se você começar a corrigir as coisas do grupo de host primeiro ou do zoneamento primeiro.
+
+
+
+== Solução de problemas verificando primeiro o zoneamento
+
+. Verifique as definições de zona para o sistema ONTAP.
++
+Você percebe que você tem duas zonas com o WWPN para a porta iniciador FC 0a nele e nenhuma zona com o WWPN para 0C nele.
+
+. Corrija as definições de zona incorretas e ative-as.
++
+[NOTE]
+====
+Você não seria capaz de ver os LUNs da matriz nas portas do iniciador ao `storage array config show` executar o .
+
+====
+. Vá para o array e reconfigure o grupo de hosts para incluir o WWPN para a porta iniciador FC 0C.
++
+Agora que o WWPN para 0C está em uma definição de zona que foi ativada, o WWPN para 0C aparece na lista de seleção na configuração do grupo host no storage.
+
+. No sistema ONTAP, execute `storage array config show` para verificar os LUNs do array nas portas do iniciador de FC para confirmar que os LUNs do array são mostrados em 0C.
+
+
+
+
+== Solução de problemas verificando primeiro o grupo de hosts
+
+. No console do sistema ONTAP, execute `storage show adapteradapter#``e anote o WWPN do adaptador que está faltando--0C neste exemplo.
+. Vá para o storage array e compare o WWPN que você anotou com os WWPNs mostrados na lista de seleção do grupo host para ver se o WWPN da porta do iniciador FC que você esperava está listado.
++
+Se o WWPN que você esperava não aparecer, o iniciador que você pretendia não está na definição de zona.
+
+. Se o storage array permitir que você modifique WWPNs no grupo host, você poderá modificar o WWPN mostrado como WWPN que você anotou.
++
+[NOTE]
+====
+Se o storage array não permitir que você modifique WWPNs no grupo host, será necessário modificar a definição do grupo host depois de modificar a definição da zona.
+
+====
++
+Você ainda não pode ver LUNs sobre o iniciador que estava pretendendo porque o zoneamento ainda não foi corrigido.
+
+. Vá para o switch e substitua o WWPN incorreto pelo iniciador de porta FC correto e, em seguida, ative a definição de zona.
+. Se você não conseguir corrigir o WWPN na definição do grupo host anteriormente no processo, vá para o storage array e reconfigure o grupo host para incluir o WWPN para a porta iniciador FC 0C.
++
+Agora que o WWPN para 0C está em uma definição de zona que foi ativada, o WWPN para 0C aparece na lista de seleção na configuração do grupo host no storage.
+
+. No sistema ONTAP, execute `storage array config show` para verificar os LUNs do array nas portas do iniciador de FC para confirmar que os LUNs do array são mostrados em 0C.
++
+Agora você deve ver o acesso aos LUNs pela porta do iniciador de FC.
+
+

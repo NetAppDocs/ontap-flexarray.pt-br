@@ -1,0 +1,71 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_3par_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, 3par, arrays, ontap, systems, host, persona, settings, port, 
+summary: Certas configurações de parâmetros são necessárias no storage de armazenamento para que o storage de armazenamento funcione com sucesso com sistemas ONTAP. 
+---
+= Parâmetros necessários para matrizes 3PAR com sistemas ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Certas configurações de parâmetros são necessárias no storage de armazenamento para que o storage de armazenamento funcione com sucesso com sistemas ONTAP.
+
+
+
+== Configurações de persona de host
+
+Para storages 3PAR com firmware 2.3.1 e posterior, os valores de persona de host necessários devem ser definidos como mostrado na tabela a seguir:
+
+|===
+| Tipo de ligação | Persona de host 
+
+
+ a| 
+Ligação direta
+ a| 
+10
+
+
+
+ a| 
+Malha conectada
+ a| 
+10
+
+|===
+A definição de host, com a persona de host necessária, deve ser criada em um storage array 3PAR antes que o switch seja zoneado para conectar o sistema ONTAP a um storage array 3PAR. Se o zoneamento for configurado antes da definição do host, o ONTAP detetará um LUN 3PAR como LUN 254 e SES do tipo de produto, que o ONTAP não pode usar. O resultado é que os LUNs 3PAR recentemente mapeados não podem ser atribuídos ao sistema ONTAP e alguns LUNs 3PAR que podem já ter sido adicionados a um agregado não podem ser usados porque o ONTAP vê um LUN 254 em vez de um LUN 3PAR. Se este problema ocorrer, o ONTAP gera a seguinte mensagem EMS:
+
+[listing]
+----
+mlm.array.unknown:warning - Array LUN XXXXXXXX.126L254 [S/N 'XXXXXXX' vendor '3PARdata' product 'SES'] is unknown and is not supported in this version of Data ONTAP.
+----
+Se o zoneamento foi configurado antes da definição do host, você pode resolver o problema fazendo a reinicialização do caminho para forçar uma redescoberta dos LUNs do array que são mapeados a partir do storage array 3PAR. Consulte a seção solução alternativa para o problema de dispositivo desconhecido (L254/SES) com matrizes de armazenamento 3PAR para obter a solução alternativa para este problema.
+
+xref:reference_workaround_for_the_unknown_device_l254_ses_problem_with_3par_storage_arrays.adoc[Solução alternativa para o problema de dispositivo desconhecido (L254/SES) com matrizes de armazenamento 3PAR]
+
+
+
+== Configurações de persona de porta
+
+Para storages 3PAR com firmware 2,2.x, os valores de persona de porta necessários devem ser definidos como mostrado na tabela a seguir:
+
+|===
+| Tipo de ligação | Persona do porto 
+
+
+ a| 
+Ligação direta
+ a| 
+18
+
+
+
+ a| 
+Malha conectada
+ a| 
+19
+
+|===

@@ -1,0 +1,86 @@
+---
+permalink: implement-third-party/reference_workaround_when_luns_are_not_visible_with_hp_xp_storage_arrays.html 
+sidebar: sidebar 
+keywords: workaround, luns, not, visible, hp xp, storage, arrays, aggregates, created, ontap, system 
+summary: Os parâmetros do storage especificados nos parâmetros necessários para a seção matrizes de armazenamento HP XP com sistemas ONTAP devem ser definidos e os LUNs devem ser mapeados para os grupos de hosts antes que o switch seja zoneado para conetar o sistema ONTAP que usa LUNs de matriz a um storage HP XP. 
+---
+= Solução alternativa quando os LUNs não são visíveis com matrizes de armazenamento HP XP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os parâmetros do storage especificados nos parâmetros necessários para a seção matrizes de armazenamento HP XP com sistemas ONTAP devem ser definidos e os LUNs devem ser mapeados para os grupos de hosts antes que o switch seja zoneado para conetar o sistema ONTAP que usa LUNs de matriz a um storage HP XP.
+
+xref:reference_required_parameters_for_hp_xp_storage_arrays_with_data_ontap_systems.adoc[Parâmetros necessários para matrizes de armazenamento HP XP com sistemas ONTAP]
+
+Se o zoneamento foi configurado antes de definir os parâmetros e mapear os LUNs para os grupos de hosts, você pode resolver o problema de LUNs não serem visíveis, executando uma reinicialização de caminho. A reinicialização do caminho força uma redescoberta dos LUNs da matriz mapeados a partir de uma matriz de armazenamento HP XP.
+
+O procedimento usado depende se agregados com LUNs de matriz HP XP já foram configurados no sistema ONTAP. (Nos procedimentos a seguir, suponha que o nó 1 e o nó 2 sejam os nomes dos nós ONTAP.)
+
+
+
+== Se agregados com LUNs de matriz HP XP já estiverem criados em um sistema ONTAP que use LUNs de matriz
+
+. Execute o seguinte comando para garantir que a configuração de HA esteja ativada nos sistemas ONTAP: *`cluster ha show`*
++
+É apresentada a seguinte saída:
+
++
+[listing]
+----
+
+High Availability Configured: true
+----
+. Execute o seguinte comando para garantir que o failover de armazenamento esteja configurado nos sistemas ONTAP: *`storage failover show`*
++
+É apresentada a seguinte saída:
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-1    Node-2    true     Connected to Node-2
+Node-2    Node-1    true     Connected to Node-1
+2 entries were displayed.
+----
+. Execute uma operação de aquisição no Node-1 executando o seguinte comando: *`storage failover takeover -ofnode Node-1`*
+. Execute o seguinte comando novamente para verificar se o nó-2 está pronto para uma operação de giveback: *`storage failover show`*
++
+É apresentada a seguinte saída:
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-2    Node-1    false    In takeover, Auto giveback will be
+                                      initiated in 348 seconds
+Node-1    Node-2    -        Waiting for giveback (HA mailboxes)
+2 entries were displayed.
+----
+. Execute uma operação de giveback no Node-1 executando o seguinte comando: *`storage failover giveback -ofnode Node-1 -require-partner-waiting true`*
+. De outros nós no cluster, repita os passos 3 a 5.
+
+
+
+
+== Se agregados com LUNs de storage HP XP não tiverem sido criados em sistemas ONTAP que usam LUNs de storage
+
+. Execute o seguinte comando para listar todas as portas do iniciador ONTAP FC que estão conetadas à matriz de armazenamento HP XP: *`system node run -node <node name> -command "sysconfig -v"`*
++
+Por exemplo*`system node run -node Node-1 -command "sysconfig -v"`: *
+
+. Execute o seguinte comando para colocar todas as portas listadas offline: *`system node run -node <node name> -command "priv set advanced;fcadmin offline <adapter>"`*
++
+Por exemplo*`system node run -node Node-1 -command "priv set advanced;fcadmin offline 0a"`: *
+
+. Execute o seguinte comando para colocar todas as portas listadas online: *`system node run -node <node name> -command "priv set advanced;fcadmin online <adapter>"`*
++
+Por exemplo*`system node run -node Node-1 -command "priv set advanced;fcadmin online 0a"`: *
+
+

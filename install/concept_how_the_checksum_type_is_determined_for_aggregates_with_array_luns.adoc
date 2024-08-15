@@ -1,0 +1,28 @@
+---
+permalink: install/concept_how_the_checksum_type_is_determined_for_aggregates_with_array_luns.html 
+sidebar: sidebar 
+keywords: how, checksum, type, determined, array, lun, aggregates 
+summary: Cada agregado ONTAP tem um tipo de checksum associado a ele. O tipo de soma de verificação agregada é determinado pelo tipo de soma de verificação dos LUNs do array que são adicionados a ele. 
+---
+= Como o tipo de checksum é determinado para agregados LUN de matriz
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cada agregado ONTAP tem um tipo de checksum associado a ele. O tipo de soma de verificação agregada é determinado pelo tipo de soma de verificação dos LUNs do array que são adicionados a ele.
+
+O tipo de checksum de um agregado é determinado pelo tipo de checksum do primeiro LUN de array que é adicionado ao agregado. O tipo de checksum aplica-se a um agregado inteiro (ou seja, a todos os volumes no agregado). A mistura de LUNs de array de diferentes tipos de checksum em um agregado não é suportada.
+
+* Um LUN de array do tipo _block_ deve ser usado com agregados do tipo checksum de bloco.
+* Um LUN de array do tipo _zoned_ deve ser usado com agregados avançados do tipo checksum (AZCS ou Advanced_zoned).
+
+
+Antes de adicionar LUNs de array a um agregado, você deve saber o tipo de checksum dos LUNs que deseja adicionar, pelos seguintes motivos:
+
+* Não é possível adicionar LUNs de array de diferentes tipos de checksum ao mesmo agregado.
+* Não é possível converter um agregado de um tipo de checksum para outro.
+
+
+Ao criar um agregado, você pode especificar o número de LUNs de array a serem adicionados ou especificar os nomes dos LUNs a serem adicionados. Se você quiser especificar um número de LUNs de array a serem adicionados ao agregado, o mesmo número ou mais LUNs de array desse tipo de checksum devem estar disponíveis.

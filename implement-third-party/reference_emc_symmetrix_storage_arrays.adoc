@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_emc_symmetrix_storage_arrays.html 
+sidebar: sidebar 
+keywords: emc, symmetrix, storage, arrays 
+summary: Você precisa atender a requisitos específicos ao configurar storage arrays para funcionar com sistemas ONTAP que usam LUNs de array. Esses requisitos incluem a configuração de parâmetros de configuração em seus storages de armazenamento e a implantação de apenas configurações compatíveis. 
+---
+= Matrizes de armazenamento EMC Symmetrix
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você precisa atender a requisitos específicos ao configurar storage arrays para funcionar com sistemas ONTAP que usam LUNs de array. Esses requisitos incluem a configuração de parâmetros de configuração em seus storages de armazenamento e a implantação de apenas configurações compatíveis.

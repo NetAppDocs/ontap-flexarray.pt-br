@@ -1,0 +1,38 @@
+---
+permalink: install/reference_fc_initiator_ports_required_for_connection_with_disks.html 
+sidebar: sidebar 
+keywords: fc initiator, ports, required, connection, native, disks 
+summary: Você precisa conectar um sistema V-Series às gavetas de disco nativas por meio das portas do iniciador de FC. O número de portas do iniciador necessário para a conexão depende se o sistema V-Series é um sistema autônomo ou em um par de HA. 
+---
+= Portas do iniciador de FC necessárias para conexão a discos nativos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você precisa conectar um sistema V-Series às gavetas de disco nativas por meio das portas do iniciador de FC. O número de portas do iniciador necessário para a conexão depende se o sistema V-Series é um sistema autônomo ou em um par de HA.
+
+A tabela a seguir lista o número necessário de portas do iniciador de FC para conetar um sistema V-Series a compartimentos de disco nativos, dependendo da configuração do sistema:
+
+|===
+| Configuração | Número de portas do iniciador de FC 
+
+
+ a| 
+Sistema autónomo
+ a| 
+* Se você estiver usando um loop, uma porta do iniciador FC
+* Se você estiver conetando dois loops, duas portas do iniciador FC: Uma para cada loop
+
+
+
+
+ a| 
+Par de HA
+ a| 
+* Se você estiver usando o storage multipath, duas portas de iniciador de FC para cada loop
+* Se você não estiver usando o storage multipath, uma porta iniciador de FC por controladora para cada loop na configuração
+
+
+|===

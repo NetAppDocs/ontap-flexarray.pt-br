@@ -1,0 +1,28 @@
+---
+permalink: install/concept_target_queue_depth_customization.html 
+sidebar: sidebar 
+keywords: target, queue, depth, customization 
+summary: 'A profundidade da fila de destino define o número de comandos ONTAP que podem ser enfileirados (pendentes) em uma porta de destino de storage array. O ONTAP fornece um valor padrão. Para a maioria das implantações, a profundidade de fila de destino padrão é apropriada; no entanto, você pode alterá-la para corrigir problemas de desempenho.' 
+---
+= Personalização da profundidade da fila-alvo
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A profundidade da fila de destino define o número de comandos ONTAP que podem ser enfileirados (pendentes) em uma porta de destino de storage array. O ONTAP fornece um valor padrão. Para a maioria das implantações, a profundidade de fila de destino padrão é apropriada; no entanto, você pode alterá-la para corrigir problemas de desempenho.
+
+A profundidade de fila de destino padrão difere com diferentes versões do ONTAP:
+
+* Para ONTAP, o padrão é 512.
+* Para todas as versões anteriores ao Data ONTAP 8.2, o padrão é 256.
+
+
+Quando um storage array é configurado com vários iniciadores compartilhando portas de destino, você não quer que os comandos pendentes no buffer de fila de todos os iniciadores juntos excedam o que o storage pode lidar. Caso contrário, o desempenho de todos os hosts pode sofrer. As matrizes de armazenamento diferem no número de comandos que podem processar na memória intermédia da fila.
+
+[NOTE]
+====
+A profundidade da fila de destino também pode ser referida como ""comprimento da fila de destino""""profundidade Q"" ou ""aceleração máxima""".
+
+====

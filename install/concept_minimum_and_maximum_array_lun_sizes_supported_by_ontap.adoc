@@ -1,0 +1,47 @@
+---
+permalink: install/concept_minimum_and_maximum_array_lun_sizes_supported_by_ontap.html 
+sidebar: sidebar 
+keywords: minimum, maximum, array, lun, sizes, supported, ontap, configurations 
+summary: Os LUNs de array apresentados nos storage arrays devem estar dentro dos requisitos de tamanho mínimo e máximo para uma configuração ONTAP com LUNs de array. O ONTAP emite uma mensagem de erro identificando um LUN de matriz que não cumpre os requisitos de tamanho mínimo ou máximo. 
+---
+= Tamanhos mínimos e máximos de LUN de array suportados para configurações ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os LUNs de array apresentados nos storage arrays devem estar dentro dos requisitos de tamanho mínimo e máximo para uma configuração ONTAP com LUNs de array. O ONTAP emite uma mensagem de erro identificando um LUN de matriz que não cumpre os requisitos de tamanho mínimo ou máximo.
+
+Os tamanhos de LUN de matriz mínimo e máximo são calculados de acordo com a forma como o ONTAP define unidades de medida. A definição ONTAP de GB e TB é a seguinte:
+
+[cols="2*"]
+|===
+| Um... | Igual a... 
+
+
+ a| 
+GB
+ a| 
+1000 x 1024 x 1024 bytes (1000 MB)
+
+
+
+ a| 
+TB
+ a| 
+1000 x 1000 x 1024 x 1024 bytes (1000 GB)
+
+|===
+Diferentes fornecedores de storage array usam fórmulas diferentes para calcular unidades de medida. Você deve usar as unidades de medida do fornecedor para calcular os tamanhos de LUN de matriz equivalentes aos tamanhos mínimo e máximo suportados por uma configuração do ONTAP.
+
+O tamanho máximo de LUN que o ONTAP suporta difere com as versões do ONTAP. Para obter informações sobre os tamanhos mínimo e máximo de LUN de matriz, consulte _Hardware Universe_.
+
+[NOTE]
+====
+O tamanho mínimo de LUN de matriz para um LUN de dados (armazenamento) é diferente do tamanho mínimo de LUN de matriz para o volume raiz.
+
+====
+*Informações relacionadas*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

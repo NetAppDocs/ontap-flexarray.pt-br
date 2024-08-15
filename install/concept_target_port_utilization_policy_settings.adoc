@@ -1,0 +1,75 @@
+---
+permalink: install/concept_target_port_utilization_policy_settings.html 
+sidebar: sidebar 
+keywords: target, port, utilization, policy, settings, output, examples, array 
+summary: O ONTAP pode detetar eventos de contenção de recursos, como fila de e/S cheia, comandos esgotados ou recursos HBA esgotados, em uma porta de destino. 
+---
+= Definições da política de utilização da porta de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O ONTAP pode detetar eventos de contenção de recursos, como fila de e/S cheia, comandos esgotados ou recursos HBA esgotados, em uma porta de destino.
+
+Você pode definir as políticas de utilização da porta de destino usando o `storage array port modify` comando se detetar esses eventos em uma determinada porta de destino de matriz.
+
+A tabela a seguir descreve as duas políticas de utilização associadas a uma porta de destino:
+
+|===
+| Política | Descrição 
+
+
+ a| 
+*normal*
+ a| 
+Quando o ONTAP deteta a contenção de recursos de porta de destino em uma determinada porta de destino de storage, ele reduz a profundidade de fila da porta de destino e limita a e/S para a porta de destino. Nesse modo, a redução da profundidade da fila de porta de destino é menor do que a política *adiar* para cada evento de contenção de recursos de porta de destino. O aumento subsequente na profundidade da fila de porta de destino é mais rápido do que a política *DEFER*. *normal* é a política padrão.
+
+
+
+ a| 
+*adiar*
+ a| 
+Quando o ONTAP deteta a contenção de recursos de porta de destino em uma determinada porta de destino de storage, ele reduz a profundidade de fila da porta de destino e limita a e/S para a porta de destino. Nesse modo, a redução da profundidade da fila de porta de destino é maior do que a política *normal* para cada evento de contenção de recursos de porta de destino. O aumento subsequente na profundidade da fila de porta de destino é mais lento do que a política de utilização *normal*.
+
+|===
+
+
+== Exemplos de saída para visualizar e modificar políticas de utilização de portas de destino de matriz
+
+O comando a seguir exibe a política de utilização de porta de destino associada a uma porta de destino de matriz:
+
+[listing]
+----
+vgv3170_jon::> storage array port show -wwnn 2703750270235
+        Array Name: HITACHI_DF600F_1
+              WWNN: 2703750270235
+              WWPN: 2703750270235
+   Connection Type: fabric
+       Switch Port: vgbr300s89:9
+        Link Speed: 4 GB/s
+   Max Queue Depth: 1024
+Utilization Policy: defer
+                              LUN                                        Link
+Node              Initiator  Count   IOPS    KB/s    %busy    %waiting   Errs
+----------------  ---------  -----  ------  ------  -------  ----------  ----
+     vgv3170f54a         0a      2       50   1956       85           0     0
+     vgv3170f54b         0a      2      350  15366      100          40     0
+----
+Por padrão, a política de e/S para uma determinada porta de destino de matriz é *normal*. Você pode modificar a política de e/S associada à porta executando o seguinte comando:
+
+[listing]
+----
+vgv3070f50ab::> storage array port modify -wwpn 50014380025d1509 -utilization-policy ?
+
+
+
+normal      This policy aggressively competes for target port resources, in effect competing with other hosts.
+             (normal)
+
+defer      	This policy does not aggressively compete for target port resources, in effect deferring to other hosts.
+
+vgv3070f50ab::> storage array port modify -wwpn 50014380025d1509 -utilization-policy defer
+1 record updated.
+----

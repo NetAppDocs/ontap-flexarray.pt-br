@@ -1,0 +1,48 @@
+---
+permalink: install/task_changing_the_checksum_type_of_an_array_lun.html 
+sidebar: sidebar 
+keywords: change, checksum, type, array, lun 
+summary: Você deve alterar o tipo de checksum de um LUN de matriz se quiser adicioná-lo a um agregado que tenha um tipo de checksum diferente do tipo de checksum do LUN. 
+---
+= Alterar o tipo de checksum de um LUN de matriz
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve alterar o tipo de checksum de um LUN de matriz se quiser adicioná-lo a um agregado que tenha um tipo de checksum diferente do tipo de checksum do LUN.
+
+*O que você vai precisar*
+
+Você precisa ter analisado as desvantagens entre a performance em certos tipos de workloads e a utilização da capacidade de storage de cada tipo de checksum.
+
+Você também pode entrar em Contato com seu engenheiro de vendas para obter detalhes sobre como usar somas de verificação.
+
+* Você deve atribuir um tipo de checksum *zoned* a um LUN de matriz que você planeja adicionar a um agregado avançado de checksum zoned (AZCS). Quando um LUN de array de checksum zoneado é adicionado a um agregado AZCS, ele se torna um LUN de array de checksum zoneado avançado. Da mesma forma, quando um LUN de array de checksum zoneado é adicionado a um agregado zoneado, ele é um tipo de checksum zoneado.
+* Não é possível modificar a soma de verificação dos LUNs da matriz durante a atribuição de propriedade. Você pode modificar a soma de verificação somente em LUNs de array já atribuídos.
+
+
+.Passos
+. Digite o seguinte comando para alterar o tipo de checksum: `storage disk assign -disk disk name -owner owner -c new_checksum_type`
++
+_Disk name_ é o LUN de matriz cujo tipo de checksum você deseja alterar.
+
++
+_Owner_ é o nó ao qual o LUN de array é atribuído.
+
++
+_new_checksum_type_ pode ser bloco ou zoneado.
+
++
+`storage disk assign -disk EMC-1.1 -owner system147b -c block`
+
++
+O tipo de checksum do LUN de matriz é alterado para o novo tipo de checksum que você especificou.
+
+. Digite o seguinte comando para acessar o nodeshell: `system node run -node node_name`
++
+_node_name_ é o nome deste sistema.
+
+. Digite o seguinte comando para sair do nodeshell: `exit`
+

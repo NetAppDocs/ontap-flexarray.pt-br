@@ -1,0 +1,41 @@
+---
+permalink: install/task_installing_the_license_for_using_array_luns.html 
+sidebar: sidebar 
+keywords: install, license, use, array, luns 
+summary: A licença V_StorageAttach deve ser instalada em cada nó ONTAP que você deseja usar com LUNs de array. Não é uma licença única para o cluster. Os LUNs de array não podem ser usados em agregados até que uma licença seja instalada. 
+---
+= Instalar a licença para o uso de LUNs de array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A licença V_StorageAttach deve ser instalada em cada nó ONTAP que você deseja usar com LUNs de array. É _não_ uma única licença para o cluster. Os LUNs de array não podem ser usados em agregados até que uma licença seja instalada.
+
+*O que você vai precisar*
+
+* O cluster deve ser instalado.
+* Você deve ter a chave de licença para a licença V_StorageAttach.
++
+https://mysupport.netapp.com/site/global/dashboard["Suporte à NetApp"]
+
+
+
+Não é necessário executar este procedimento se a chave de licença do pacote V_StorageAttach já estiver instalada. Se o sistema ONTAP for encomendado com discos, a fábrica normalmente instala o pacote de licença para você. Alternativamente, muitos clientes instalam todas as licenças necessárias no início do processo de instalação.
+
+.Passos
+. Para cada nó ONTAP no cluster para uso com LUNs de array, digite o seguinte comando no nó: `system license add license key`
++
+[listing]
+----
+
+vgv3170f41a> license
+Serial Number: nnnnnnnn
+Owner: mysystem1a
+Package           Type    Description           Expiration
+----------------- ------- --------------------- --------------------
+V_StorageAttach   license Virtual Attached Storage
+----
+. Observe a saída para confirmar que o pacote V_StorageAttach é mostrado.
+

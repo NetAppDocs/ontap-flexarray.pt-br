@@ -1,0 +1,85 @@
+---
+permalink: install/task_connecting_an_ontap_system_to_a_storage_array.html 
+sidebar: sidebar 
+keywords: connect, ontap, system, storage, array 
+summary: A conexão do sistema ONTAP a um storage array envolve o cabeamento do sistema ONTAP, switches e matrizes de armazenamento e a conexão de dispositivos adicionais, como dispositivos de backup em fita. 
+---
+= Conexão de um sistema ONTAP a um storage array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A conexão do sistema ONTAP a um storage array envolve o cabeamento do sistema ONTAP, switches e matrizes de armazenamento e a conexão de dispositivos adicionais, como dispositivos de backup em fita.
+
+*O que você vai precisar*
+
+* Você precisa ter identificado as portas integradas e as portas do adaptador de expansão do sistema ONTAP para conexão com o storage array.
+* Você deve ter localizado as portas no storage array que deseja usar para se conetar ao sistema ONTAP.
+
+
+Este procedimento descreve como conetar um sistema ONTAP a um storage array por dois caminhos, com cada iniciador dedicado a uma porta de destino.
+
+.Passos
+. Ligue o sistema ONTAP aos interrutores, conforme ilustrado na seguinte tabela:
++
+|===
+| Para... | Siga estes passos... 
+
+
+ a| 
+Um sistema autônomo
+ a| 
+.. Conete um cabo de uma porta do iniciador FC no sistema ONTAP a uma porta no comutador 1.
+.. Conete outro cabo de uma porta do iniciador FC redundante a uma porta no Switch 2.
+
+
+
+
+ a| 
+Um par de HA
+ a| 
+.. No primeiro nó do par de HA, conete um cabo de uma porta do iniciador de FC a uma porta no switch 1.
+.. Conete outro cabo de uma porta do iniciador FC redundante no mesmo nó a uma porta no switch 2.
+.. No segundo nó no par de HA, conete um cabo de uma porta do iniciador de FC a uma porta no switch 1.
+.. Conete outro cabo de uma porta do iniciador FC redundante no mesmo nó a uma porta no switch 2.
+
+
+|===
+. Conete os switches ao storage array usando as instruções na tabela a seguir e, para um par de HA, a ilustração a seguir à tabela:
++
+|===
+| Para um sistema autônomo... | Para um par HA... 
+
+
+ a| 
+.. Conete o Switch 1 ao controlador do storage de armazenamento 1, porta 1A.
+.. Conete o Switch 2 ao controlador do storage de armazenamento 2, porta 2A.
+
+ a| 
+.. Conete o Switch 1 ao controlador do storage de armazenamento 1, porta 1A.
+.. Conete o Switch 2 ao controlador do storage de armazenamento 2, porta 2A.
+.. Conete o Switch 1 ao controlador do storage de armazenamento 1, porta 1B.
+.. Conete o Switch 2 ao controlador do storage de armazenamento 2, porta 2B.
+
+
+|===
++
+A ilustração a seguir mostra as conexões para um par de HA.
+
++
+image::../media/one_4_port_array_lun_gp.gif[As conexões de VS1 0a e VS2 0a vão para o controlador do storage de armazenamento 1,ports 1A and 1B. Connections from vs1 0c and vs2 0c go to storage array controller 2,ports 2A and 2B.]
+
+. *Opcional:* Conete o sistema ONTAP a um dispositivo de backup em fita por meio de uma porta iniciador FC separada ou adaptador de fita SCSI.
+. Verifique se a matriz de armazenamento está configurada e conetada corretamente e se está ligada.
++
+A matriz de armazenamento configurada e conetada deve ser ligada antes de ligar o sistema ONTAP. Consulte a documentação da matriz de armazenamento para saber como ligar a matriz de armazenamento.
+
+. Se sua implantação incluir switches, verifique se todos os IDs de switch estão definidos e, em seguida, ligue-os em intervalos de 10 minutos.
+. *Opcional:* se aplicável, ligue qualquer dispositivo de backup em fita.
+. Ligue o sistema ONTAP e execute a configuração e configuração iniciais da rede.
+. Se o storage array não detetar automaticamente as WWNs do sistema ONTAP depois de conetar o sistema ONTAP ao storage array, você deve obter as WWNs manualmente.
+
+
+Você deve continuar com a configuração apropriada dos recursos de gerenciamento do ONTAP para trabalhar com os storage arrays.

@@ -1,0 +1,39 @@
+---
+permalink: install/concept_number_of_storage_arrays_supported_with_a_ontap_system.html 
+sidebar: sidebar 
+keywords: considerations, connect, multiple, storage, arrays, ontap, system 
+summary: Dependendo dos modelos de storage array compatíveis com sistemas ONTAP, você pode conectar vários storage arrays ou um único storage array ao sistema ONTAP. 
+---
+= Considerações ao conetar vários storage arrays a um sistema ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dependendo dos modelos de storage array compatíveis com sistemas ONTAP, você pode conectar vários storage arrays ou um único storage array ao sistema ONTAP.
+
+[NOTE]
+====
+A Matriz de interoperabilidade identifica qualquer modelo de storage array para o qual apenas um storage array é suportado com um sistema ONTAP.
+
+====
+Considere o seguinte ao conetar vários storages de armazenamento a um sistema ONTAP:
+
+* Se você puder conetar vários arrays do mesmo modelo de storage array com suporte ao sistema ONTAP, não haverá limite para o número de storage arrays que você pode implantar.
+* Os storage arrays podem ser do mesmo fornecedor com suporte ou de diferentes fornecedores.
++
+Se os storage arrays forem do mesmo fornecedor, eles podem ser todos da mesma família ou de diferentes famílias.
+
+
+
+[NOTE]
+====
+Os storage arrays da mesma família compartilham as mesmas características de performance e failover. Por exemplo, todos os membros da mesma família executam failover ativo-ativo ou todos executam failover ativo-passivo. Mais de um fator pode ser usado para determinar famílias de storage array. Por exemplo, matrizes de armazenamento com arquiteturas diferentes estariam em famílias diferentes, embora outras caraterísticas possam ser as mesmas.
+
+====
+*Informações relacionadas*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementação de virtualização de FlexArray para storage de terceiros"]
+
+https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"]

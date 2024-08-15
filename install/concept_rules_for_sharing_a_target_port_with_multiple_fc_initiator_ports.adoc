@@ -1,0 +1,28 @@
+---
+permalink: install/concept_rules_for_sharing_a_target_port_with_multiple_fc_initiator_ports.html 
+sidebar: sidebar 
+keywords: rules, share, target, port, multiple, fc initiator 
+summary: A conexão de um máximo de duas portas de iniciador de FC ONTAP a uma única porta de destino no storage array é compatível. Cada porta de destino é zoneada em duas portas iniciadores de FC, uma de cada nó de cluster. O compartilhamento de uma porta de destino conetada a sistemas ONTAP com qualquer outro host não é suportado. 
+---
+= Regras para compartilhar uma porta de destino com várias portas de iniciador de FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A conexão de um máximo de duas portas de iniciador de FC ONTAP a uma única porta de destino no storage array é compatível. Cada porta de destino é zoneada em duas portas iniciadores de FC, uma de cada nó de cluster. O compartilhamento de uma porta de destino conetada a sistemas ONTAP com qualquer outro host não é suportado.
+
+Compartilhar uma porta de destino com vários iniciadores ajuda a otimizar o uso de portas de storage array para conetividade com sistemas ONTAP.
+
+As regras para esta configuração são as seguintes:
+
+* Quando os sistemas ONTAP estão em um par de HA, cada nó pode compartilhar no máximo uma porta de iniciador de FC com a mesma porta de destino.
+* Todos os storage arrays precisam ser do mesmo fornecedor e família de modelos.
+* A conexão de uma única porta de destino a várias portas do iniciador de FC é compatível com configurações do MetroCluster.
+* A melhor prática para zoneamento é ter cada par de portas iniciador-destino FC em uma zona separada (1:1).
+
+
+*Informações relacionadas*
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Instalação e configuração do MetroCluster conectado à malha"]

@@ -1,0 +1,54 @@
+---
+permalink: implement-e-series/reference_supported_direct_attached_configurations_for_e_series_storage_arrays.html 
+sidebar: sidebar 
+keywords: supported, direct-attached, configurations, e-series, storage, arrays, stand-alone, four-port, lun, group, eight-port 
+summary: Você pode conectar sistemas ONTAP em configurações com conexão direta aos storage arrays e-Series. Você deve verificar a redundância nas conexões entre os sistemas ONTAP e os storages de armazenamento para evitar a possibilidade de um único ponto de falha. O FlexArray Stretch MetroCluster é compatível com configurações de conexão direta com storage arrays e-Series. 
+---
+= Configurações com conexão direta compatíveis com storage arrays e-Series
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode conectar sistemas ONTAP em configurações com conexão direta aos storage arrays e-Series. Você deve verificar a redundância nas conexões entre os sistemas ONTAP e os storages de armazenamento para evitar a possibilidade de um único ponto de falha. O FlexArray Stretch MetroCluster é compatível com configurações de conexão direta com storage arrays e-Series. Para obter mais informações, consulte https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"] e https://docs.netapp.com/us-en/ontap-metrocluster/install-stretch/index.html["Instalação e configuração do Stretch MetroCluster"].
+
+A Matriz de interoperabilidade contém informações sobre os modelos de array específicos da série e compatíveis com configurações de conexão direta com o sistema ONTAP.
+
+O ONTAP dá suporte às seguintes configurações com conexão direta com storage arrays e-Series:
+
+
+
+== Configuração básica independente
+
+Em uma configuração básica independente, duas portas de iniciador de FC do sistema ONTAP acessam as portas de um grupo de LUN de array de duas portas.
+
+A ilustração a seguir mostra uma configuração de conexão direta em que as portas 0a e 0h do iniciador FC do ONTAP acessam as portas de destino de um grupo LUN de matriz de duas portas:
+
+image::../media/da_2port_standalone.gif[da 2port standalone]
+
+
+
+== Grupo LUN de matriz de quatro portas
+
+Duas portas de iniciador de FC de cada sistema ONTAP em um par de HA acessam diferentes portas de storage array em um grupo LUN de array de quatro portas para redundância nas conexões.
+
+A ilustração a seguir mostra uma configuração de conexão direta em que as portas do iniciador ONTAP FC acessam as portas de destino de um grupo LUN de matriz de quatro portas.
+
+image::../media/da_4port_hapair.gif[da 4port hapair]
+
+Você também pode conectar quatro portas do iniciador de FC de cada sistema ONTAP no par de HA a dois grupos de LUN de array de quatro portas diferentes, de modo que cada porta do iniciador de FC em um par de portas acessa o grupo de LUN alternativo.
+
+A ilustração a seguir mostra uma configuração de conexão direta em que as portas do iniciador ONTAP FC acessam as portas de destino de dois grupos de LUN de matriz de quatro portas:
+
+image::../media/direct_attached_configuration_with_two_four_port_array_lun_groups.gif[configuração de conexão direta com dois grupos de lun de matriz de quatro portas]
+
+
+
+== Grupo LUN de matriz de oito portas
+
+Quatro portas de iniciador de FC de cada sistema ONTAP em um par de HA acessam diferentes portas de storage array em um grupo LUN de matriz de oito portas para redundância nas conexões.
+
+A ilustração a seguir mostra uma configuração de conexão direta em que as portas do iniciador ONTAP FC acessam as portas de destino de um grupo LUN de matriz de oito portas:
+
+image::../media/eight_port_direct_attached_ha_pair_configuration.gif[configuração de par ha com conexão direta de oito portas]

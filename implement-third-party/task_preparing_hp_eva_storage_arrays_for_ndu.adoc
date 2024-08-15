@@ -1,0 +1,41 @@
+---
+permalink: implement-third-party/task_preparing_hp_eva_storage_arrays_for_ndu.html 
+sidebar: sidebar 
+keywords: prepare, hp, eva, storage, arrays, ndu 
+summary: As matrizes de armazenamento HP EVA tendem a colocar as portas de destino offline durante uma atualização de firmware. O ONTAP fornece comandos que aumentam a resiliência do ONTAP para que o sistema ONTAP não seja interrompido se as portas de destino ficarem offline durante a atualização do firmware. Esses comandos só podem ser usados com sistemas de storage que executam o ONTAP. 
+---
+= Preparando matrizes de armazenamento HP EVA para NDU
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+As matrizes de armazenamento HP EVA tendem a colocar as portas de destino offline durante uma atualização de firmware. O ONTAP fornece comandos que aumentam a resiliência do ONTAP para que o sistema ONTAP não seja interrompido se as portas de destino ficarem offline durante a atualização do firmware. Esses comandos só podem ser usados com sistemas de storage que executam o ONTAP.
+
+Você deve seguir as diretrizes fornecidas pela HP para executar a atualização de firmware, incluindo diretrizes sobre a recomendação de carga (HP EVA). Você só pode atualizar para o firmware compatível com a HP. Este procedimento diz respeito ao tipo de atualização de firmware HP EVA _online upgrade_.
+
+[NOTE]
+====
+Durante a atualização do firmware, ambos os controladores HP EVA são reinicializados.
+
+====
+Este procedimento instrui você a usar comandos ONTAP que aumentam a resiliência do ONTAP durante a atualização do firmware. Depois que a atualização do firmware estiver concluída, você usará os comandos ONTAP novamente para retornar as portas ao modo operacional normal.
+
+.Passos
+. No sistema ONTAP, defina o nível de privilégio da sessão de comando como avançado: *`set -privilege advanced`*
+. Defina `is-upgrade-pending` o parâmetro como *True* para a matriz de armazenamento HP EVA que está passando por uma atualização de firmware: *`storage array modify -name array_name -is-upgrade-pending true`*
+. Na matriz de armazenamento, inicie a atualização do firmware.
+. Depois que a atualização do firmware estiver concluída, defina o nível de privilégio para avançado novamente, se necessário, e, em seguida, no sistema ONTAP, defina o `is-upgrade-pending` parâmetro para *false* para retornar as portas do storage à operação normal: *`storage array modify -name array_name -is-upgrade-pending false`*
++
+Se não tiver saído do modo avançado no passo 2, não terá de o aceder novamente.
+
++
+O `is-upgrade-pending` parâmetro contém os seguintes recursos para garantir o uso adequado do comando:
+
++
+** Se você tentar definir `is-upgrade-pending` como *false* enquanto a atualização estiver em andamento no storage array, o comando falhará e uma mensagem EMS será retornada.
+** Se o `is-upgrade-pending` status não for retornado para *false* dentro de 60 minutos a partir do momento em que é definido como *true*, as mensagens EMS são registradas a cada hora até `is-upgrade-pending` que sejam retornadas para *false*.
+
+
+

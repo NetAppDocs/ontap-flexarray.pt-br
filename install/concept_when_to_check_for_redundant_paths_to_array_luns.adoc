@@ -1,0 +1,32 @@
+---
+permalink: install/concept_when_to_check_for_redundant_paths_to_array_luns.html 
+sidebar: sidebar 
+keywords: when, check, redundant, paths, array, luns 
+summary: Você precisa verificar se há caminhos redundantes para um LUN de array após a instalação e durante as atividades de manutenção da malha. 
+---
+= Quando verificar caminhos redundantes para LUNs de matriz
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você precisa verificar se há caminhos redundantes para um LUN de array após a instalação e durante as atividades de manutenção da malha.
+
+Você deve verificar novamente a redundância de caminho ao executar as seguintes atividades:
+
+* Instalação inicial
+* Manutenção de tecidos, por exemplo:
++
+** Antes, durante e depois de uma atualização da infraestrutura
+** Antes e depois de retirar um interrutor de serviço para manutenção
++
+Certifique-se de que os caminhos foram configurados como caminhos redundantes antes de remover um switch entre os sistemas ONTAP e a matriz de armazenamento para que o acesso aos LUNs de storage não seja interrompido.
+
+** Antes e depois de manter o hardware em um storage array
++
+Por exemplo, você deve verificar novamente a redundância de caminho ao manter o componente de hardware no qual os adaptadores e as portas do host estão localizados. (O nome deste componente varia em diferentes modelos de storage array).
+
+
+
+

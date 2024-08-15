@@ -1,0 +1,30 @@
+---
+permalink: install/concept_location_of_the_root_volume.html 
+sidebar: sidebar 
+keywords: location, root, volume 
+summary: O local do volume raiz depende se o sistema ONTAP está pré-encomendado com discos nativos ou se você está adicionando discos a um sistema ONTAP configurado para LUNs de matriz. 
+---
+= Localização do volume raiz
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O local do volume raiz depende se o sistema ONTAP está pré-encomendado com discos nativos ou se você está adicionando discos a um sistema ONTAP configurado para LUNs de matriz.
+
+Siga estas diretrizes para determinar a localização do volume raiz no sistema ONTAP:
+
+* O volume raiz pode estar em um storage array ou em um compartimento de disco nativo.
++
+No entanto, você deve instalar o volume raiz em um disco nativo se o sistema ONTAP tiver discos nativos e LUNs de array.
+
++
+Se você solicitar o sistema de armazenamento com discos, a fábrica instalará o volume raiz em um disco nativo.
+
+* Em um par de HA, a prática recomendada é que o volume raiz esteja localizado no mesmo tipo de storage para ambos os nós, seja em um compartimento de disco nativo ou em um storage array para ambos os nós.
+* Para configurações do MetroCluster com discos e LUNs de array, você deve criar o volume raiz em um disco se estiver configurando uma nova configuração.
++
+Se você estiver adicionando discos a uma configuração MetroCluster existente com LUNs de array, poderá deixar o volume raiz em um LUN de array.
+
+

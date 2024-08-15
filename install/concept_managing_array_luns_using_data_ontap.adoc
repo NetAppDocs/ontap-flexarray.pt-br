@@ -1,0 +1,14 @@
+---
+permalink: install/concept_managing_array_luns_using_data_ontap.html 
+sidebar: sidebar 
+keywords: manage, array, luns, ontap 
+summary: Se o administrador do storage de armazenamento desejar fazer alterações de configuração em um LUN de array depois que ele é atribuído a um nó, por exemplo, para redimensioná-lo, talvez seja necessário executar algumas atividades no ONTAP antes que seja possível reconfigurar o LUN no storage array. 
+---
+= Gerenciamento de LUNs de array usando o ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se o administrador do storage de armazenamento desejar fazer alterações de configuração em um LUN de array depois que ele é atribuído a um nó, por exemplo, para redimensioná-lo, talvez seja necessário executar algumas atividades no ONTAP antes que seja possível reconfigurar o LUN no storage array.

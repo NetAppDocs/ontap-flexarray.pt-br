@@ -1,0 +1,49 @@
+---
+permalink: install/concept_aggregate_rules_when_the_storage_arrays_are_from_the_same_family.html 
+sidebar: sidebar 
+keywords: aggregate, rules, storage, arrays, same, family, add, luns, single, multiple, distribute 
+summary: Regras específicas se aplicam a como você pode definir LUNs de array em agregados quando os storage arrays são do mesmo fornecedor de storage e família de modelos. 
+---
+= Agregue regras quando os storage arrays são da mesma família
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Regras específicas se aplicam a como você pode definir LUNs de array em agregados quando os storage arrays são do mesmo fornecedor de storage e família de modelos.
+
+Se seus storage arrays forem do mesmo fornecedor, as regras para adicionar LUNs de array a agregados são as seguintes:
+
+* É possível misturar LUNs de array a partir dos storage arrays no mesmo agregado, se os storage arrays estiverem na mesma família.
+* É possível separar as LUNs de array em diferentes agregados.
+
+
+Os exemplos a seguir mostram algumas opções para a disposição de LUNs de storage em agregados quando os storage arrays por trás de um sistema ONTAP estão em _a mesma família de fornecedores_.
+
+[NOTE]
+====
+Para simplificar, as ilustrações mostram apenas dois storage arrays; sua implantação pode incluir mais storage arrays.
+
+====
+
+
+== Exemplo 1: Adicionar LUNs de todos os storage arrays a um único agregado
+
+Como mostrado na ilustração a seguir, você pode criar um agregado e adicionar todos os LUNs de todos os storages de armazenamento na mesma família ao mesmo agregado:
+
+image::../media/luns_assigned_to_same_aggr_same_family.gif[Este gráfico é descrito pelo texto circundante.]
+
+
+
+== Exemplo 2: Distribua e misture LUNs dos storage arrays em vários agregados
+
+Como mostrado na ilustração a seguir, você pode criar vários agregados e, em seguida, distribuir e misturar os LUNs de storage de diferentes arrays na mesma família sobre os agregados:
+
+image:../media/luns_from_same_family_mixed_in_multiple_aggrs.gif[""]
+
+[NOTE]
+====
+Este exemplo não é suportado se você tiver matrizes de armazenamento do mesmo modelo e uma tiver unidades Fibre Channel e a outra matriz de armazenamento tiver unidades SATA. Nesse caso, esses storage arrays não são considerados na mesma família.
+
+====

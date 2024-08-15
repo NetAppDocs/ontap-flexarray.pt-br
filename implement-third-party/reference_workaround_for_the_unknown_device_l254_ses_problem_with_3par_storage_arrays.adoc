@@ -1,0 +1,86 @@
+---
+permalink: implement-third-party/reference_workaround_for_the_unknown_device_l254_ses_problem_with_3par_storage_arrays.html 
+sidebar: sidebar 
+keywords: 'Workaround, unknown device (l254/ses), problem, 3PAR, storage, arrays, aggregates, luns, created, ontap system, not' 
+summary: A definição de host, com a persona de host especificada na seção parâmetros necessários para arrays 3PAR com sistemas ONTAP, deve ser criada em um storage array 3PAR antes que o switch seja zoneado para conectar o sistema ONTAP a um storage array 3PAR. Se o zoneamento for configurado antes da definição do host, o ONTAP detetará um LUN de array 3PAR como LUN 254 e SES do tipo de produto, que o ONTAP não pode usar. 
+---
+= Solução alternativa para o problema de dispositivo desconhecido (L254/SES) com matrizes de armazenamento 3PAR
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A definição de host, com a persona de host especificada na seção parâmetros necessários para arrays 3PAR com sistemas ONTAP, deve ser criada em um storage array 3PAR antes que o switch seja zoneado para conectar o sistema ONTAP a um storage array 3PAR. Se o zoneamento for configurado antes da definição do host, o ONTAP detetará um LUN de array 3PAR como LUN 254 e SES do tipo de produto, que o ONTAP não pode usar.
+
+xref:reference_required_parameters_for_3par_arrays_with_data_ontap_systems.adoc[Parâmetros necessários para matrizes 3PAR com sistemas ONTAP]
+
+Quando o ONTAP descobre LUNs de array 3PAR como LUN 254 e SES do tipo de produto, os LUNs 3PAR recentemente mapeados não podem ser atribuídos a sistemas ONTAP e alguns LUNs 3PAR que podem já ter sido adicionados a um agregado não podem ser usados porque o ONTAP vê um LUN 254. O ONTAP gera mensagens EMS para o LUN que ele descobriu como LUN 254 e SES do tipo de produto, relatando alguns LUNs como dispositivos desconhecidos.
+
+Se o zoneamento foi configurado antes da definição do host, você pode resolver o problema de dispositivo desconhecido LUN 254/SES forçando uma redescoberta dos LUNs do array que são mapeados a partir do array de armazenamento 3PAR. O procedimento usado depende se agregados com LUNs de matriz 3PAR já foram configurados no sistema ONTAP. (Nos procedimentos a seguir, suponha que o nó 1 e o nó 2 sejam os nomes dos nós ONTAP.)
+
+
+
+== Se agregados com LUNs de array 3PAR já tiverem sido criados em um sistema ONTAP
+
+. Execute o seguinte comando para garantir que uma configuração de HA esteja ativada nos sistemas ONTAP: *`cluster ha show`*
++
+É apresentada a seguinte saída:
+
++
+[listing]
+----
+
+High Availability Configured: true
+----
+. Execute o seguinte comando para garantir que o failover de armazenamento esteja configurado nos sistemas ONTAP: *`storage failover show`*
++
+É apresentada a seguinte saída:
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-1    Node-2    true     Connected to Node-2
+Node-2    Node-1    true     Connected to Node-1
+2 entries were displayed.
+----
+. Execute uma operação de aquisição no Node-1 executando o seguinte comando: *`storage failover takeover -ofnode Node-1`*
+. Execute o seguinte comando novamente para verificar se o nó-2 está pronto para uma operação de giveback: *`storage failover show`*
++
+É apresentada a seguinte saída:
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-2    Node-1    false    In takeover, Auto giveback will be
+                                      initiated in 348 seconds
+Node-1    Node-2    -        Waiting for giveback (HA mailboxes)
+2 entries were displayed.
+----
+. Execute uma operação de giveback no Node-1 executando o seguinte comando: *`storage failover giveback -ofnode Node-1 -require-partner-waiting true`*
+. De outros nós no cluster, repita os passos 3 a 5.
+
+
+
+
+== Se agregados com LUNs de array 3PAR não tiverem sido criados em um sistema ONTAP
+
+. Execute o seguinte comando para listar todas as portas do iniciador ONTAP FC que estão conetadas ao storage array 3PAR: *`system node run -node <node name> -command "sysconfig -v"`*
++
+O exemplo a seguir mostra o comando com um nome de nó específico incluído: *`system node run -node Node-1 -command "sysconfig -v"`*
+
+. Execute o seguinte comando para colocar todas as portas listadas offline: *`system node run -node <node name> -command "priv set advanced;fcadmin offline <adapter>"`*
++
+O exemplo a seguir mostra o comando com um nome de nó específico e adaptador incluído: *`system node run -node Node-1 -command "priv set advanced;fcadmin offline 0a"`*
+
+. Execute o seguinte comando para colocar todas as portas listadas online: *`system node run -node <node name> -command "priv set advanced;fcadmin online <adapter>"`*
++
+O exemplo a seguir mostra o comando com um nome de nó específico e adaptador incluído: *`system node run -node Node-1 -command "priv set advanced;fcadmin online 0a"`*
+
+

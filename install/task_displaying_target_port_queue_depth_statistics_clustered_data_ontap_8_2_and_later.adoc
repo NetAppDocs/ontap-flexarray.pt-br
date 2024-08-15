@@ -1,0 +1,80 @@
+---
+permalink: install/task_displaying_target_port_queue_depth_statistics_clustered_data_ontap_8_2_and_later.html 
+sidebar: sidebar 
+keywords: display, target, queue, depth, statistics 
+summary: Se você suspeitar que uma configuração de profundidade da fila de destino está causando problemas de desempenho em seu storage array, verifique o valor definido para a profundidade da fila e verifique o estado das solicitações nas portas do iniciador FC. 
+---
+= Exibindo estatísticas de profundidade da fila de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se você suspeitar que uma configuração de profundidade da fila de destino está causando problemas de desempenho em seu storage array, verifique o valor definido para a profundidade da fila e verifique o estado das solicitações nas portas do iniciador FC.
+
+Existem diferentes níveis de detalhes que você pode acessar para determinar se há problemas no processamento de solicitações nas portas de destino. As etapas a seguir descrevem como determinar a configuração atual para a profundidade da fila da porta de destino, determinar se há solicitações aguardando nas portas e exibir estatísticas detalhadas de portas para ajudá-lo a entender a carga de trabalho na porta.
+
+.Passos
+. Use o `storage array show` comando com o `-instance` parâmetro para mostrar o valor atual da profundidade da fila da porta de destino.
++
+[listing]
+----
+> set advanced
+> storage array show -instance
+
+Name: HP2
+                 Prefix: HP-2
+                 Vendor: HP
+                  Model: HSV300
+                options:
+          Serial Number: 50014380025d1500
+Target Port Queue Depth: 512
+        LUN Queue Depth: 32
+        Upgrade Pending: false
+    Optimization Policy: eALUA
+               Affinity: aaa
+             Error Text: -
+----
+. Use o `storage array port show -fields max-queue-depth` comando para mostrar a configuração de profundidade da fila para cada porta no storage de armazenamento.
++
+[listing]
+----
+> set advanced
+> storage array port show -fields max-queue-depth
+
+name            wwnn             wwpn             max-queue-depth
+--------------- ---------------- ---------------- ---------------
+EMC_SYMMETRIX_1 50060480000001a0 50060480000001a0 -
+EMC_SYMMETRIX_1 50060480000001a1 50060480000001a1 -
+EMC_SYMMETRIX_1 50060480000001b0 50060480000001b0 -
+EMC_SYMMETRIX_1 50060480000001b1 50060480000001b1 256
+----
++
+Um valor de "'-' `Max Queue Depth` para indica que a porta não tem uma configuração específica de profundidade máxima da fila e está usando o valor definido no nível da matriz de armazenamento.
+
+. Use o `storage array port show` comando para exibir informações de desempenho sobre portas de destino de storage array.
++
+Os resultados deste comando ajudam a determinar se há problemas de desempenho relacionados às portas. Os `%busy` valores e `%waiting` fornecem uma visão de alto nível do desempenho em uma porta. Se esses valores mostrarem uma alta porcentagem de solicitações aguardando para serem processadas ou mostrarem que a porta está ocupada por uma grande porcentagem de tempo, então você pode querer investigar mais sobre o estado da porta.
+
++
+[listing]
+----
+
+vgv3070f51::*> storage array port show
+
+Array Name: HP2
+WWNN: 50014380025d1500
+WWPN: 50014380025d1508
+Connection Type: fabric
+Switch Port: vgbr300s70:9
+Link Speed: 4   GB/s
+Max Queue Depth: -
+                              LUN                                 Link
+Node       Initiator  Count   IOPS    KB/s    %busy    %waiting   Errs
+---------  ---------  -----  ------  ------  -------  ----------  ----
+vgv51-02       0a     21       2      53        0           0     0
+vgv51-01       0a     21       2      48        1           0     0
+----
+. Você pode obter informações mais detalhadas sobre portas usando o `storage array port show -fields` comando com os `average-latency-per-iop` `max-pending` campos , `average-pending`, , `average-waiting` ou `max-waiting` .
+

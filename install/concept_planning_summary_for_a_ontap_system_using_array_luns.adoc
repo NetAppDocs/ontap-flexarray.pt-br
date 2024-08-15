@@ -1,0 +1,71 @@
+---
+permalink: install/concept_planning_summary_for_a_ontap_system_using_array_luns.html 
+sidebar: sidebar 
+keywords: plan, summary, ontap, systems, array, luns 
+summary: Quando você planeja usar LUNs de array com sistemas ONTAP, deve se comunicar com os administradores de storage e switch para que os dispositivos de back-end sejam configurados para funcionar com sistemas ONTAP. 
+---
+= Resumo de Planejamento de sistemas ONTAP usando LUNs de array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Quando você planeja usar LUNs de array com sistemas ONTAP, deve se comunicar com os administradores de storage e switch para que os dispositivos de back-end sejam configurados para funcionar com sistemas ONTAP.
+
+A tabela a seguir resume as principais tarefas de Planejamento e a localização das informações para ajudá-lo em cada tarefa.
+
+|===
+| Tarefa de planeamento | Onde encontrar informações 
+
+
+ a| 
+Determinando os requisitos para configurar seu storage array para funcionar com o ONTAP
+ a| 
+* https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementação de virtualização de FlexArray para storage de terceiros"]
+* https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implementação de virtualização FlexArray para storage NetApp e-Series"]
+* https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"]
+
+
+
+
+ a| 
+Diretrizes para uso de LUN de array com ONTAP
+ a| 
+xref:concept_planning_for_ontap_use_of_array_luns.adoc[Planejamento do uso de LUNs de array pela ONTAP]
+
+
+
+ a| 
+Determinando limites de ONTAP em relação aos LUNs de array
+ a| 
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+
+ a| 
+Determinando um esquema de segurança LUN, definindo controles de acesso no storage array e, se os switches forem implantados, definindo zoneamento nos switches
+ a| 
+* xref:concept_planning_for_lun_security_on_storage_arrays.adoc[Planejamento da segurança LUN em matrizes de armazenamento]
+* xref:concept_zoning_for_a_configuration_with_storage_arrays.adoc[Requisitos de zoneamento]
+
+
+
+
+ a| 
+Determinando um esquema de conectividade porta a porta entre os sistemas ONTAP e o storage array
+ a| 
+* xref:concept_planning_a_port_to_port_connectivity_scheme.adoc[Planejamento de um esquema de conetividade porta a porta]
+* https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"]
+
+
+
+
+ a| 
+Determinando qual sistema ONTAP é para "possuir" qual LUN de array (propriedade de disco)
+ a| 
+* xref:concept_how_array_luns_become_available_for_ontap_storage_use.adoc[Como os LUNs de array se tornam disponíveis para uso no storage ONTAP]
+* xref:task_assigning_ownership_of_array_luns.adoc[Atribuição de propriedade de LUNs de array]
+
+
+|===

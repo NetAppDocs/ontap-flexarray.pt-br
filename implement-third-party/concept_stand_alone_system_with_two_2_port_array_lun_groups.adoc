@@ -1,0 +1,24 @@
+---
+permalink: implement-third-party/concept_stand_alone_system_with_two_2_port_array_lun_groups.html 
+sidebar: sidebar 
+keywords: stand-alone, system, two, 2-port, array, lun, groups 
+summary: Em um sistema ONTAP autônomo que está em uma configuração simples conectada à malha, cada par de portas iniciador de FC presente no sistema ONTAP acessa um grupo de LUN de array separado. 
+---
+= Sistema autônomo com dois grupos LUN de matriz de 2 portas
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Em um sistema ONTAP autônomo que está em uma configuração simples conectada à malha, cada par de portas iniciador de FC presente no sistema ONTAP acessa um grupo de LUN de array separado.
+
+Esta configuração é suportada para utilização com todas as matrizes de armazenamento listadas na Matriz de interoperabilidade, conforme suportado para a versão do ONTAP em execução no seu sistema.
+
+A ilustração a seguir mostra a configuração simples conetada à malha:
+
+image::../media/multiple_lun_groups_with_stand_alone_6xxx_array_controller.gif[Este gráfico é descrito pelo texto circundante.]
+
+*Informações relacionadas*
+
+https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"]

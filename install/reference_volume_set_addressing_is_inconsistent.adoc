@@ -1,0 +1,57 @@
+---
+permalink: install/reference_volume_set_addressing_is_inconsistent.html 
+sidebar: sidebar 
+keywords: volume, set, address, inconsistent, show, message, troubleshoot, problem, resolution 
+summary: O ONTAP pode detetar IDs de LUN inconsistentes em um conjunto de caminhos para arrays de storage. Para matrizes de armazenamento em que o endereçamento do conjunto de volume está definido, uma incompatibilidade das definições nas portas para as quais o LUN é mapeado é um problema que causa uma incompatibilidade de IDs de LUN. 
+---
+= O endereçamento do conjunto de volume é inconsistente
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O ONTAP pode detetar IDs de LUN inconsistentes em um conjunto de caminhos para arrays de storage. Para matrizes de armazenamento em que o endereçamento do conjunto de volume está definido, uma incompatibilidade das definições nas portas para as quais o LUN é mapeado é um problema que causa uma incompatibilidade de IDs de LUN.
+
+Em matrizes de armazenamento EMC Symmetrix, por exemplo, a definição inconsistente do parâmetro de endereçamento de conjunto de volume nas portas do diretor de canal para as quais um LUN é mapeado aciona um erro de incompatibilidade de LUN.
+
+
+
+== Erros de armazenamento mostram mensagem
+
+[listing]
+----
+
+EMC-1.128 (4849544143484920443630303035323430303132): This Array LUN is using multiple LUN IDs.  Only one LUN ID per serial number is supported.
+----
+
+
+== Explicação
+
+Há vários erros de configuração que podem causar a mensagem de erro. Esta explicação é sobre a apresentação desta mensagem quando o endereçamento do conjunto de volume é definido de forma inconsistente.
+
+O ONTAP verifica explicitamente a configuração inconsistente do parâmetro volume Set Addressing em portas às quais um LUN é mapeado. Se as definições forem diferentes, o ONTAP comunica isto como uma incompatibilidade de ID LUN na `storage errors show` saída e nas mensagens EMS.
+
+[NOTE]
+====
+O ONTAP não o alerta se o endereçamento de conjunto de volume não estiver configurado como esperado; ele o alerta somente se a configuração for inconsistente nas portas do diretor de canal para as quais o LUN é mapeado.
+
+====
+
+
+== Resolução de problemas e resolução de problemas
+
+Se o `storage errors show` comando exibir a mensagem de erro específica e seu storage array for um EMC Symmetrix, fazer um dos seguintes ajuda a identificar se o problema é devido a uma inconsistência de endereçamento de conjunto de volume:
+
+* No ONTAP, execute `storage disk show -disk` para o LUN de array identificado.
++
+Este comando mostra todos os caminhos para o LUN de array e o ID de LUN atribuído a cada caminho.
+
+* Na matriz de armazenamento, verifique as configurações de endereçamento do conjunto de volume para as portas do diretor de canal para as quais o LUN identificado é mapeado.
+
+
+Se você determinar que as configurações são inconsistentes, corrija o problema de configuração no storage array, certificando-se de que você está definindo o parâmetro em ambas as portas do diretor de canal para a configuração exigida pelo ONTAP.
+
+*Informações relacionadas*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementação de virtualização de FlexArray para storage de terceiros"]

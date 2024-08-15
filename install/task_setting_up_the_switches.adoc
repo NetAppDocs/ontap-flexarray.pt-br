@@ -1,0 +1,78 @@
+---
+permalink: install/task_setting_up_the_switches.html 
+sidebar: sidebar 
+keywords: set, up, switches 
+summary: A configuração do switch geralmente é feita pelo administrador de armazenamento ou SAN. Os switches precisam ser zoneados para que os sistemas ONTAP e os storage arrays possam se ver. Você deve usar o zoneamento de iniciador único como a estratégia de zoneamento. 
+---
+= Configurar os interrutores
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A configuração do switch geralmente é feita pelo administrador de armazenamento ou SAN. Os switches precisam ser zoneados para que os sistemas ONTAP e os storage arrays possam se ver. Você deve usar o zoneamento de iniciador único como a estratégia de zoneamento.
+
+.Passos
+. Faça login no storage array e obtenha as WWPNs dos adaptadores FC do storage array.
+. Use os comandos do switch Fibre Channel para zona de cada switch de modo que o storage array e o sistema ONTAP vejam as WWPNs uns dos outros.
++
+Considere o exemplo a seguir de sistemas ONTAP em um par de HA:
+
++
+image::../media/one_4_port_array_lun_gp.gif[Este gráfico é descrito pelo texto circundante.]
+
++
+Na configuração de exemplo, as zonas são as seguintes:
+
++
+|===
+| Zona | ONTAP sistema e porta | Porta e controlador de storage array 
+
+
+ a| 
+Interrutor 1
+
+
+
+ a| 
+z1
+ a| 
+vs1, 0a
+ a| 
+Controlador 1, 1A
+
+
+
+ a| 
+z2
+ a| 
+vs2, 0a
+ a| 
+Controlador 1, 1B
+
+
+
+ a| 
+Interrutor 2
+
+
+
+ a| 
+z3
+ a| 
+vs1, 0c
+ a| 
+Controlador 2, 2A
+
+
+
+ a| 
+z4
+ a| 
+vs2, 0c
+ a| 
+Controlador 2, 2B
+
+|===
+

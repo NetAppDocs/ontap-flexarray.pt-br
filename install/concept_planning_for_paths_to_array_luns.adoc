@@ -1,0 +1,14 @@
+---
+permalink: install/concept_planning_for_paths_to_array_luns.html 
+sidebar: sidebar 
+keywords: plan, paths, array, luns 
+summary: 'Os caminhos são as conexões físicas entre o sistema ONTAP e o storage array. Caminhos redundantes são necessários para eliminar qualquer ponto único de falha (SPOF) entre o sistema ONTAP e o storage array.' 
+---
+= Planejamento de caminhos para LUNs de array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os caminhos são as conexões físicas entre o sistema ONTAP e o storage array. Caminhos redundantes são necessários para eliminar qualquer ponto único de falha (SPOF) entre o sistema ONTAP e o storage array.

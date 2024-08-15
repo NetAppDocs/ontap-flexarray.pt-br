@@ -1,0 +1,88 @@
+---
+permalink: install/concept_example_of_zoning_in_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: example, zone, configuration, storage, arrays, single, 4-port, lun, group 
+summary: O uso da segurança LUN ao configurar os switches para zoneamento garante que hosts diferentes não vejam LUNs mapeados para outro host. 
+---
+= Exemplo de zoneamento em uma configuração com matrizes de armazenamento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O uso da segurança LUN ao configurar os switches para zoneamento garante que hosts diferentes não vejam LUNs mapeados para outro host.
+
+
+
+== Zoneamento em uma única configuração de grupo LUN de 4 portas
+
+image::../media/one_4_port_array_lun_gp.gif[Este gráfico é descrito pelo texto circundante.]
+
+A tabela a seguir mostra zoneamento para este exemplo de configuração de sistemas ONTAP em um par de HA. O zoneamento de um único iniciador é a estratégia de zoneamento recomendada.
+
+|===
+| Zona | Sistema ONTAP |  | Storage array |  
+
+
+ a| 
+Interrutor 1
+
+
+
+ a| 
+z1
+ a| 
+vs1
+ a| 
+Porta 0a
+ a| 
+Controlador 1
+ a| 
+Porta 1A
+
+
+
+ a| 
+z2
+ a| 
+vs2
+ a| 
+Porta 0a
+ a| 
+Controlador 1
+ a| 
+Porta 1B
+
+
+
+ a| 
+Interrutor 2
+
+
+
+ a| 
+z3
+ a| 
+vs1
+ a| 
+Porta 0c
+ a| 
+Controlador 2
+ a| 
+Porta 2A
+
+
+
+ a| 
+z4
+ a| 
+vs2
+ a| 
+Porta 0c
+ a| 
+Controlador 2
+ a| 
+Porta 2B
+
+|===

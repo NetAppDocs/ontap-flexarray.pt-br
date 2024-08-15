@@ -1,0 +1,56 @@
+---
+permalink: install/concept_rules_for_sharing_an_fc_initiator_port_with_multiple_target_ports.html 
+sidebar: sidebar 
+keywords: rules, share, fc initiator, port, multiple, target, connect, storage, arrays 
+summary: Você pode conectar uma porta do iniciador de FC em um sistema ONTAP a um máximo de quatro portas de destino em storage arrays separados. Compartilhar uma porta do iniciador de FC com vários destinos é útil quando você deseja minimizar o número de portas do iniciador de FC usadas. 
+---
+= Regras para compartilhar uma porta iniciador de FC com várias portas de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode conetar uma porta do iniciador de FC em um sistema ONTAP a um máximo de quatro portas de destino em storages _separados_. Compartilhar uma porta do iniciador de FC com vários destinos é útil quando você deseja minimizar o número de portas do iniciador de FC usadas.
+
+Você também pode conetar uma porta do iniciador FC a um máximo de quatro portas de destino no storage array _same_ se o array puder apresentar conjuntos diferentes de dispositivos lógicos ao iniciador FC com base na porta de destino que está sendo acessada.
+
+Há limites em quantos LUNs de array podem ser visíveis em uma porta iniciador de FC. Estes limites variam de acordo com a liberação.
+
+
+
+== Regras quando a porta do iniciador FC é conetada a várias portas de destino em storages _separate_
+
+As regras para esta configuração são as seguintes:
+
+* Todos os storage arrays precisam ser da mesma família de modelos de fornecedor.
++
+Os storage arrays da mesma família compartilham as mesmas características de performance e failover. Por exemplo, todos os membros da mesma família executam failover ativo-ativo ou todos executam failover ativo-passivo. Mais de um fator pode ser usado para determinar famílias de storage array. Por exemplo, matrizes de armazenamento com arquiteturas diferentes estariam em famílias diferentes, embora outras caraterísticas possam ser as mesmas.
+
+* A conexão de uma única porta do iniciador de FC a várias portas de destino é compatível com configurações do MetroCluster.
+* Uma única porta do iniciador de FC pode se conectar a um máximo de quatro portas de destino em vários storage arrays.
+* É necessário ter cada par de portas iniciador-destino FC em uma zona separada (1:1), mesmo que a mesma porta do iniciador FC esteja acessando várias portas de destino.
+
+
+
+
+== Regras quando a porta do iniciador FC é conetada a várias portas de destino no storage _same_
+
+Essa configuração só pode ser usada com arrays de storage cujo recurso de mascaramento de LUN, apresentação ou grupo de hosts permite apresentações diferentes de grupos de LUN ao mesmo iniciador FC com base na porta de destino que está sendo acessada.
+
+Alguns storage arrays podem apresentar conjuntos diferentes de dispositivos lógicos para um iniciador FC com base na porta de destino que está sendo acessada. Esses tipos de storage arrays permitem que o mesmo iniciador de FC esteja em vários grupos de host. Em storage arrays com essa funcionalidade, é possível que cada porta do iniciador de FC acesse várias portas de destino de storage no mesmo storage array, com cada porta de destino apresentando um grupo de LUN diferente ao iniciador de FC. Consulte a documentação do storage array para determinar se o storage array permite que o mesmo iniciador FC esteja em vários grupos de host.
+
+A seguir estão as regras para esta configuração:
+
+* Uma única porta de iniciador de FC pode se conectar a até quatro portas de destino em um storage array.
+* A conexão de uma única porta do iniciador de FC a várias portas de destino é compatível com configurações do MetroCluster.
+* É necessário ter cada par de portas iniciador-destino FC em uma zona separada (1:1), mesmo que o mesmo iniciador de FC esteja acessando várias portas de destino.
+
+
+*Informações relacionadas*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementação de virtualização de FlexArray para storage de terceiros"]
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implementação de virtualização FlexArray para storage NetApp e-Series"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Instalação e configuração do MetroCluster conectado à malha"]

@@ -1,0 +1,37 @@
+---
+section: implement-e-series
+title: Implementação do storage e-Series
+url: "/implement-e-series/index.html"
+entries:
+- title: Onde encontrar informações para configurações com matrizes de armazenamento
+  url: "/implement-e-series/concept_where_to_find_information_for_configurations_with_storage_arrays.html"
+  entries:
+  - title: Onde encontrar informações sobre o suporte do ONTAP para storage arrays
+    url: "/implement-e-series/concept_where_to_find_information_about_support_for_storage_arrays.html"
+- title: Sistemas ONTAP que podem usar LUNs de array em arrays de storage
+  url: "/implement-e-series/concept_systems_that_can_use_array_luns_on_storage_arrays.html"
+- title: Requisitos para a configuração de storage arrays do e-Series
+  url: "/implement-e-series/reference_requirements_for_configuring_e_series_storage_arrays.html"
+  entries:
+  - title: Tipo de host necessário para storage arrays e-Series
+    url: "/implement-e-series/reference_required_host_type_for_e_series_storage_arrays_reference.html"
+- title: Configurações conectadas à malha compatíveis com arrays de storage e-Series
+  url: "/implement-e-series/reference_supported_fabric_attached_configurations_for_storage_arrays.html"
+  entries:
+  - title: Configuração básica independente
+    url: "/implement-e-series/concept_stand_alone_basic_configuration.html"
+  - title: Sistema autônomo com dois grupos LUN de matriz de 2 portas
+    url: "/implement-e-series/concept_stand_alone_system_with_two_2_port_array_lun_groups.html"
+  - title: Configuração única de grupo LUN de matriz de 4 portas
+    url: "/implement-e-series/concept_single_4_port_array_lun_group_configuration.html"
+  - title: Duas configurações de grupo LUN de matriz de 4 portas
+    url: "/implement-e-series/concept_two_4_port_array_lun_group_configuration.html"
+  - title: Configuração de grupo LUN de matriz de oito portas
+    url: "/implement-e-series/concept_eight_port_array_lun_group_configuration.html"
+  - title: Anexando a porta do iniciador FC a várias portas de destino
+    url: "/implement-e-series/concept_attaching_fc_initiator_port_to_multiple_targets_ports.html"
+  - title: Compartilhamento de uma porta de destino com duas portas do iniciador de
+      FC
+    url: "/implement-e-series/concept_sharing_a_target_port_with_two_fc_initiator_ports.html"
+- title: Configurações com conexão direta compatíveis com storage arrays e-Series
+  url: "/implement-e-series/reference_supported_direct_attached_configurations_for_e_series_storage_arrays.html"

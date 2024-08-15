@@ -1,0 +1,83 @@
+---
+permalink: implement-e-series/concept_where_to_find_information_about_support_for_storage_arrays.html 
+sidebar: sidebar 
+keywords: non-ontap storage, third-party storage, e-series, arrays, storage 
+summary: Nem todas as versões do ONTAP oferecem suporte aos mesmos recursos, configurações, modelos de sistema e modelos de storage array. Durante o Planejamento de implantação, você deve verificar as informações de suporte da ONTAP para verificar se sua implantação está em conformidade com os requisitos de hardware e software da ONTAP para todos os sistemas na implantação. 
+---
+= Onde encontrar informações sobre o suporte do ONTAP para storage arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nem todas as versões do ONTAP oferecem suporte aos mesmos recursos, configurações, modelos de sistema e modelos de storage array. Durante o Planejamento de implantação, você deve verificar as informações de suporte da ONTAP para verificar se sua implantação está em conformidade com os requisitos de hardware e software da ONTAP para todos os sistemas na implantação.
+
+A tabela a seguir lista as fontes de informação que contêm os detalhes dos requisitos de hardware e software associados aos sistemas ONTAP:
+
+[cols="2*"]
+|===
+| Para obter informações sobre... | Você deve olhar aqui... 
+
+
+ a| 
+Tarefas de implementação do ONTAP com storage arrays, incluindo as seguintes:
+
+* Planejamento da implementação
+* Conetando os sistemas ONTAP e o array
+* Verificando a instalação
+
+ a| 
+https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Referência e requisitos de instalação da virtualização do FlexArray"]
+
+
+
+ a| 
+ONTAP trabalhando com dispositivos, incluindo o seguinte:
+
+* Matrizes de armazenamento suportadas e firmware de matriz de armazenamento
+* Switches suportados e firmware do switch
+* Se seu storage array é compatível com a atualização sem interrupções (ao vivo) do firmware do storage array
+* Se uma configuração do MetroCluster é compatível com seu storage array
+
+ a| 
+https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"]
+
+Você pode exibir informações sobre o suporte avançado a recursos para matrizes de armazenamento e-Series com virtualização FlexArray consultando as notas apropriadas na FlexArray página de solução de armazenamento back-end da Matriz de interoperabilidade
+
+
+
+ a| 
+Limites do ONTAP para lançamentos e plataformas, incluindo o seguinte:
+
+* Tamanhos mínimos e máximos de LUN de array, incluindo o tamanho mínimo de LUN de array para o volume raiz e LUNs de array principal sobressalentes
+* Tamanho de agregado mínimo para agregados com LUNs de array
+* Tamanho de bloco suportado
+* Capacidade mínima e máxima
+* Limites de vizinhança
+
+ a| 
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+
+ a| 
+Configuração de storage arrays do e-Series, incluindo o seguinte:
+
+* Requisitos de preparação do local
+* Instruções de cabeamento
+* Instruções de instalação e configuração do software SANtricity
+
+ a| 
+A seguinte documentação do e-Series:
+
+* _E-Series Storage Systems Site Preparation Guide_
+* _Guia de cabeamento de hardware de sistemas de storage e-Series_
+* _Documentação do Gestor de armazenamento do SANtricity ES_
+
+
+Você pode acessar esses documentos no site de suporte da NetApp.
+
+https://mysupport.netapp.com/site/global/dashboard["Suporte à NetApp"]
+
+|===

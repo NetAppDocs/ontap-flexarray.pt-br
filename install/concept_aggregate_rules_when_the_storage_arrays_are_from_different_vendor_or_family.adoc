@@ -1,0 +1,43 @@
+---
+permalink: install/concept_aggregate_rules_when_the_storage_arrays_are_from_different_vendor_or_family.html 
+sidebar: sidebar 
+keywords: aggregate, rules, storage, arrays, different, vendors, families, luns, mixed 
+summary: Regras específicas se aplicam a como você pode definir LUNs de array em agregados quando os storage arrays são de diferentes fornecedores ou de diferentes famílias de storage do mesmo fornecedor. 
+---
+= Agregue regras quando os storage arrays forem de diferentes fornecedores ou famílias
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Regras específicas se aplicam a como você pode definir LUNs de array em agregados quando os storage arrays são de diferentes fornecedores ou de diferentes famílias de storage do mesmo fornecedor.
+
+As regras a seguir se aplicam se seus storage arrays forem de diferentes fornecedores ou famílias do mesmo fornecedor:
+
+* Não é possível misturar LUNs de array de storage de diferentes fornecedores ou de diferentes famílias do mesmo fornecedor no mesmo agregado.
+* Você pode associar o agregado que contém o volume raiz a qualquer um dos storages, independentemente do tipo de família do storage array.
+
+
+[NOTE]
+====
+Ao criar seu agregado, certifique-se de especificar explicitamente os IDs dos LUNs do array que você deseja adicionar ao agregado. Não use os parâmetros para especificar o número e o tamanho dos LUNs da matriz a serem coletados porque o sistema pode pegar automaticamente LUNs de uma família diferente ou de um storage de outro fornecedor. Depois que LUNs de array de diferentes famílias ou fornecedores estiverem no mesmo agregado, a única maneira de corrigir o problema de LUNs de array misto em um agregado é destruir o agregado e recriá-lo.
+
+====
+Os exemplos a seguir mostram opções de como definir LUNs de array em agregados quando os storage arrays são de _diferentes fornecedores ou de diferentes famílias do mesmo fornecedor_.
+
+
+
+== Exemplo 1: LUNs das duas matrizes de storage estão em agregados diferentes
+
+Neste exemplo, alguns LUNs para ONTAP são do storage array 1, Família A, enquanto os outros LUNs para ONTAP são do storage array 2, Família B. os LUNs dos dois storage arrays não podem ser adicionados ao mesmo agregado porque os dois storage arrays são de famílias diferentes do mesmo fornecedor. O mesmo seria verdade se os dois storage arrays fossem de diferentes fornecedores.
+
+image::../media/luns_assigned_to_multiple_aggrs_dif_family.gif[Este gráfico é descrito pelo texto circundante.]
+
+
+
+== Exemplo 2: Alguns LUNs podem ser misturados no mesmo agregado e outros não podem
+
+Neste exemplo, um storage array é da Família A e os outros dois storage arrays são da Família B. os LUNs da Família A storage array não podem ser adicionados ao mesmo agregado que os LUNs de um storage array da Família B porque os storage arrays são de famílias diferentes. No entanto, o LUN 1 do storage array 3 pode ser atribuído ao agregado 2, que também contém LUNs do storage array 2, porque os dois storage arrays estão na mesma família.
+
+image::../media/luns_assigned_to_multiple_aggrs_dif_and_same_family.gif[Este gráfico é descrito pelo texto circundante.]

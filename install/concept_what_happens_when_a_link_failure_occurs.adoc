@@ -1,0 +1,34 @@
+---
+permalink: install/concept_what_happens_when_a_link_failure_occurs.html 
+sidebar: sidebar 
+keywords: happens, link, failure, occurs 
+summary: O ONTAP monitora o uso de um link periodicamente. A resposta do ONTAP a uma falha de link difere dependendo de onde a falha ocorre. 
+---
+= O que acontece quando ocorre uma falha de link
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O ONTAP monitora periodicamente o uso de um link. A resposta do ONTAP a uma falha de link difere dependendo de onde a falha ocorre.
+
+A tabela a seguir mostra o que ocorre se houver uma falha em uma configuração conetada à malha:
+
+|===
+| Se ocorrer uma falha na ligação entre o... | Então... 
+
+
+ a| 
+Sistema ONTAP e o interrutor
+ a| 
+O ONTAP recebe notificação imediatamente e envia o tráfego para o outro caminho imediatamente.
+
+
+
+ a| 
+Switch e storage array
+ a| 
+O ONTAP não está imediatamente ciente de que há uma falha de link porque o link ainda está estabelecido entre o sistema ONTAP e o switch. O ONTAP fica ciente de que há uma falha quando a e/S expira. O ONTAP tenta novamente três vezes para enviar o tráfego no caminho original e, em seguida, falha sobre o tráfego para o outro caminho.
+
+|===

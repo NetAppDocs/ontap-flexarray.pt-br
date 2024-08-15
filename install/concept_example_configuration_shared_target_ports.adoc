@@ -1,0 +1,62 @@
+---
+permalink: install/concept_example_configuration_shared_target_ports.html 
+sidebar: sidebar 
+keywords: example, configuration, shared, target, ports, multiple, initiator 
+summary: É possível conectar, no máximo, duas portas do iniciador de FC ONTAP a uma única porta de destino no storage array. 
+---
+= Exemplo de configuração: Portas de destino compartilhadas
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+É possível conectar, no máximo, duas portas do iniciador de FC ONTAP a uma única porta de destino no storage array.
+
+A melhor prática para zoneamento é ter cada par de portas iniciador-destino FC em uma zona separada (1:1).
+
+
+
+== Porta de destino compartilhada conetada a várias portas do iniciador
+
+A ilustração a seguir mostra conexões e zoneamento para o compartilhamento de uma porta de destino com várias portas do iniciador FC em diferentes sistemas ONTAP.
+
+As linhas sólidas na ilustração a seguir mostram as conexões das portas do iniciador FC no sistema VS1 e as linhas tracejadas mostram as conexões das portas do iniciador FC no sistema VS2.
+
+image::../media/shared_target_ports.gif[As conexões e o zoneamento para a configuração da porta de destino compartilhada são descritos no texto ao redor.]
+
+A tabela a seguir mostra as definições de zoneamento do 1:1 para o exemplo de uma porta de destino compartilhando duas portas do iniciador FC de controladores em um par de HA:
+
+|===
+| Zona | Sistema ONTAP e porta do iniciador FC | Storage array 
+
+
+ a| 
+*Switch 1*
+
+
+
+ a| 
+z1
+| vs1:0a | Controlador 1: Porta 1A 
+
+
+ a| 
+z3
+| vs2:0a |  
+
+
+ a| 
+*Switch 2*
+
+
+
+ a| 
+z2
+| vs1:0c | Controlador 2: Porta 2A 
+
+
+ a| 
+z4
+| vs2:0c |  
+|===

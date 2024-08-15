@@ -1,0 +1,27 @@
+---
+permalink: install/concept_how_fc_initiator_ports_are_labeled.html 
+sidebar: sidebar 
+keywords: how, fc initiator, ports, labeled 
+summary: Todas as portas do iniciador de FC em sistemas ONTAP são identificadas por um número e uma letra. A etiquetagem difere dependendo se as portas estão na placa-mãe ou nas placas nos slots de expansão. 
+---
+= Como as portas do iniciador FC são marcadas
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Todas as portas do iniciador de FC em sistemas ONTAP são identificadas por um número e uma letra. A etiquetagem difere dependendo se as portas estão na placa-mãe ou nas placas nos slots de expansão.
+
+* Numeração de portas na placa-mãe
++
+As portas estão numeradas de 0a, 0b, 0C, 0d...
+
+* Numeração de portas em cartões de expansão
++
+As portas são numeradas de acordo com o slot no qual a placa de expansão está instalada. Um cartão no slot 3 rende as portas 3A e 3B.
+
++
+As portas do iniciador FC são identificadas como 1 e 2. No entanto, o software refere-se a eles como A e B. você vê esses rótulos na interface do usuário e nas mensagens do sistema exibidas no console.
+
+

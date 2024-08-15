@@ -1,0 +1,36 @@
+---
+permalink: implement-third-party/concept_requirements_for_formatting_array_luns.html 
+sidebar: sidebar 
+keywords: requirements, formatting, array, luns 
+summary: Você pode executar diferentes tipos de formatação de LUN de matriz. Cada tipo afeta a disponibilidade de LUNs ou de todo o storage array. 
+---
+= Requisitos para a formatação de LUNs de array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode executar diferentes tipos de formatação de LUN de matriz. Cada tipo afeta a disponibilidade de LUNs ou de todo o storage array.
+
+Se você precisar apresentar um novo LUN ao sistema ONTAP imediatamente, você deve usar a formatação rápida. Se você planeja apresentar LUNs ao sistema ONTAP no futuro, a formatação rápida é recomendada, mas a formatação on-line é aceitável.
+
+A formatação rápida é recomendada porque a formatação on-line e off-line atrasam a descoberta do disco até que a formatação LUN seja concluída, conforme descrito na lista a seguir:
+
+* A formatação on-line leva o LUN de matriz que está sendo formatado completamente offline, e o LUN de array não responde a nenhum comando SCSI.
++
+A formatação é realizada em um LUN de matriz de cada vez até que todos os LUNs de matriz sejam formatados.
+
+* A formatação off-line coloca todo o storage array off-line e o storage array não responde a nenhum comando SCSI.
++
+Os LUNs da matriz são formatados seis de cada vez por controlador até que a formatação seja concluída.
+
++
+O storage array não responde até que toda a formatação esteja concluída.
+
+* Se você estiver criando LUNs de array (para qualquer host) após a configuração inicial do sistema ONTAP e estiver usando a formatação off-line, o sistema será exibido em pânico.
++
+Quaisquer LUNs de array mapeados para o sistema ONTAP, incluindo LUNs de array no volume raiz, ficam indisponíveis até que a formatação seja concluída.
+
+* A formatação on-line e rápida de LUNs para outros hosts não afeta o sistema ONTAP.
+

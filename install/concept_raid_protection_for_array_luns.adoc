@@ -1,0 +1,29 @@
+---
+permalink: install/concept_raid_protection_for_array_luns.html 
+sidebar: sidebar 
+keywords: raid, protection, array, luns 
+summary: Os storage arrays fornecem proteção RAID para os LUNs de storage que eles disponibilizam para o ONTAP. O ONTAP não fornece proteção RAID. 
+---
+= Proteção RAID para LUNs de array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os storage arrays fornecem proteção RAID para os LUNs de storage que eles disponibilizam para o ONTAP. O ONTAP não fornece proteção RAID.
+
+O ONTAP usa RAID0 (striping) para LUNs de array. O ONTAP oferece suporte a vários tipos de RAID nos storage arrays, exceto o RAID0 porque o RAID0 não fornece proteção de armazenamento.
+
+Ao criar _RAID Groups_ em storages de armazenamento, você precisa seguir as práticas recomendadas do fornecedor de storage array para garantir que haja um nível adequado de proteção no storage array de armazenamento para que a falha do disco não resulte em perda de dados ou perda de acesso aos dados.
+
+[NOTE]
+====
+* Um _RAID Group_ em um storage array é o arranjo de discos que juntos formam o nível RAID definido.
++
+Cada grupo RAID suporta apenas um tipo RAID. O número de discos selecionados para um grupo RAID determina o tipo de RAID suportado por um grupo RAID específico. Diferentes fornecedores de storage array usam termos diferentes para descrever essa entidade: Grupos RAID, grupos de paridade, grupos de discos, grupos RAID de paridade e outros termos.
+
+* O ONTAP dá suporte a RAID4 e RAID-DP em compartimentos de disco nativos, mas dá suporte a apenas RAID0 LUNs de array.
+
+
+====

@@ -1,0 +1,20 @@
+---
+permalink: install/concept_supported_methods_for_connecting_a_v_series_system_to_a_storage_array.html 
+sidebar: sidebar 
+keywords: supported, methods, connect, ontap, system, storage, array 
+summary: Você pode conectar o sistema ONTAP em uma configuração conectada à malha com storage arrays. Configurações de malha conectadas são compatíveis com sistemas autônomos e pares de HA. As configurações com conexão direta estão limitadas a alguns arrays de storage e a algumas versões do ONTAP. 
+---
+= Métodos suportados para conetar um sistema ONTAP a um storage array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode conectar o sistema ONTAP em uma configuração conectada à malha com storage arrays. Configurações de malha conectadas são compatíveis com sistemas autônomos e pares de HA. As configurações com conexão direta estão limitadas a alguns arrays de storage e a algumas versões do ONTAP.
+
+A Matriz de interoperabilidade contém informações sobre os métodos de conexão suportados para matrizes de armazenamento e plataformas específicas que executam o ONTAP.
+
+*Informações relacionadas*
+
+https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"]

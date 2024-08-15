@@ -1,0 +1,28 @@
+---
+permalink: install/concept_how_array_luns_become_available_for_ontap_storage_use.html 
+sidebar: sidebar 
+keywords: how, array, luns, available, ontap, storage, use 
+summary: Um sistema ONTAP não pode usar um LUN de array apresentado a ele até que o ONTAP tenha sido configurado para usar o LUN de array. 
+---
+= Como os LUNs de array se tornam disponíveis para uso no storage ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Um sistema ONTAP não pode usar um LUN de array apresentado a ele até que o ONTAP tenha sido configurado para usar o LUN de array.
+
+Embora o administrador do storage array torne um LUN de array acessível ao ONTAP, o ONTAP não pode usar o LUN de array para armazenamento até que ambas as tarefas a seguir sejam concluídas:
+
+. Um sistema ONTAP (licenciado para usar LUNs de array) deve ser atribuído para ser o _proprietário_ do LUN de array.
+. O LUN de array deve ser adicionado a um agregado.
+
+
+Quando você atribui um LUN de array a um sistema ONTAP, o ONTAP grava dados no LUN de array para identificar o sistema atribuído como o proprietário do LUN de array. Essa relação lógica é chamada de _propriedade do disco_.
+
+Quando você atribui um LUN de array a um sistema ONTAP, ele se torna um LUN sobressalente de propriedade desse sistema e não está mais disponível para qualquer outro sistema ONTAP.
+
+Um LUN de matriz sobressalente não pode ser usado para armazenamento até que você o adicione a um agregado. Depois disso, o ONTAP garante que somente o proprietário do LUN de array pode gravar dados e ler dados do LUN.
+
+Em um par de HA, ambos os nós precisam ser capazes de visualizar o mesmo storage, mas apenas um nó no par é o proprietário do LUN de array. O nó do parceiro assume o acesso de leitura/gravação a um LUN de array em caso de falha do nó proprietário. O nó proprietário original retoma a propriedade após o problema que causou a indisponibilidade do nó ser corrigido.

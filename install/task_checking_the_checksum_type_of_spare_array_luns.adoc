@@ -1,0 +1,33 @@
+---
+permalink: install/task_checking_the_checksum_type_of_spare_array_luns.html 
+sidebar: sidebar 
+keywords: check, checksum, type, spare, array, luns 
+summary: Se você pretende adicionar um LUN de matriz sobressalente a um agregado especificando seu nome, você precisa garantir que o tipo de checksum do LUN de matriz que você deseja adicionar seja o mesmo que o tipo de checksum agregado. 
+---
+= Verificação do tipo de checksum de LUNs de matriz sobressalente
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se você pretende adicionar um LUN de matriz sobressalente a um agregado especificando seu nome, você precisa garantir que o tipo de checksum do LUN de matriz que você deseja adicionar seja o mesmo que o tipo de checksum agregado.
+
+Não é possível misturar LUNs de array de diferentes tipos de checksum em um agregado LUN de array. O tipo de checksum do agregado e o tipo de checksum dos LUNs de array adicionados a ele devem ser os mesmos.
+
+Se você especificar um número de LUNs de array sobressalente a serem adicionados a um agregado, por padrão, o ONTAP selecionará LUNs de array do mesmo tipo de checksum que o agregado.
+
+[NOTE]
+====
+O tipo de checksum de todos os agregados recém-criados usando LUNS de array de checksum zoneados é _Advanced zoned checksum_ (AZCS). O tipo de checksum zoneado continua a ser suportado para agregados zoneados existentes. Os LUNs de array sobressalente de checksum zoneado adicionados a um agregado de checksum zoneado existente continuam a ser LUNs de array de checksum zoneado. LUNs de array sobressalente de checksum por zona adicionados a um agregado do tipo de checksum AZCS usam o esquema de checksum AZCS para gerenciar somas de verificação.
+
+====
+.Passo
+. Verifique o tipo de checksum dos LUNs do array sobressalente inserindo o seguinte comando:
++
+`storage disk show -fields checksum-compatibility -container-type spare`
+
++
+Você pode adicionar um LUN de array de checksum de bloco a um agregado de soma de verificação de bloco e um LUN de matriz zoneada a um agregado de soma de verificação zoneada _avançada_ (AZCS).
+
+

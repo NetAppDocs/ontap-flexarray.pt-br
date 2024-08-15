@@ -1,0 +1,40 @@
+---
+permalink: install/concept_characteristics_of_checksum_types_that_ontap_supports.html 
+sidebar: sidebar 
+keywords: characteristics, checksum, types, ontap, supports, block, advanced, zoned 
+summary: 'O ONTAP dá suporte ao tipo de checksum de bloco (BCS) e ao tipo avançado de checksum zoneado (AZCS) para LUNs, discos e agregados de array.' 
+---
+= Caraterísticas dos tipos de checksum compatíveis com o ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O ONTAP dá suporte ao tipo de checksum de bloco (BCS) e ao tipo avançado de checksum zoneado (AZCS) para LUNs, discos e agregados de array.
+
+O tipo de checksum atribuído a um LUN de array no ONTAP pode afetar o desempenho ou o espaço utilizável de um LUN de array. Portanto, o número e o tamanho dos LUNs de storage de que você precisa podem ser afetados dependendo do tipo de checksum que você atribui aos LUNs de storage.
+
+
+
+== Soma de verificação do bloco (BCS)
+
+BCS é o tipo de checksum padrão e recomendado para LUNs de array. O BCS fornece melhor desempenho para LUNs de array do que o AZCS.
+
+O BCS tem um impactos maior no espaço utilizável em um array LUN do que o AZCS. O BCS usa 12,5% do espaço utilizável em um LUN de array.
+
+
+
+== Soma de verificação avançada zoneada (AZCS)
+
+AZCS é uma alternativa ao BCS. O impactos do AZCS no espaço utilizável em um LUN de array é menor do que com o BCS; o AZCS usa 1,56% da capacidade do dispositivo. No entanto, você deve pesar a necessidade de mais espaço utilizável em relação ao desempenho. O AZCS às vezes pode causar problemas de desempenho para LUNs de array.
+
+O AZCS não é recomendado para LUNs de array para workloads aleatórios de alto desempenho. No entanto, você pode usar o AZCS com LUNs de array para DR, arquivamento ou workloads semelhantes.
+
+Não há impactos no desempenho do AZCS em discos nativos.
+
+As diretrizes para os tipos de checksum diferem de acordo com o tamanho e o tipo do disco. Consulte _TR3838 Storage Subsystem Configuration Guide_ para obter mais informações.
+
+*Informações relacionadas*
+
+https://www.netapp.com/pdf.html?item=/media/19675-tr-3838.pdf["Relatório técnico da NetApp 3838: Guia de configuração do subsistema de armazenamento"^]

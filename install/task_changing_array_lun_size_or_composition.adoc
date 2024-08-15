@@ -1,0 +1,36 @@
+---
+permalink: install/task_changing_array_lun_size_or_composition.html 
+sidebar: sidebar 
+keywords: change, array, lun, size, composition 
+summary: A reconfiguração do tamanho ou da composição de um LUN de array deve ser feita no storage array. Se um LUN de array já tiver sido atribuído a um sistema ONTAP, você deve usar o ONTAP para alterar o estado do LUN de array para não utilizado antes que o administrador do storage possa reconfigurá-lo. 
+---
+= Alterar o tamanho ou a composição do LUN do array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A reconfiguração do tamanho ou da composição de um LUN de array deve ser feita no storage array. Se um LUN de array já tiver sido atribuído a um sistema ONTAP, você deve usar o ONTAP para alterar o estado do LUN de array para não utilizado antes que o administrador do storage possa reconfigurá-lo.
+
+*O que você vai precisar*
+
+O LUN de array deve ser um LUN de array sobressalente antes de poder alterar o seu estado para não utilizado.
+
+.Passos
+. No sistema ONTAP, digite o seguinte comando para remover as informações de propriedade: `storage disk removeowner  -disk arrayLUNname`
+. No storage de armazenamento, execute as seguintes etapas:
++
+.. Desmapeie (desprenda) o LUN de array dos sistemas ONTAP para que eles não possam mais ver o LUN de array.
+.. Altere o tamanho ou a composição do LUN de matriz.
+.. Se você quiser que o ONTAP use o LUN de array novamente, apresente o LUN de array aos sistemas ONTAP novamente.
++
+Nesse ponto, o LUN de array é visível para as portas do iniciador FC às quais o LUN de array foi apresentado, mas ainda não pode ser usado por nenhum sistema ONTAP.
+
+
+
+. Digite o seguinte comando no sistema ONTAP que você deseja ser o proprietário do LUN de array: `storage disk assign -disk arrayLUNname -owner nodename`
++
+Após a remoção das informações de propriedade, o LUN de array não pode ser usado por qualquer sistema ONTAP até que o LUN de array seja atribuído novamente a um sistema. Você pode deixar o LUN de array como um sobressalente ou adicioná-lo a um agregado. Você deve adicionar o LUN de array a um agregado antes que o LUN de array possa ser usado para armazenamento.
+
+

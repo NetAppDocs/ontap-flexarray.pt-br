@@ -1,0 +1,34 @@
+---
+permalink: install/reference_factors_impacting_the_required_number_of_array_luns.html 
+sidebar: sidebar 
+keywords: factors, impact, required, number, array, luns 
+summary: Ao Planejar o uso de LUNs de array pela ONTAP, você deve considerar fatores como tamanho de LUN de array, sobrecarga de ONTAP e tipo de checksum que afetam o número de LUNs de array necessários no ambiente ONTAP. 
+---
+= Fatores que afetam o número necessário de LUNs de array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ao Planejar o uso de LUNs de array pela ONTAP, você deve considerar fatores como tamanho de LUN de array, sobrecarga de ONTAP e tipo de checksum que afetam o número de LUNs de array necessários no ambiente ONTAP.
+
+Você deve considerar o seguinte ao determinar o número necessário de LUNs de array:
+
+* Quanto menores os LUNs do array, mais LUNs você precisa para o storage.
++
+Idealmente, é recomendável criar um LUN de matriz grande a partir de um determinado grupo RAID de matriz de armazenamento.
+
+* Os limites de dispositivo definem o número máximo de discos e LUNs de matriz que podem ser atribuídos a um sistema ONTAP.
++
+O _Hardware Universe_ contém informações sobre os limites do dispositivo.
+
+* Quanto mais espaço utilizável em um LUN de array, menos LUNs de array são necessários.
++
+A quantidade de espaço utilizável em um LUN de array é determinada pelo espaço necessário pelo ONTAP, pelo tipo de checksum e por fatores adicionais, como o espaço necessário para reservas opcionais de Snapshot.
+
+* Diferentes aplicações geram cargas diferentes.
++
+Ao determinar a atribuição de LUNs de array a sistemas ONTAP, você deve considerar para que o storage será usado e o número de solicitações que provavelmente serão geradas por diferentes aplicativos.
+
+

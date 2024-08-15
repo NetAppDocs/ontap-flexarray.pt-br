@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/concept_requirement_for_8_gb_array_port_initialization.html 
+sidebar: sidebar 
+keywords: requirement, 8-Gb array, port, initialization 
+summary: 'Em uma malha Fibre Channel (FC) típica, as portas do storage array são inicializadas como portas N (portas de nó) e suas portas de switch correspondentes são inicializadas como portas F (portas de malha). Em alguns casos, essas portas F podem ficar offline e retomar a operação como portas L (portas de loop), resultando em erros de malha.' 
+---
+= Requisito para a inicialização da porta de matriz de 8 GB
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Em uma malha Fibre Channel (FC) típica, as portas do storage array são inicializadas como portas N (portas de nó) e suas portas de switch correspondentes são inicializadas como portas F (portas de malha). Em alguns casos, essas portas F podem ficar offline e retomar a operação como portas L (portas de loop), resultando em erros de malha.
+
+Esse comportamento é causado por problemas de negociação automática de topologia no switch Brocade.
+
+Para garantir que as portas do switch sejam sempre inicializadas como portas F, você deve executar o `portcfggport` ``<portnumber> 1` comando nas portas do switch Brocade que estão conetadas a matrizes de armazenamento. Você deve executar este comando quando você começar a configurar o sistema para evitar esse problema, e você deve corrigir o problema se ele ocorrer.
+
+Para promover a eficiência na malha como um todo, você também pode usar esta solução alternativa em quaisquer portas Brocade conetadas às portas do iniciador ONTAP.

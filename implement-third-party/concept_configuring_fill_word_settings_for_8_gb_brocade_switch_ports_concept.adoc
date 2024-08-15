@@ -1,0 +1,41 @@
+---
+permalink: implement-third-party/concept_configuring_fill_word_settings_for_8_gb_brocade_switch_ports_concept.html 
+sidebar: sidebar 
+keywords: required fill word, settings, 8 gb, brocade, switch, ports 
+summary: Se você estiver usando switches Brocade de 8 GB com a versão de firmware FOS 6.3.1 ou posterior em seu ambiente de armazenamento, verifique se as configurações de palavras de preenchimento apropriadas estão configuradas nas portas do switch conetadas aos sistemas ONTAP e se as portas do switch estão conetadas a matrizes de armazenamento. Fornecer palavras de preenchimento incorretas pode levar a falhas de inicialização do link nas portas do switch. 
+---
+= Configurações de palavras de preenchimento necessárias para portas de switch Brocade de 8 GB
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se você estiver usando switches Brocade de 8 GB com a versão de firmware FOS 6.3.1 ou posterior em seu ambiente de armazenamento, verifique se as configurações de palavras de preenchimento apropriadas estão configuradas nas portas do switch conetadas aos sistemas ONTAP e se as portas do switch estão conetadas a matrizes de armazenamento. Fornecer palavras de preenchimento incorretas pode levar a falhas de inicialização do link nas portas do switch.
+
+Para sistemas ONTAP, você deve definir a palavra de preenchimento nas portas de switch correspondentes para 3.
+
+Para storages de armazenamento, você deve definir a palavra de preenchimento de acordo com os seguintes valores recomendados, usando a documentação do switch Brocade para obter instruções:
+
+[cols="2*"]
+|===
+| Storage array | Preencha o valor da palavra nas portas do switch Brocade 
+
+
+ a| 
+Hitachi
+| 2 
+
+
+ a| 
+HP XP
+|  
+
+
+ a| 
+Todos os outros storage arrays compatíveis com sistemas Data ONTAP
+| 3 
+|===
+*Informações relacionadas*
+
+https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"]

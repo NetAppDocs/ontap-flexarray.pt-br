@@ -1,0 +1,63 @@
+---
+permalink: install/concept_planning_summary_for_a_v_series_system_using_native_disks.html 
+sidebar: sidebar 
+keywords: plan, summary, v-series, system, native, disks, additional, considerations, setup, array, luns 
+summary: É possível instalar compartimentos de disco nativos em sistemas V-Series novos ou existentes. No entanto, você deve considerar alguns fatores adicionais se planeja instalar compartimentos de disco nativos em sistemas série V, em comparação com a instalação dos compartimentos de disco em sistemas FAS. 
+---
+= Resumo de Planejamento de um sistema V-Series usando discos nativos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+É possível instalar compartimentos de disco nativos em sistemas V-Series novos ou existentes. No entanto, você deve considerar alguns fatores adicionais se planeja instalar compartimentos de disco nativos em sistemas série V, em comparação com a instalação dos compartimentos de disco em sistemas FAS.
+
+
+
+== Considerações de Planejamento adicionais para configuração básica em sistemas V-Series com discos
+
+Você deve considerar o seguinte ao determinar os requisitos básicos de instalação e configuração para o seu sistema V-Series que usa discos nativos:
+
+* Se o sistema V-Series for solicitado com compartimentos de disco, a fábrica configura o volume raiz e instala licenças e software ONTAP (assim como acontece com os sistemas FAS).
+* Se o sistema V-Series não for encomendado com compartimentos de disco, você deve Planejar instalar o software ONTAP e as licenças apropriadas.
+* O ONTAP atribui automaticamente propriedade a discos nativos conetados ao sistema Série V.
+
+
+
+
+== Considerações adicionais de Planejamento se o sistema V-Series usar discos e LUNs de array
+
+A tabela a seguir resume considerações adicionais de Planejamento e a localização das informações para ajudá-lo em cada tarefa.
+
+|===
+| Consideração de Planejamento | Onde encontrar diretrizes 
+
+
+ a| 
+Localização do volume raiz
+ a| 
+xref:concept_location_of_the_root_volume.adoc[Localização do volume raiz]
+
+
+
+ a| 
+Quantos discos e LUNs combinados podem ser atribuídos sem exceder o limite máximo suportado para o sistema V-Series
+ a| 
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+
+ a| 
+Utilização da porta do iniciador de FC
+ a| 
+xref:concept_requirements_for_v_series_fc_initiator_port_usage.adoc[Requisitos para o uso da porta do iniciador FC]
+
+
+
+ a| 
+O tipo de dados que devem residir nos discos e o tipo de dados que devem residir nos LUNs de array
+ a| 
+Você precisa avaliar o tipo de dados que precisa ser gerenciado e decidir se os dados podem residir em discos nativos ou LUNs de array.
+
+|===

@@ -1,0 +1,39 @@
+---
+permalink: install/concept_valid_pathing_standalone_system_with_a_single_2_port_array_lun_group.html 
+sidebar: sidebar 
+keywords: valid, path, stand-alone, system, single, 2-port, array, lun, group 
+summary: Um sistema autônomo conectado à malha com um único grupo LUN de array de 2 portas é compatível com a maioria dos storage arrays para todas as versões do ONTAP. 
+---
+= Pathing válido: Sistema autônomo com um único grupo LUN de matriz de 2 portas
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Um sistema autônomo conectado à malha com um único grupo LUN de array de 2 portas é compatível com a maioria dos storage arrays para todas as versões do ONTAP.
+
+[NOTE]
+====
+Arrays de armazenamento diferentes, mesmo aqueles do mesmo fornecedor, podem rotular as portas de forma diferente das mostradas no exemplo. No storage array, você precisa garantir que as portas selecionadas estejam em controladores alternativos.
+
+====
+A ilustração a seguir mostra um único grupo LUN de matriz de 2 portas com um sistema ONTAP autônomo:
+
+image::../media/one_standalone_2_port_array_lun_group_array_port_labels.gif[Em uma única configuração de grupo LUN de matriz de 2 portas com um sistema autônomo]
+
+Ao validar sua instalação, você pode verificar a saída do comando no exemplo abaixo para verificar se o número de grupos LUN é o que você pretendia e se há caminhos redundantes.
+
+.Exemplo
+O exemplo a seguir mostra a `storage array config show` saída esperada para a configuração ilustrada - um único grupo LUN (grupo LUN 0) com dois caminhos redundantes para cada LUN de matriz. (Os caminhos redundantes na saída que correspondem à ilustração são mostrados nos nomes das portas de destino do array 20**1A**00a0b80fee04 e 20**2A**00a0b80fee0420.)
+
+[listing]
+----
+
+vs1::> storage array config show
+             LUN   LUN
+Node         Group Count     Array Name    Array Target Port   Initiator
+------------ ----- ----- ----------------- ------------------- ----------
+vs1           0    50        DGC_RAID5_1	 201A00a0b80fee04     0a
+                                             202A00a0b80fee04     0h
+----

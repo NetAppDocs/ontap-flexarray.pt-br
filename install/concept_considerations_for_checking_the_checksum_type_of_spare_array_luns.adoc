@@ -1,0 +1,28 @@
+---
+permalink: install/concept_considerations_for_checking_the_checksum_type_of_spare_array_luns.html 
+sidebar: sidebar 
+keywords: checksum, type, considerations, add, spare, array, luns, aggregates 
+summary: Você deve considerar certas considerações relacionadas aos tipos de checksum ao adicionar LUNs de storage sobressalentes a agregados. Por exemplo, se você planeja adicionar um LUN de matriz sobressalente a um agregado especificando seu nome, você deve garantir que o LUN de matriz e o agregado tenham o mesmo tipo de checksum. 
+---
+= Considerações sobre o tipo de checksum para adicionar LUNs de array sobressalente a agregados
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve considerar certas considerações relacionadas aos tipos de checksum ao adicionar LUNs de storage sobressalentes a agregados. Por exemplo, se você planeja adicionar um LUN de matriz sobressalente a um agregado especificando seu nome, você deve garantir que o LUN de matriz e o agregado tenham o mesmo tipo de checksum.
+
+A seguir estão algumas considerações sobre o tipo de checksum para adicionar LUNs de storage sobressalentes a agregados:
+
+* Não é possível misturar LUNs de array de diferentes tipos de checksum em um agregado LUN de array.
+* Se você especificar um número de LUNs de array sobressalente a serem adicionados a um agregado, o ONTAP por padrão selecionará os LUNs de array do mesmo tipo de checksum que o agregado.
+* LUNs de array do tipo de checksum zoneado quando adicionados a um agregado de checksum zoneado existente continuam a ser LUNs de array de checksum zoneado.
+* LUNs de matriz de reserva de soma de verificação zoneada adicionados a um agregado de tipo AZCS (Advanced Zone Checksum) usam o esquema de soma de verificação AZCS.
+
+
+[NOTE]
+====
+Você pode verificar o tipo de checksum dos LUNs de matriz de reserva usando o `storage disk show` comando. Para obter mais informações sobre o comando, consulte as páginas de manual.
+
+====

@@ -1,0 +1,18 @@
+---
+permalink: install/concept_required_number_of_paths_to_an_array_lun.html 
+sidebar: sidebar 
+keywords: required, number, paths, array, lun 
+summary: O ONTAP dá suporte a quatro ou dois caminhos para LUNs de array. 
+---
+= Número necessário de caminhos para um LUN de matriz
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O ONTAP dá suporte a quatro ou dois caminhos para LUNs de array.
+
+O ONTAP espera e exige que um storage array forneça acesso a um LUN de array específico em pelo menos duas portas de storage arrays redundantes, ou seja, por meio de pelo menos dois caminhos redundantes.
+
+Certifique-se de que as portas no storage array que você selecionar para acessar um determinado LUN são de componentes diferentes, de modo a evitar um único ponto de falha, por exemplo, de controladores alternativos, clusters ou gabinetes. O motivo é que você não quer que todo o acesso a um LUN de matriz seja perdido se um componente falhar.

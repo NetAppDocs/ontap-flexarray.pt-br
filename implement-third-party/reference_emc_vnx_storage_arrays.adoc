@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_emc_vnx_storage_arrays.html 
+sidebar: sidebar 
+keywords: emc, vnx, storage, arrays 
+summary: Você deve atender a requisitos específicos ao configurar matrizes de armazenamento EMC VNX para trabalhar com sistemas ONTAP que usam LUNs de storage. Esses requisitos incluem a configuração de parâmetros de configuração em seus storages de armazenamento e a implantação de apenas configurações compatíveis. 
+---
+= Matrizes de armazenamento EMC VNX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve atender a requisitos específicos ao configurar matrizes de armazenamento EMC VNX para trabalhar com sistemas ONTAP que usam LUNs de storage. Esses requisitos incluem a configuração de parâmetros de configuração em seus storages de armazenamento e a implantação de apenas configurações compatíveis.

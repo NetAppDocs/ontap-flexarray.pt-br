@@ -1,0 +1,27 @@
+---
+permalink: install/concept_planning_for_ontap_use_of_array_luns.html 
+sidebar: sidebar 
+keywords: plan, ontap, use, array, luns 
+summary: Para que o ONTAP use LUNs de array, primeiro um administrador de storage precisa criar LUNs no storage array e disponibilizá-los para o ONTAP. Em seguida, o administrador do ONTAP deve configurar o ONTAP para usar os LUNs do array que o storage array disponibilizou. 
+---
+= Planejamento do uso de LUNs de array pela ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Para que o ONTAP use LUNs de array, primeiro um administrador de storage precisa criar LUNs no storage array e disponibilizá-los para o ONTAP. Em seguida, o administrador do ONTAP deve configurar o ONTAP para usar os LUNs do array que o storage array disponibilizou.
+
+O Planejamento de como provisionar LUNs de array para uso no ONTAP inclui as seguintes considerações:
+
+* Os tipos de LUNs de array compatíveis com o ONTAP
+* ONTAP tamanho mínimo e máximo de LUN de array
+* O número de LUNs de array que você precisa
+
+
+[NOTE]
+====
+O ONTAP considera um LUN de array como um disco virtual.
+
+====

@@ -1,0 +1,39 @@
+---
+permalink: install/concept_requirement_for_redundant_setup_of_components_in_a_path.html 
+sidebar: sidebar 
+keywords: requirements, redundant, setup, components, path, fc switch, ontap, systems, storage, array 
+summary: 'Os sistemas ONTAP devem se conectar ao storage array por meio de uma rede Fibre Channel (FC) redundante. Duas redes FC são necessárias para se proteger contra falha de conexão e para que as portas de malha ou switches possam ser offline para atualizações e substituições sem afetar os sistemas ONTAP.' 
+---
+= Requisitos para configuração redundante de componentes em um caminho
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os sistemas ONTAP devem se conectar ao storage array por meio de uma rede Fibre Channel (FC) redundante. Duas redes FC são necessárias para se proteger contra falha de conexão e para que as portas de malha ou switches possam ser offline para atualizações e substituições sem afetar os sistemas ONTAP.
+
+
+
+== Requisitos de redundância de sistemas ONTAP
+
+* É necessário anexar cada conexão a uma porta de iniciador de FC diferente no par de portas nos sistemas ONTAP.
+* Cada porta do iniciador FC no mesmo par de portas do iniciador FC deve estar em um barramento diferente.
+
+
+
+
+== Requisitos de redundância de switch FC
+
+* Você deve usar switches redundantes.
+
+
+
+
+== Requisitos de redundância de storage array
+
+Certifique-se de que as portas no storage array que você selecionar para acessar um determinado LUN são de componentes diferentes, de modo a evitar um único ponto de falha, por exemplo, de controladores alternativos, clusters ou gabinetes. O motivo é que você não quer que todo o acesso a um LUN de matriz seja perdido se um componente falhar.
+
+A ilustração a seguir mostra a seleção correta e incorreta da porta da matriz de armazenamento para redundância. A configuração do caminho no exemplo à esquerda está correta porque os caminhos para o LUN de matriz são redundantes - cada conexão é para uma porta em um controlador diferente no storage array.
+
+image::../media/redundant_array_port_selection.gif[Os caminhos para um LUN de matriz devem ser redundantes. Está incorreto que ambos os caminhos acessem o mesmo controlador de storage array.]

@@ -1,0 +1,21 @@
+---
+permalink: install/concept_advantages_of_four_paths_to_an_array_lun_clustered_data_ontap_8_1_and_later.html 
+sidebar: sidebar 
+keywords: advantages, four, paths, array, lun 
+summary: Ao Planejar o número de caminhos para um LUN de array para ONTAP, você precisa considerar se deseja configurar dois ou quatro caminhos. 
+---
+= Vantagens de quatro caminhos para um LUN de array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ao Planejar o número de caminhos para um LUN de array para ONTAP, você precisa considerar se deseja configurar dois ou quatro caminhos.
+
+As vantagens de configurar quatro caminhos para um LUN de array incluem o seguinte:
+
+* Se um switch falhar, ambos os controladores de storage array ainda estarão disponíveis.
+* Se um controlador de storage array falhar, ambos os switches ainda estarão disponíveis.
+* O desempenho pode ser melhorado porque o balanceamento de carga é superior a quatro caminhos em vez de dois.
+

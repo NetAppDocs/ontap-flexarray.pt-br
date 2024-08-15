@@ -1,0 +1,14 @@
+---
+permalink: install/concept_invalid_path_setup_examples.html 
+sidebar: sidebar 
+keywords: invalid, path, setup, examples 
+summary: A configuração do caminho pode ser inválida porque os caminhos para um LUN de matriz não são redundantes ou o número de caminhos para um LUN de matriz não atende aos requisitos do ONTAP. 
+---
+= Exemplos de configuração de caminho inválidos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A configuração do caminho pode ser inválida porque os caminhos para um LUN de matriz não são redundantes ou o número de caminhos para um LUN de matriz não atende aos requisitos do ONTAP.

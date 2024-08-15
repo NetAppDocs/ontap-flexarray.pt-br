@@ -1,0 +1,47 @@
+---
+permalink: install/concept_stages_of_implementation_for_a_system_using_array_luns.html 
+sidebar: sidebar 
+keywords: stages, implementation, system, use, array, luns, back end, front end 
+summary: 'A implementação de uma configuração na qual o sistema usa LUNs de um storage array tem duas etapas: Uma implementação de back-end e uma implementação de front-end. É útil ao Planejar sua configuração entender as tarefas de alto nível em cada etapa.' 
+---
+= Etapas de implementação de um sistema usando LUNs de array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A implementação de uma configuração na qual o sistema usa LUNs de um storage array tem duas etapas: Uma implementação de back-end e uma implementação de front-end. É útil ao Planejar sua configuração entender as tarefas de alto nível em cada etapa.
+
+
+
+== Etapa 1: Implementação de back-end
+
+A configuração da implementação de back-end inclui todas as tarefas necessárias para configurar o sistema ONTAP com um storage array, até o ponto em que você pode instalar o software ONTAP.
+
+As tarefas para configurar a implementação de back-end incluem o seguinte:
+
+. Criação e formatação de LUNs de array
+. Atribuindo portas
+. Cabeamento
+. Interrutores de zoneamento (se aplicável)
+. No ONTAP, atribuindo LUNs de array específicos a um sistema ONTAP
+. No ONTAP, fornecendo informações para configurar um sistema ONTAP na rede
+. Instalar o software ONTAP
+
+
+Se um sistema ONTAP for solicitado com compartimentos de disco, o software ONTAP será instalado de fábrica. Em tal configuração, você não precisa criar o volume raiz e instalar licenças e software ONTAP.
+
+Se um sistema ONTAP for encomendado sem compartimentos de disco, você precisará configurar o ONTAP antes de configurar o cluster.
+
+
+
+== Etapa 2: Implementação front-end
+
+As tarefas para configurar a implementação front-end são as mesmas que para um sistema que usa discos, incluindo o seguinte:
+
+* Configuração do sistema ONTAP para todos os protocolos (nas, FC ou ambos)
+* Configuração de recursos do ONTAP, como cópias SnapVault, SnapMirror, SnapValidator e Snapshot
+* Criação de volumes e agregados
+* Configuração de proteção de dados, incluindo despejo NDMP em fitas
+

@@ -1,0 +1,20 @@
+---
+permalink: install/concept_zoning_recommendation_for_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: zone, recommendation, configuration, storage, arrays 
+summary: 'O tipo recomendado de zoneamento para uma configuração com matrizes de armazenamento é o zoneamento 1:1. Com o zoneamento 1:1, cada zona contém uma única porta de iniciador FC e uma única porta de destino de storage array.' 
+---
+= Recomendação de zoneamento para uma configuração com matrizes de armazenamento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O tipo recomendado de zoneamento para uma configuração com matrizes de armazenamento é o zoneamento 1:1. Com o zoneamento 1:1, cada zona contém uma única porta de iniciador FC e uma única porta de destino de storage array.
+
+Os benefícios da criação de zoneamento 1:1 são os seguintes:
+
+* Você limita o número de portas sobre as quais um LUN de array específico pode ser acessado.
+* Há melhorias no tempo de descoberta e inicialização porque os sistemas ONTAP de iniciadores FC não tentam se descobrir.
+

@@ -1,0 +1,32 @@
+---
+permalink: install/concept_prerequisites_to_reconfiguring_an_array_lun_on_the_storage_array.html 
+sidebar: sidebar 
+keywords: prerequisites, reconfigure, array. lun, storage, array 
+summary: 'Se um LUN de array já tiver sido atribuído (por meio do ONTAP) a um determinado sistema ONTAP, as informações que o ONTAP escreveu para o LUN de array devem ser removidas antes que o administrador de armazenamento tente reconfigurar o LUN de array na matriz de armazenamento.' 
+---
+= Pré-requisitos para reconfigurar um LUN de matriz no storage array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se um LUN de array já tiver sido atribuído (por meio do ONTAP) a um determinado sistema ONTAP, as informações que o ONTAP escreveu para o LUN de array devem ser removidas antes que o administrador de armazenamento tente reconfigurar o LUN de array na matriz de armazenamento.
+
+Quando o storage array apresenta um LUN de array para o ONTAP, o ONTAP coleta informações sobre o LUN de array (por exemplo, seu tamanho) e grava essas informações no LUN de array. O ONTAP não pode atualizar dinamicamente as informações que ele escreveu em um LUN de array. Portanto, antes que o administrador do storage array reconfigure um LUN de array, você deve usar o ONTAP para alterar o estado do LUN de array para _unused_. O LUN de array não é utilizado da perspetiva do ONTAP.
+
+Ao alterar o estado do LUN de array para não utilizado, o ONTAP faz o seguinte:
+
+* Termina as operações de e/S para o LUN do array
+* Remove o rótulo das informações de configuração RAID e as reservas persistentes do LUN de array, o que torna o LUN de array não propriedade de qualquer sistema ONTAP
+
+
+Após esse processo terminar, nenhuma informação de ONTAP permanece no LUN de array.
+
+Você pode fazer o seguinte após o estado do LUN do array ser alterado para não utilizado:
+
+* Remova o mapeamento do LUN de array para ONTAP e disponibilize o LUN de array para outros hosts.
+* Redimensione o LUN da matriz ou altere sua composição.
+
+
+Se você quiser que o ONTAP retome o uso do LUN de array depois que seu tamanho ou composição for alterado, você deve apresentar o LUN de array novamente ao ONTAP e atribuir o LUN de array a um sistema ONTAP novamente. O ONTAP está ciente do novo tamanho ou composição do LUN de array.

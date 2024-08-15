@@ -1,0 +1,14 @@
+---
+permalink: install/concept_planning_a_port_to_port_connectivity_scheme.html 
+sidebar: sidebar 
+keywords: plan, port to port, connectivity, scheme 
+summary: O Planejamento da conectividade entre as portas do iniciador de FC em sistemas ONTAP e as portas do storage array inclui determinar como obter redundância e atender aos requisitos de número de caminhos para um LUN de array. 
+---
+= Planejamento de um esquema de conetividade porta a porta
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O Planejamento da conectividade entre as portas do iniciador de FC em sistemas ONTAP e as portas do storage array inclui determinar como obter redundância e atender aos requisitos de número de caminhos para um LUN de array.

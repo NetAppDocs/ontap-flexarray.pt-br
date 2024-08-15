@@ -1,0 +1,18 @@
+---
+permalink: implement-third-party/concept_caution_about_using_the_aclx_lun.html 
+sidebar: sidebar 
+keywords: caution, aclx, lun 
+summary: 'Nos arrays VMAX, o LUN ACLX (Access Control Logix) é criado durante a inicialização se o cliente solicitar que ACLX seja usado. O LUN ACLX não é um LUN de armazenamento, por isso não deve ser mapeado para o ONTAP.' 
+---
+= Cuidado com a utilização do LUN ACLX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nos arrays VMAX, o LUN ACLX (Access Control Logix) é criado durante a inicialização se o cliente solicitar que ACLX seja usado. O LUN ACLX não é um LUN de armazenamento, por isso não deve ser mapeado para o ONTAP.
+
+Se o LUN ACLX for mapeado para um sistema ONTAP, o ONTAP Registra uma mensagem que o LUN ACLX é menor do que o tamanho mínimo necessário e marca o LUN como falhou. O sistema ONTAP continua a funcionar normalmente depois de registar esta mensagem de erro, mas não pode utilizar o LUN.
+
+O LUN ACLX deve ser desmapeado das portas do diretor front-end no sistema ONTAP.

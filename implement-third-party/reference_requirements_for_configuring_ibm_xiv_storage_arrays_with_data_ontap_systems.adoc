@@ -1,0 +1,45 @@
+---
+permalink: implement-third-party/reference_requirements_for_configuring_ibm_xiv_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: requirements, configuring, ibm xiv, arrays, ontap, systems, parameter, settings 
+summary: Certas configurações de parâmetros são necessárias no storage de armazenamento para que o storage de armazenamento funcione com sucesso com sistemas ONTAP. 
+---
+= Requisitos para configurar matrizes IBM XIV com sistemas ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Certas configurações de parâmetros são necessárias no storage de armazenamento para que o storage de armazenamento funcione com sucesso com sistemas ONTAP.
+
+
+
+== Definições dos parâmetros do sistema
+
+A tabela a seguir lista as configurações de parâmetros do sistema para matrizes IBM XIV Gen3:
+
+|===
+| Parâmetro | Definição 
+
+
+ a| 
+`Type`
+ a| 
+Padrão
+
+
+
+ a| 
+`Host`
+ a| 
+Nome de host fornecido pelo usuário
+
+
+
+ a| 
+`Cluster`
+ a| 
+Nome do cluster fornecido pelo utilizador
+
+|===

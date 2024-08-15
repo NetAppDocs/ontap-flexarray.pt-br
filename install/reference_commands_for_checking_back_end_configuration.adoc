@@ -1,0 +1,97 @@
+---
+permalink: install/reference_commands_for_checking_back_end_configuration.html 
+sidebar: sidebar 
+keywords: commands, check, back-end, configuration 
+summary: Vários comandos do ONTAP fornecem informações sobre a configuração do storage array, incluindo erros de configuração de back-end. Esses comandos são particularmente úteis durante a verificação e solução de problemas da instalação. 
+---
+= Comandos para verificar a configuração back-end
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vários comandos do ONTAP fornecem informações sobre a configuração do storage array, incluindo erros de configuração de back-end. Esses comandos são particularmente úteis durante a verificação e solução de problemas da instalação.
+
+O `storage array config show` comando é o primeiro comando a ser usado durante a verificação da instalação. É também o primeiro comando a ser usado se você notar que seu sistema não está funcionando como você espera, ou se você receber uma mensagem de erro.
+
+Os comandos que são particularmente úteis para verificação e solução de problemas de instalação são mostrados na tabela a seguir:
+
+|===
+| Comando | Descrição 
+
+
+ a| 
+`storage array config show`
+ a| 
+Fornece informações, no nível do storage array, sobre a configuração dos dispositivos back-end em uma implantação com sistemas ONTAP usando LUNs de array. Este comando mostra como os storages de armazenamento se conetam ao cluster. Se o ONTAP detetar um problema que impedisse que os sistemas ONTAP que usam LUNs de storage e arrays de storage funcionem corretamente em conjunto, `storage array config show` instrui você a executar `storage errors show` para obter detalhes sobre o erro.
+
+Este comando também é útil para verificar se a configuração está configurada como você pretendia. Por exemplo, você pode olhar para a saída para confirmar que o número de grupos LUN de matriz que você pretendia foi criado.
+
+
+
+ a| 
+`storage array show -name array_name`
+ a| 
+Exibe informações sobre todas as matrizes de armazenamento visíveis para o cluster ou sobre a matriz de armazenamento especificada. Se o número de LUNs de array apresentado exceder a capacidade do sistema, o campo de texto erro mostra o número de LUNs que o ONTAP não conseguiu detetar. Você deve observar esse problema em sistemas de baixa memória, em particular.
+
+
+
+ a| 
+`storage path quiesce`
+ a| 
+Suspende temporariamente a e/S para um LUN de array específico em um caminho específico. O caminho fica ativo novamente na reinicialização ou executando `storage path resume`o . Algumas matrizes de armazenamento requerem a interrupção de e/S por um período de tempo para remover ou mover um LUN de matriz.
+
+[NOTE]
+====
+O `storage path quiesce` comando não pode ser usado com matrizes de armazenamento IBM DS.
+
+====
+
+
+ a| 
+`storage path resume`
+ a| 
+Permite que a e/S comece a fluir novamente; este é o inverso do quiesce. O `storage path resume` comando é usado principalmente para manutenção de hardware (por exemplo, cabos ou GBIC puxa) ou após uma quiescência acidental de um caminho para um LUN de matriz ocorrer. Nem sempre é necessário executar este comando depois de executar um caminho em quietude. Por exemplo, o ONTAP pode descobrir um LUN de array recentemente mapeado.
+
+
+
+ a| 
+`storage array show`
+ a| 
+Exibe informações sobre os storage arrays visíveis para o cluster, por exemplo, nome, fornecedor, modelo e tipo de failover.
+
+
+
+ a| 
+`storage disk show`
+ a| 
+A inserção de `storage disk show` parâmetros sem mostra o seguinte para todos os discos e LUNs de matriz: O nome, tamanho utilizável, tipo de contentor, posição, agregado e proprietário. A inserção `storage disk show` com um nome de disco ou um nome de LUN de matriz como parâmetro mostra detalhes sobre um LUN de disco ou matriz individual, por exemplo, o status (atribuído ou não atribuído), o proprietário e os caminhos para o LUN de matriz. A saída é dividida em três seções: Informações sobre o LUN de array, informações sobre os caminhos para o LUN de array e quaisquer erros associados ao LUN de array.
+
+
+
+ a| 
+`storage disk show -errors _**_`
+ a| 
+A inserção `storage disk show` com o ``-errors` parâmetro fornece detalhes dos erros de configuração nos níveis de LUN de disco e array. Embora a saída do comando seja semelhante à `storage disk error show` do comando, `storage disk show -errors` fornece opções adicionais para filtrar a saída por parâmetros como nó, cluster e posição do compartimento.
+
+
+
+ a| 
+`storage disk error show`
+ a| 
+Fornece detalhes sobre erros de configuração de back-end nos níveis de LUN de disco e array. Inserir `storage disk error` show com um nome de LUN de array como parâmetro mostra detalhes sobre erros de configuração relacionados ao LUN de array especificado. Você deve corrigir esses erros antes de configurar o ONTAP para funcionar com storage arrays.
+
+
+
+ a| 
+`storage errors show`
+ a| 
+Fornece detalhes, no nível de LUN de array, sobre erros de configuração de back-end que impedem que o sistema ONTAP e o storage array operem juntos. Você deve corrigir erros identificados pelo `storage errors show` antes de configurar o ONTAP para funcionar com storage arrays.
+
+[NOTE]
+====
+O `storage errors show` comando não fornece informações sobre erros de configuração de disco. Para exibir informações sobre erros de configuração de LUN de disco e array, você pode usar o `storage disk show -errors` comando ou o `storage disk error show` comando.
+
+====
+|===

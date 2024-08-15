@@ -1,0 +1,50 @@
+---
+permalink: install/reference_an_access_control_lun_is_presented_to_ontap.html 
+sidebar: sidebar 
+keywords: access, control, lun, presented, ontap 
+summary: O ONTAP não é compatível com LUNs de array de controle de acesso. Os erros de armazenamento mostram alertas de saída se um LUN de controle de acesso estiver sendo apresentado. 
+---
+= Um LUN de controle de acesso é apresentado ao ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O ONTAP não é compatível com LUNs de array de controle de acesso. A `storage errors show` saída alerta você se um LUN de controle de acesso estiver sendo apresentado.
+
+
+
+== Erros de armazenamento mostram mensagem
+
+[listing]
+----
+
+NAME (UID): This array LUN is an access control LUN. It is not supported and should be masked off or disabled.
+----
+
+
+== Explicação
+
+O ONTAP é compatível apenas com LUNs de storage array. Quando um LUN de array, por exemplo, um LUN de controle de acesso da Série e é apresentado ao ONTAP, a `storage array config show` saída parece normal; mostra o LUN de controle de acesso em um grupo LUN, como mostra o exemplo a seguir. A mensagem de aviso na parte inferior do ecrã indica o problema. Você precisa correr `storage errors show` para descobrir que o problema é que um LUN de controle de acesso foi apresentado e qual LUN ele é.
+
+[listing]
+----
+
+mysystem1::> storage array config show
+
+          LUN     LUN
+Node      Group   Count  Array Name    Array Target Port       Initiator
+------    ------  -----  ------------ ------------------       --------
+mysystem1   0       1    NETAPP_INF_1  20:1A:00:a0:b8:0f:ee:04   0a
+                                       20:2A:00:a0:b8:0f:ee:04   0c
+
+Warning: Configuration errors were detected.  Use 'storage errors show' for detailed information.
+----
+
+
+== Resolução de problemas e resolução de problemas
+
+. Na matriz de armazenamento, desmascare o LUN de controle de acesso.
+. No ONTAP, execute `storage errors show` novamente para confirmar que o LUN de controle de acesso não está mais sendo apresentado ao ONTAP.
+

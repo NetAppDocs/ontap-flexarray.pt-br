@@ -1,0 +1,58 @@
+---
+permalink: install/reference_reasons_for_no_luns_in_the_array_lun_group.html 
+sidebar: sidebar 
+keywords: reasons, luns, array, group, host, ontap, operation, empty 
+summary: Ao validar a configuração de back-end, você deve verificar a saída da configuração de storage array para determinar se LUNs são exibidos nos grupos LUN. Quando a configuração do storage array show output não mostra LUNs em um grupo LUN de array, o ONTAP pode ver a porta de destino na malha, mas a porta de destino não apresenta LUNs de array para ONTAP. 
+---
+= Motivos para não haver LUNs no grupo LUN de array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ao validar a configuração de back-end, você deve verificar a `storage array config show` saída para determinar se LUNs são exibidos nos grupos de LUN. Quando a `storage array config show` saída não mostra LUNs em um grupo LUN de array, o ONTAP pode ver a porta de destino na malha, mas a porta de destino não está apresentando LUNs de array para o ONTAP.
+
+Há uma variedade de razões pelas quais uma porta de destino pode não apresentar LUNs de array para ONTAP (uma _porta de destino aberta_). As razões para uma porta de destino aberta podem diferir entre diferentes matrizes de armazenamento. Além disso, as maneiras de lidar com os problemas de porta de destino aberta diferem com os storage arrays. Para todos os storage arrays, a solução de problemas da causa de uma porta de destino aberta deve incluir a verificação da configuração do storage array, incluindo a configuração do grupo de hosts.
+
+Por exemplo, a causa pode ser um _grupo de host vazio_, que se apresenta ao ONTAP como uma porta de destino aberta. Com um grupo de host vazio, o grupo de host define as portas do iniciador FC e de destino, mas não lista LUNs de array (ou seja, o grupo de host está vazio).
+
+[NOTE]
+====
+A operação dos sistemas ONTAP não é afetada por um grupo de hosts vazio.
+
+====
+A ilustração a seguir representa uma situação de porta de destino de porta aberta e uma situação de grupo de host vazio. (Um sistema autônomo ONTAP é usado na ilustração para simplificar.)
+
+A porta de destino aberta é causada por IDs de LUN ausentes na definição do grupo de hosts para o controlador de armazenamento 1A. Na definição de grupo de host para o controlador de storage 1A, o iniciador FC 0b é zoneado na porta de destino e há um grupo de host definido para a porta 0b do iniciador FC, mas não há IDs de LUN no grupo de host. Como mostra a ilustração, a definição do grupo de hosts para o controlador de armazenamento 2A inclui iniciadores e LUNs.
+
+O grupo de hosts vazio é causado por LUNs de storage não serem listados na definição de grupo de hosts para os controladores de armazenamento 1B e 2B. Os iniciadores FC 0a e 0d são zoneados nas portas de destino, mas não são exibidos LUNs.
+
+image::../media/ldevs_missing_from_host_group.gif[ldevs faltando no grupo host]
+
+O exemplo a seguir mostra a `storage array config show` saída para as situações ilustradas em que o sistema ONTAP é zoneado para o storage array, mas não há LUNs nas definições do grupo host para o controlador de armazenamento 1A, resultando em uma porta de destino aberta. As controladoras 1B e 2B não têm LUNs nas respetivas definições de grupo de hosts, resultando em um grupo de hosts vazio.
+
+Na saída para as situações ilustradas, os iniciadores FC 0a, 0b e 0d não mostram LUNs no campo de contagem de LUN. Para o iniciador FC 0C, dois LUNs são mostrados no LUN group1.
+
+[listing]
+----
+cluster-1::> storage array config show
+          LUN   LUN
+Node      Group Count  Array Name       Array Target Port   Initiator
+--------- ----- -----  ------------     ------------------- ---------
+vs1
+           0     2     EMC_SYMMETRIX_1  50060480000001b0       0c
+
+           1     0     EMC_SYMMETRIX_1  50060480000001a0       0b
+
+           2     0     EMC_SYMMETRIX_1  50060480000001b1       0a
+
+                 0     EMC_SYMMETRIX_1  50060480000001a1       0d
+
+4 entries were displayed.
+----
+[NOTE]
+====
+Na saída, você pode determinar que o problema não é devido a iniciadores FC ausentes no grupo de hosts. Se os iniciadores FC estivessem em falta no grupo de hosts, o ONTAP não seria capaz de ver os grupos de LUN sem LUNs.
+
+====

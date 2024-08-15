@@ -1,0 +1,60 @@
+---
+permalink: install/reference_reasons_for_more_paths_to_an_array_lun_than_expected.html 
+sidebar: sidebar 
+keywords: reasons, paths, array, lun, expected, output, show, config, issue 
+summary: As principais razões para um caminho adicional inesperado para um LUN de array são problemas de zoneamento e muitos cabos. Três caminhos para um LUN de array não são práticas recomendadas, mas você não é obrigado a corrigir esse problema. 
+---
+= Razões para mais caminhos para um LUN de array do que o esperado
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+As principais razões para um caminho adicional inesperado para um LUN de array são problemas de zoneamento e muitos cabos. Três caminhos para um LUN de array não são práticas recomendadas, mas você não é obrigado a corrigir esse problema.
+
+
+
+== Exemplo de configuração de storage array show output
+
+O par de portas do iniciador FC no sistema ONTAP é 0a e 0C. O exemplo a seguir mostra um caminho extra, 0b, na `storage array config show` saída:
+
+[listing]
+----
+
+mysystem1::> storage array config show
+             LUN   LUN
+Node         Group Count   Array Name       Array Target Port   Initiator
+----------   ----- -----  ----------------  ------------------  ----------
+mysystem1a    1     3     HITACHI_DF600F_1  50060e80004291c0    0a
+                                            50060e80004291c1    0b
+                                                                0c
+
+3 entries were displayed.
+----
+[NOTE]
+====
+Se um iniciador `storage array config show` na saída não for precedido por uma porta de destino de matriz, o iniciador está se conetando à mesma porta de destino de matriz que o iniciador acima dele.
+
+====
+
+
+== Explicação
+
+Três caminhos dentro de um grupo LUN indicam que há um caminho extra. Para configurações do ONTAP, a prática recomendada é de dois ou quatro caminhos.
+
+Os motivos pelos quais pode haver mais caminhos do que o esperado incluem o seguinte:
+
+* Mais cabos foram conetados do que são necessários.
+* Um erro de configuração de zoneamento causou um caminho extra.
+
+
+
+
+== Resolvendo o problema
+
+Ter um caminho extra não é uma melhor prática, mas não é incorreto do ponto de vista do sistema. Você não precisa corrigir esse problema. Se você quiser corrigir o problema para se alinhar com a configuração pretendida, execute as seguintes etapas:
+
+. Verifique o cabeamento e a configuração de zoneamento para a causa e, em seguida, corrija o problema que está causando o caminho extra.
+. Depois que o problema é corrigido, execute `storage array config show` novamente para confirmar que o caminho extra foi removido.
+

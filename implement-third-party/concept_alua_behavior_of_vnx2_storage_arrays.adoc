@@ -1,0 +1,22 @@
+---
+permalink: implement-third-party/concept_alua_behavior_of_vnx2_storage_arrays.html 
+sidebar: sidebar 
+keywords: alua, behavior, vnx2, storage, arrays 
+summary: 'Embora todos os arrays EMC CLARiiON e VNX usem o modo de failover ALUA (ativo-ativo assimétrico), os storages VNX2 podem diferir em seu comportamento ALUA.' 
+---
+= Comportamento ALUA de storage arrays VNX2
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Embora todos os arrays EMC CLARiiON e VNX usem o modo de failover ALUA (ativo-ativo assimétrico), os storages VNX2 podem diferir em seu comportamento ALUA.
+
+Como todos os outros LUNs de array EMC, os LUNs de array VNX2 apresentados ao sistema ONTAP a partir de pools de discos dinâmicos usam o modo de failover ALUA. No entanto, os LUNs de array VNX2 apresentados ao sistema ONTAP a partir de grupos RAID tradicionais usam o modo de failover ativo-ativo, com todos os caminhos sendo relatados como *`AO`* (ativo otimizado). Esse comportamento dos LUNs do array muda durante certas operações, como a criação de Snapshot no array de back-end.
+
+Portanto, para manter um comportamento consistente de LUNs de array VNX2, o ONTAP trata esses LUNs como ALUA, independentemente de esses LUNs de array serem apresentados de grupos RAID tradicionais ou de pools de discos dinâmicos.
+
+Em tal situação, as solicitações de e/S para um determinado LUN VNX2 são distribuídas somente pelos caminhos relatados como estando no *`INU`estado * (em uso) e não em todos os caminhos relatados como *`AO`* (ativo-otimizado).
+
+Por exemplo, se você tiver quatro caminhos para um LUN de matriz VNX2 apresentado ao sistema ONTAP a partir de um grupo RAID tradicional, todos os caminhos são reportados como *`AO`*; no entanto, apenas dois dos caminhos estão no *`INU`estado *, enquanto os outros dois caminhos não são usados, mas estão no *`RDY`estado * (pronto).

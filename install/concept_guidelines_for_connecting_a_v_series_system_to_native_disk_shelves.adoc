@@ -1,0 +1,106 @@
+---
+permalink: install/concept_guidelines_for_connecting_a_v_series_system_to_native_disk_shelves.html 
+sidebar: sidebar 
+keywords: guidelines, connect, v-series, system, native, disk, shelves, fc initiator, ports 
+summary: Ao Planejar como conetar seu sistema V-Series a compartimentos de disco nativos, seu plano de conetividade porta a porta deve abordar redundância e outras diretrizes. 
+---
+= Diretrizes para a conexão de um sistema V-Series a compartimentos de disco nativos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ao Planejar como conetar seu sistema V-Series a compartimentos de disco nativos, seu plano de conetividade porta a porta deve abordar redundância e outras diretrizes.
+
+
+
+== Número de portas do iniciador de FC necessárias para os discos
+
+O número de portas do iniciador FC necessário para conectar um sistema V-Series a um compartimento de disco depende se o seu sistema V-Series é um sistema autônomo ou em um par de HA
+
+[cols="2*"]
+|===
+| Configuração | Número de portas do iniciador de FC 
+
+
+ a| 
+Sistema autónomo
+ a| 
+* Se você estiver usando um loop: Uma porta do iniciador FC.
+* Se você estiver conetando dois loops: Duas portas do iniciador FC, uma para cada loop.
+
+
+
+
+ a| 
+Em um par de HA
+ a| 
+* Se você estiver usando o armazenamento Multipath, duas portas do iniciador de FC para cada loop.
+* Se você não estiver usando o Multipath Storage, uma porta do iniciador de FC para cada controlador para cada loop na configuração.
+
+
+|===
+
+
+== Conexões entre um sistema da Série V e discos
+
+Você segue os mesmos processos para vincular um sistema da série V a um compartimento de disco nativo, assim como faria com um sistema FAS a um compartimento de disco nativo. Ao criar seu esquema de conetividade porta a porta, este guia e os guias de ONTAP e hardware da tabela a seguir fornecem informações sobre a configuração e o gerenciamento de discos e gavetas de disco.
+
+[cols="2*"]
+|===
+| Para obter informações sobre... | Veja... 
+
+
+ a| 
+Suporte a disco, incluindo velocidades de disco suportadas e capacidade de disco
+ a| 
+https://mysupport.netapp.com/site/global/dashboard["Suporte à NetApp"]
+
+
+
+ a| 
+Instalação de um sistema V-Series em um rack ou gabinete do sistema
+ a| 
+Em novos sistemas, esta tarefa é normalmente realizada pela fábrica. Se você precisar de instruções, consulte o guia do seu gabinete.
+
+
+
+ a| 
+Conexão de um compartimento de disco a um sistema V-Series autônomo
+ a| 
+As instruções de instalação e configuração da sua plataforma.
+
+* https://library.netapp.com/ecm/ecm_download_file/ECMP1213632["Instruções de instalação e configuração 32xx sistemas"]
+* https://library.netapp.com/ecm/ecm_download_file/ECMP1147995["Instruções de instalação e configuração 62xx sistemas"]
+
+
+
+
+ a| 
+Conexão de um par de HA a um compartimento de disco
+ a| 
+https://docs.netapp.com/us-en/ontap/high-availability/index.html["Configuração de alta disponibilidade"]
+
+
+
+ a| 
+Adicionando um compartimento de disco
+ a| 
+O guia apropriado para o tipo de compartimento de disco.
+
+
+
+ a| 
+Movimentação de um compartimento de disco
+ a| 
+O guia apropriado para o tipo de compartimento de disco.
+
+
+
+ a| 
+Gerenciamento de disco
+ a| 
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gerenciamento de disco e agregado"]
+
+|===

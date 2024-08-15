@@ -1,0 +1,18 @@
+---
+permalink: install/concept_overview_of_setting_up_ontap_to_work_with_array_luns.html 
+sidebar: sidebar 
+keywords: set, up, ontap, work, array, luns 
+summary: O processo de configuração de um sistema ONTAP para funcionar com LUNs de array difere dependendo se os sistemas ONTAP são solicitados com ou sem discos. 
+---
+= Configurando o ONTAP para funcionar com LUNs de array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O processo de configuração de um sistema ONTAP para funcionar com LUNs de array difere dependendo se os sistemas ONTAP são solicitados com ou sem discos.
+
+Se um sistema ONTAP for solicitado com compartimentos de disco, o software ONTAP será instalado de fábrica. Em tal configuração, você não precisa criar o volume raiz e instalar licenças e software ONTAP.
+
+É possível instalar o software ONTAP em sistemas solicitados sem gavetas de disco. Nesses sistemas, você deve primeiro instalar o ONTAP e, em seguida, configurar um cluster.

@@ -1,0 +1,58 @@
+---
+permalink: install/concept_pre_cluster_array_lun_name_format.html 
+sidebar: sidebar 
+keywords: pre cluster, array, lun, name, format, ontap, systems 
+summary: Antes de um nó se unir a um cluster ou quando o sistema está no modo de manutenção, o nome do LUN do array segue um formato usado antes do Data ONTAP 8.3, o formato do pré-cluster. 
+---
+= Formato de nome LUN da matriz pré-cluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de um nó se unir a um cluster ou quando o sistema está no modo de manutenção, o nome do LUN do array segue um formato usado antes do Data ONTAP 8.3, o formato _pre-cluster_.
+
+Nesse formato, o nome LUN do array é um nome baseado em caminho que inclui os dispositivos no caminho entre o sistema ONTAP e o storage array, as portas usadas e o ID LUN SCSI no caminho que o storage array apresenta externamente para mapeamento para hosts.
+
+Em um sistema ONTAP que suporta LUNs de array, cada LUN de array pode ter vários nomes porque há vários caminhos para cada LUN.
+
+
+
+== Formato de nome LUN de matriz para sistemas ONTAP
+
+|===
+| Configuração | Formato de nome LUN da matriz | Descrições dos componentes 
+
+
+ a| 
+Das ligações diretas
+ a| 
+`node-name.adapter.idlun-id`
+ a| 
+`node-name` é o nome do nó em cluster. Com o ONTAP, o nome do nó é anexado ao nome do LUN para que o nome baseado no caminho seja exclusivo no cluster. O adaptador é o número do adaptador no sistema ONTAP.
+
+`id` é a porta do adaptador de canal no storage de armazenamento.
+
+`lun-id` É o número LUN de array que o storage array apresenta aos hosts.
+
+Exemplo: `node1.0a.0L1`
+
+
+
+ a| 
+Conectado à malha
+ a| 
+`node-name:switch-name:port.idlun-id`
+ a| 
+`node-name` é o nome do nó. Com o ONTAP, o nome do nó é anexado ao nome do LUN para que o nome baseado no caminho seja exclusivo no cluster. `switch-name` é o nome do interrutor.
+
+`port` é a porta do switch que está conetada à porta de destino (o ponto final).
+
+`id` É a ID do dispositivo.
+
+`lun-id` É o número LUN de array que o storage array apresenta aos hosts.
+
+Exemplo: `node1:brocade3:6.126L1`
+
+|===

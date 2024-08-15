@@ -1,0 +1,28 @@
+---
+permalink: install/reference_reasons_storage_arrays_are_missing_from_command_output.html 
+sidebar: sidebar 
+keywords: reasons, storage, arrays, miss, command, output 
+summary: Uma matriz de armazenamento que não está conetada ao sistema ONTAP não aparece na saída de configuração da matriz de armazenamento. Problemas com cabeamento, zoneamento e configuração de grupo de host podem impedir uma conexão entre os dois dispositivos. 
+---
+= Razões pelas quais matrizes de armazenamento estão faltando na saída do comando
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Um storage array que não está conetado ao sistema ONTAP não aparece `storage array config show` na saída. Problemas com cabeamento, zoneamento e configuração de grupo de host podem impedir uma conexão entre os dois dispositivos.
+
+
+
+== Resolvendo o problema
+
+. Verifique o cabeamento, a configuração do grupo de hosts e o zoneamento da seguinte forma:
++
+** Verifique se os cabos estão ligados.
+** Verifique se os WWPNs dos iniciadores FC nos sistemas ONTAP estão no grupo host.
+** Verifique se o storage array e o iniciador FC estão na mesma zona.
+
+
+. Depois que o problema é corrigido, execute `storage array config show` no ONTAP para confirmar que o problema foi corrigido.
+

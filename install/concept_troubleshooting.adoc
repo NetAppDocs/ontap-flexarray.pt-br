@@ -1,0 +1,14 @@
+---
+permalink: install/concept_troubleshooting.html 
+sidebar: sidebar 
+keywords: troubleshoot, configurations, storage, arrays 
+summary: Você deve validar sua configuração durante a instalação inicial para que você possa resolver problemas antes que sua configuração seja colocada em um ambiente de produção. 
+---
+= Solução de problemas de configurações com storage arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve validar sua configuração durante a instalação inicial para que você possa resolver problemas antes que sua configuração seja colocada em um ambiente de produção.

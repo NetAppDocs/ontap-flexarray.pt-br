@@ -1,0 +1,32 @@
+---
+permalink: install/task_configuring_lun_security.html 
+sidebar: sidebar 
+keywords: configure, lun, security 
+summary: O administrador do storage deve configurar o storage array e criar grupos de host para que outros hosts não possam acessar os LUNs de storage destinados a serem usados pelo ONTAP. 
+---
+= Configurando a segurança LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O administrador do storage deve configurar o storage array e criar grupos de host para que outros hosts não possam acessar os LUNs de storage destinados a serem usados pelo ONTAP.
+
+O conceito de segurança LUN é semelhante ao zoneamento, exceto que a segurança LUN é configurada no storage array. A segurança LUN impede que servidores diferentes usem o armazenamento uns dos outros na SAN. A segurança LUN também pode ser chamada de _LUN Masking_.
+
+.Passos
+. Configure a segurança LUN na matriz de armazenamento.
++
+Consulte a documentação da matriz de armazenamento para obter informações sobre como configurar a segurança LUN.
+
++
+Você também deve ver https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementação de virtualização de FlexArray para storage de terceiros"] para obter detalhes adicionais sobre a segurança LUN para os storages de armazenamento de seu fornecedor. Alguns storage arrays devem ser dedicados para uso pelos sistemas ONTAP.
+
+. Crie grupos de host, ou o equivalente, para o sistema ONTAP.
++
+O termo _host group_ é usado em algumas matrizes de armazenamento para descrever um parâmetro de configuração que permite especificar o acesso do host a portas específicas na matriz de armazenamento. Diferentes matrizes de armazenamento usam termos diferentes para descrever este parâmetro de configuração. Cada fornecedor de storage array tem seu próprio processo para criar um grupo de host ou o equivalente.
+
+
+
+*Informações relacionadas*

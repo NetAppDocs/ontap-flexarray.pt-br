@@ -1,0 +1,112 @@
+---
+permalink: install/reference_fewer_than_two_paths_to_an_array_lun.html 
+sidebar: sidebar 
+keywords: fewer, two, paths, array, lun 
+summary: Razões comuns para menos de dois caminhos para um LUN de matriz são um erro de mapeamento, um erro de zoneamento ou um cabo que cai. Os erros de armazenamento mostram saída identifica LUNs de array com apenas um caminho único. 
+---
+= Menos de dois caminhos para um LUN de array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Razões comuns para menos de dois caminhos para um LUN de matriz são um erro de mapeamento, um erro de zoneamento ou um cabo que cai. A `storage errors show` saída identifica LUNs de array com apenas um caminho único.
+
+O ONTAP requer caminhos redundantes para um LUN de matriz para que o acesso ao LUN seja mantido se um dispositivo falhar. Dois caminhos devem existir para cada LUN de array.
+
+
+
+== Erros de armazenamento mostram mensagem
+
+[listing]
+----
+
+NAME (UID):  This Array LUN is only available on one path.  Proper configuration requires two paths.
+----
+
+
+== Explicação
+
+Os motivos pelos quais você vê menos de dois caminhos para um LUN de array incluem o seguinte:
+
+* O LDEV é mapeado em apenas uma porta de matriz de armazenamento.
+* O segundo caminho para o LUN de array não é zoneado.
+* Há um problema com o mapeamento do grupo host.
+* Há um problema com as conexões do interrutor.
+* O cabo saiu.
+* Os SFPs falharam no adaptador.
+
+
+[NOTE]
+====
+Se um caminho sair em um sistema em execução, uma mensagem EMS é gerada.
+
+====
+
+
+== Cenário de problema
+
+Para este exemplo de um erro de mapeamento, suponha que o administrador de armazenamento criou um novo LDEV Z. o administrador mapeou LDEV Z como ID LUN 3 para a porta de destino 1A. No entanto, o administrador não mapeou o LDEV para a porta de destino 2A, como mostra a ilustração a seguir. O resultado é apenas um caminho para o LUN de array.
+
+image::../media/ldev_mapped_on_only_one_array_port.gif[Este gráfico é descrito no texto circundante.]
+
+Quando esse erro é feito, a `storage array config show` saída mostra apenas um caminho para o LUN, como mostra o exemplo a seguir.
+
+[listing]
+----
+
+mysystem1::> storage array config show
+           LUN     LUN
+Node       Group   Count  Array Name    Array Target Ports      Switch Port   Initiator
+-------   -------  -----  ----------   -------------------      -----------    ---------
+mysystem1a    0      1    DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr20es25:5   0a
+
+Warning: Configuration errors were detected.  Use 'storage errors show' for detailed information.
+----
+O `storage errors show` comando fornece os detalhes necessários para determinar qual LUN tem menos de dois caminhos.
+
+[listing]
+----
+
+mysystem1a::> storage errors show
+Disk: EMC-1.2
+UID: 600508B4:000B6314:00008000:00200000:00000000:00000000:00000000:...
+--------------------
+EMC-1.2 (600508b4000b63140000800000200000): This array LUN is only available on one path. Proper configuration requires two paths.
+----
+[NOTE]
+====
+O UID para este exemplo é 600508B4:000B6314:00008000:00200000:00000000:00000000:00000000:00000000:00000000:00000000. Ele é truncado por causa do espaço.
+
+====
+
+
+== Resolução de problemas e resolução de problemas
+
+Olhando para a `storage array config show` saída e os erros de armazenamento mostram que a saída é útil ao solucionar problemas de menos de dois caminhos para um LUN de matriz.
+
+. Revise a `storage errors show` saída para obter o número de série do LUN de matriz disponível em apenas um caminho.
+. Reveja a `storage array config show` saída para tentar isolar a causa do problema.
++
+|===
+| Se a `storage array config show` saída mostrar... | A causa é mais provável... 
+
+
+ a| 
+Outros LUNs de array
+ a| 
+Um erro de mapeamento
+
+
+
+ a| 
+Nenhum outro array LUNs
+ a| 
+Um erro de cabeamento, erro de zoneamento ou problema de hardware
+
+|===
+. Se a causa for um erro de mapeamento, peça ao administrador da matriz de armazenamento que mapeie o LUN da matriz identificado para duas portas de matriz de armazenamento redundantes.
+. Se a causa parece ser um problema diferente do mapeamento, verifique o zoneamento, o mapeamento do grupo de hosts, o cabeamento e a conetividade.
+. Depois de corrigir o problema, execute `storage array config show` novamente para confirmar que o erro foi corrigido.
+

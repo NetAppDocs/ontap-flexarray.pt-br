@@ -1,0 +1,44 @@
+---
+permalink: implement-third-party/concept_eight_port_array_lun_group_configuration.html 
+sidebar: sidebar 
+keywords: eight-port, array, lun, group, configuration, crossed, back-end, connections, not 
+summary: Uma configuração de grupo LUN de oito portas é suportada em sistemas da série V em cluster e em sistemas ONTAP que podem usar LUNs de array. 
+---
+= Configuração de grupo LUN de matriz de oito portas
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Uma configuração de grupo LUN de oito portas é suportada em sistemas da série V em cluster e em sistemas ONTAP que podem usar LUNs de array.
+
+Esta configuração é suportada para utilização com todas as matrizes de armazenamento listadas na Matriz de interoperabilidade, conforme suportado para a versão do ONTAP em execução no seu sistema.
+
+Há duas maneiras de implantar essa configuração: Conexões back-end cruzadas e não cruzadas.
+
+
+
+== Ligações back-end cruzadas
+
+Nessa configuração com as conexões de back-end cruzadas, as conexões FC da mesma controladora de storage array vão para ambos os switches de malha (redundantes).
+
+Nesta ilustração de conexões back-end cruzadas, observe como os nós são conetados aos switches e ao storage array. O VS1 usa o switch 1 ao conetar-se ao storage storage storage controlador 1 porta 1A e controlador 2 porta 2C, e usa o switch 2 ao conetar ao storage storage storage controlador 2 portas 2A e controlador 1 porta 1C. Isso otimiza o uso de portas de switch e portas de array, o que reduz o impactos de uma falha de controladora de storage ou switch.
+
+image::../media/eight_port_array_lun_group_configuration_crossed.gif[configuração de grupo lun de matriz de oito portas cruzada]
+
+
+
+== As ligações back-end não são cruzadas
+
+Nessa configuração em que as conexões de back-end não são cruzadas, as conexões FC do mesmo controlador de storage array passam para apenas um switch de malha.
+
+A ilustração a seguir mostra essa configuração quando as conexões back-end não são cruzadas.
+
+image::../media/eight_port_array_lun_group_configuration.gif[configuração de grupo lun de matriz de oito portas]
+
+*Informações relacionadas*
+
+https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Instalação e configuração do MetroCluster conectado à malha"]

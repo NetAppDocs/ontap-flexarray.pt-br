@@ -1,0 +1,33 @@
+---
+permalink: install/concept_array_lun_name_format.html 
+sidebar: sidebar 
+keywords: array, lun, name, format 
+summary: O nome atribuído a um LUN de matriz tem um novo formato para garantir que o nome seja exclusivo em um cluster. 
+---
+= Formato de nome LUN da matriz
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O nome atribuído a um LUN de matriz tem um novo formato para garantir que o nome seja exclusivo em um cluster.
+
+O nome do LUN do array consiste em dois componentes e se parece com o seguinte:
+
+``<array_prefix>.<offset>``, por exemplo `EMC-1.1`.
+
+*  `array_prefix`O é um prefixo exclusivo que o ONTAP atribui por padrão a cada storage array.
++
+Este campo é composto ``<array_name-array_instance> (EMC-1``neste caso).
+
++
+`array_name` pode ser denotado pelas três primeiras letras do nome do vendedor.
+
++
+Se houver mais de um array do mesmo fornecedor, o valor dos `array_instance` lucros em uma ordem crescente.
+
+* O deslocamento é o número de disco virtual ascendente que o ONTAP atribui a cada LUN. É independente da ID LUN do host.
+
+
+Você pode modificar ``<array_prefix>``o campo usando o `storage array modify -name -prefix` comando.

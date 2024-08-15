@@ -1,0 +1,20 @@
+---
+permalink: install/concept_systems_that_can_use_array_luns_on_storage_arrays.html 
+sidebar: sidebar 
+keywords: ontap, systems, use, array, luns, storage 
+summary: Você pode usar sistemas FAS e Série V compatíveis com LUNs de array. 
+---
+= Sistemas ONTAP que podem usar LUNs de array em arrays de storage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode usar sistemas FAS e Série V compatíveis com LUNs de array.
+
+A ferramenta de Matriz de interoperabilidade do NetApp lista as combinações suportadas de hardware e software.
+
+*Informações relacionadas*
+
+https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"]

@@ -1,0 +1,67 @@
+---
+permalink: install/task_getting_started_with_troubleshooting.html 
+sidebar: sidebar 
+keywords: get, started, troubleshoot, ontap, configuration, array, luns 
+summary: Ao solucionar problemas de uma configuração do ONTAP com LUNs de array, você deve seguir uma abordagem sistemática para determinar a causa do problema. 
+---
+= Introdução à solução de problemas de uma configuração ONTAP com LUNs de array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ao solucionar problemas de uma configuração do ONTAP com LUNs de array, você deve seguir uma abordagem sistemática para determinar a causa do problema.
+
+Este procedimento sugere um pedido de resolução de problemas.
+
+[NOTE]
+====
+À medida que você continuar com as etapas de solução de problemas, você deve salvar todas as informações coletadas sobre o problema para que possa fornecer essas informações ao suporte técnico no caso de um encaminhamento.
+
+====
+.Passos
+. Determine se o problema é com o _front end_ (um problema de ONTAP que afeta todas as plataformas correspondentes) ou o _back end_ (um problema com a configuração do switch ou storage array).
++
+Por exemplo, se você estiver tentando usar um recurso do ONTAP e ele não estiver funcionando como esperado, o problema provavelmente será com o front-end
+
+. Tomar as medidas adequadas para resolver o problema, dependendo da sua natureza:
++
+|===
+| Se a configuração do ONTAP tiver um... | Então faça isso... 
+
+
+ a| 
+Problema de front-end
+ a| 
+Prossiga com a solução de problemas do recurso ONTAP seguindo as instruções nos guias do ONTAP.
+
+https://docs.netapp.com/us-en/ontap/index.html["Documentação do ONTAP 9"^]
+
+
+
+ a| 
+Problema de back-end
+ a| 
+.. Verifique a Matriz de interoperabilidade para garantir que os seguintes itens sejam suportados: Configuração, matriz de armazenamento, firmware da matriz de armazenamento, switch e firmware do switch.
++
+https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"^]
+
+.. Use o `storage array config show` comando para verificar se existem erros de configuração de back-end comuns que o sistema pode detetar.
++
+Se o ONTAP detetar um erro de configuração de back-end, você deve executar o `storage errors show` comando para obter detalhes sobre o erro.
+
+
+
+|===
+. Se a causa do problema ainda não estiver clara, verifique as seguintes fontes para garantir que o sistema esteja em conformidade com os requisitos para trabalhar com matrizes de armazenamento:
++
+** xref:concept_verifying_an_installation_with_storage_arrays.adoc[Verificando uma instalação com matrizes de armazenamento]
+** https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementação de virtualização de FlexArray para storage de terceiros"]
+** https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implementação de virtualização FlexArray para storage NetApp e-Series"]
+** https://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"^]
+** https://hwu.netapp.com["NetApp Hardware Universe"^]
+
+
+. Se você ainda precisar de ajuda para resolver o problema, entre em Contato com o suporte técnico.
+
